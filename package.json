@@ -14,7 +14,23 @@
   ],
   "main": "./out/extension.js",
   "contributes": {
-    "commands": []
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "ezmode",
+          "title": "EzMode",
+          "icon": "media/ezmode.svg"
+        }
+      ]
+    },
+    "views": {
+      "ezmode": [
+        {
+          "id": "ezmode.cheatsheet",
+          "name": "Cheat Sheet"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
