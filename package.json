@@ -35,8 +35,7 @@
       {
         "id": "ezmoderc",
         "aliases": [
-          "ezmoderc",
-          "ezmoderc"
+          "EzMode configuration"
         ],
         "extensions": [
           ".ezmoderc"
