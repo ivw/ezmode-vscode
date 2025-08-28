@@ -30,7 +30,27 @@
           "name": "Cheat Sheet"
         }
       ]
-    }
+    },
+    "languages": [
+      {
+        "id": "ezmoderc",
+        "aliases": [
+          "ezmoderc",
+          "ezmoderc"
+        ],
+        "extensions": [
+          ".ezmoderc"
+        ],
+        "configuration": "./ezmoderc-language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "ezmoderc",
+        "scopeName": "source.ezmoderc",
+        "path": "./syntaxes/ezmoderc.tmLanguage.json"
+      }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",

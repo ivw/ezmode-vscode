@@ -1,0 +1,54 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "ezmoderc",
+  "patterns": [
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#properties"
+    },
+    {
+      "include": "#template-substitution-element"
+    },
+    {
+      "include": "#line-comment"
+    }
+  ],
+  "repository": {
+    "keywords": {
+      "patterns": [
+        {
+          "name": "entity.name.function.ezmoderc",
+          "match": "(?<=^|<)(set|map|write|mode|vscode|native|ofmode|nop|pair|quote|toolwindow|numberop)\\b"
+        }
+      ]
+    },
+    "properties": {
+      "name": "variable.other.property.ezmoderc",
+      "match": "\\b(default|space|entermode|exitmode)\\b"
+    },
+    "template-substitution-element": {
+      "name": "meta.template.expression.ezmoderc",
+      "begin": "\\$\\{",
+      "beginCaptures": {
+        "0": {
+          "name": "punctuation.definition.template-expression.begin.ezmoderc"
+        }
+      },
+      "end": "\\}",
+      "endCaptures": {
+        "0": {
+          "name": "punctuation.definition.template-expression.end.ezmoderc"
+        }
+      },
+      "contentName": "meta.embedded.line.ezmoderc"
+    },
+    "line-comment": {
+      "name": "comment.line.double-slash.ezmoderc",
+      "begin": "//",
+      "end": "$"
+    }
+  },
+  "scopeName": "source.ezmoderc"
+}
