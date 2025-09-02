@@ -36,3 +36,12 @@ export const nativeEzAction: EzAction = {
   },
   description: "Native",
 }
+
+export function createPopupAction(message: string): EzAction {
+  return {
+    perform: () => {
+      vscode.window.showInformationMessage(message)
+    },
+    description: `Show pop-up with the text: ${message}`,
+  }
+}

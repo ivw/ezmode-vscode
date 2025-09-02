@@ -13,7 +13,7 @@ export function activateTypeActionHandler(context: vscode.ExtensionContext) {
       return vscode.commands.executeCommand("default:type", { text: keyChar })
     }
     const keyBindings = modeEnv.keyBindings
-    const keyBinding = keyBindings.get(keyChar) ?? keyBindings.get(null)
+    const keyBinding = keyBindings.get(keyChar) ?? keyBindings.get("default")
     if (keyBinding) {
       return keyBinding.action.perform({ env, keyChar })
     }

@@ -1,5 +1,6 @@
 import { EventEmitter } from "vscode"
 import {
+  createPopupAction,
   createSwitchModeAction,
   createVsCodeEzAction,
   nativeEzAction,
@@ -13,11 +14,11 @@ export type EzEnv = {
 
 export type ModeEnv = {
   name: string
-  keyBindings: Map<string | null, KeyBinding>
+  keyBindings: Map<string, KeyBinding>
 }
 
 export type KeyBinding = {
-  key: string | null
+  key: string
   action: EzAction
 }
 
@@ -58,6 +59,8 @@ const keybindings: Array<KeyBinding> = [
   { key: "a", action: createVsCodeEzAction("editor.action.addSelectionToNextFindMatch") },
   { key: "A", action: createVsCodeEzAction("editor.action.selectAll") },
   { key: "t", action: createSwitchModeAction("type") },
+  { key: "entermode", action: createPopupAction("Entered ez mode") },
+  { key: "exitmode", action: createPopupAction("Exited ez mode") },
 ]
 keybindings.forEach((it) => addBindingToModeEnv(env.modes[0], it))
-addBindingToModeEnv(env.modes[1], { key: null, action: nativeEzAction })
+addBindingToModeEnv(env.modes[1], { key: "default", action: nativeEzAction })
