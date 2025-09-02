@@ -9,7 +9,7 @@ export function activateSidebar(context: vscode.ExtensionContext) {
 
 class KeyBindingTreeDataProvider implements vscode.TreeDataProvider<KeyBinding> {
   getTreeItem(element: KeyBinding): vscode.TreeItem {
-    return new vscode.TreeItem(`${element.key}: ${element.action}`)
+    return new vscode.TreeItem(`${element.key}: ${element.action.description}`)
   }
 
   getChildren(element?: KeyBinding): KeyBinding[] {

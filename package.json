@@ -14,6 +14,29 @@
   ],
   "main": "./out/extension.js",
   "contributes": {
+    "commands": [
+      {
+        "command": "ezmode.enterEzMode",
+        "title": "Enter EzMode"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "ezmode.enterEzMode",
+        "key": "tab",
+        "when": "editorTextFocus && !editorTabMovesFocus && !suggestWidgetVisible"
+      },
+      {
+        "command": "tab",
+        "key": "alt+t",
+        "when": "editorTextFocus && !editorReadonly && !editorTabMovesFocus"
+      },
+      {
+        "command": "outdent",
+        "key": "shift+alt+t",
+        "when": "editorTextFocus && !editorReadonly && !editorTabMovesFocus"
+      }
+    ],
     "viewsContainers": {
       "activitybar": [
         {
