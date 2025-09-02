@@ -7,7 +7,9 @@ export function activateModeStatusBarItem(context: vscode.ExtensionContext) {
   item.show()
   context.subscriptions.push(item)
 
-  onModeChange((mode: string) => {
-    item.text = mode
-  })
+  context.subscriptions.push(
+    onModeChange((mode: string) => {
+      item.text = mode
+    }),
+  )
 }

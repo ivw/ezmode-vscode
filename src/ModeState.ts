@@ -1,6 +1,6 @@
 import { EventEmitter } from "vscode"
 
-var mode: string = "ez"
+let mode: string = "type"
 const modeChangeEmitter = new EventEmitter<string>()
 export const onModeChange = modeChangeEmitter.event
 

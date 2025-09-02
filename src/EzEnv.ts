@@ -1,3 +1,4 @@
+import { EventEmitter } from "vscode"
 import {
   createSwitchModeAction,
   createVsCodeEzAction,
@@ -28,7 +29,7 @@ export function addBindingToModeEnv(modeEnv: ModeEnv, keyBinding: KeyBinding) {
   modeEnv.keyBindings.set(keyBinding.key, keyBinding)
 }
 
-export const env: EzEnv = {
+let env: EzEnv = {
   modes: [
     {
       name: "ez",
@@ -41,8 +42,19 @@ export const env: EzEnv = {
   ],
   vars: new Map(),
 }
+const envChangeEmitter = new EventEmitter<EzEnv>()
+export const onEnvChange = envChangeEmitter.event
 
-export const keybindings: Array<KeyBinding> = [
+export function getEnv(): EzEnv {
+  return env
+}
+
+export function setEnv(newEnv: EzEnv) {
+  env = newEnv
+  envChangeEmitter.fire(newEnv)
+}
+
+const keybindings: Array<KeyBinding> = [
   { key: "a", action: createVsCodeEzAction("editor.action.addSelectionToNextFindMatch") },
   { key: "A", action: createVsCodeEzAction("editor.action.selectAll") },
   { key: "t", action: createSwitchModeAction("type") },

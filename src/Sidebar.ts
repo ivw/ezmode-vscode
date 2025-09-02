@@ -1,21 +1,29 @@
 import * as vscode from "vscode"
-import { keybindings, type KeyBinding } from "./EzEnv"
+import { type KeyBinding, getEnv, getModeEnv, onEnvChange } from "./EzEnv"
+import { getMode, onModeChange } from "./ModeState"
 
 export function activateSidebar(context: vscode.ExtensionContext) {
-  context.subscriptions.push(
-    vscode.window.registerTreeDataProvider("ezmode.cheatsheet", new KeyBindingTreeDataProvider()),
-  )
-}
-
-class KeyBindingTreeDataProvider implements vscode.TreeDataProvider<KeyBinding> {
-  getTreeItem(element: KeyBinding): vscode.TreeItem {
-    return new vscode.TreeItem(`${element.key}: ${element.action.description}`)
+  const changeEmitter = new vscode.EventEmitter<KeyBinding | undefined | void>()
+  const provider: vscode.TreeDataProvider<KeyBinding> = {
+    onDidChangeTreeData: changeEmitter.event,
+    getTreeItem: (element: KeyBinding) =>
+      new vscode.TreeItem(`${element.key}: ${element.action.description}`),
+    getChildren: (element?: KeyBinding) => {
+      if (element) {
+        // No nested children
+        return []
+      }
+      const env = getEnv()
+      const mode = getMode()
+      const modeEnv = getModeEnv(env, mode)
+      if (!modeEnv) {
+        return []
+      }
+      return Array.from(modeEnv.keyBindings.values())
+    },
   }
+  context.subscriptions.push(vscode.window.registerTreeDataProvider("ezmode.cheatsheet", provider))
 
-  getChildren(element?: KeyBinding): KeyBinding[] {
-    if (!element) {
-      return keybindings
-    }
-    return []
-  }
+  context.subscriptions.push(onEnvChange(() => changeEmitter.fire()))
+  context.subscriptions.push(onModeChange(() => changeEmitter.fire()))
 }
