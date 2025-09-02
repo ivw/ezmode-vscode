@@ -22,6 +22,10 @@ export type KeyBinding = {
   action: EzAction
 }
 
+export const DEFAULT_KEY = "default"
+export const ENTER_MODE_KEY = "entermode"
+export const EXIT_MODE_KEY = "exitmode"
+
 export function getModeEnv(env: EzEnv, mode: string): ModeEnv | null {
   return env.modes.find((m) => m.name === mode) ?? null
 }
@@ -59,8 +63,8 @@ const keybindings: Array<KeyBinding> = [
   { key: "a", action: createVsCodeEzAction("editor.action.addSelectionToNextFindMatch") },
   { key: "A", action: createVsCodeEzAction("editor.action.selectAll") },
   { key: "t", action: createSwitchModeAction("type") },
-  { key: "entermode", action: createPopupAction("Entered ez mode") },
-  { key: "exitmode", action: createPopupAction("Exited ez mode") },
+  { key: ENTER_MODE_KEY, action: createPopupAction("Entered ez mode") },
+  { key: EXIT_MODE_KEY, action: createPopupAction("Exited ez mode") },
 ]
 keybindings.forEach((it) => addBindingToModeEnv(env.modes[0], it))
-addBindingToModeEnv(env.modes[1], { key: "default", action: nativeEzAction })
+addBindingToModeEnv(env.modes[1], { key: DEFAULT_KEY, action: nativeEzAction })

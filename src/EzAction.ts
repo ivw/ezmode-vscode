@@ -42,6 +42,6 @@ export function createPopupAction(message: string): EzAction {
     perform: () => {
       vscode.window.showInformationMessage(message)
     },
-    description: `Show pop-up with the text: ${message}`,
+    description: `Display notification: ${message}`,
   }
 }

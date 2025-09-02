@@ -1,5 +1,5 @@
 import * as vscode from "vscode"
-import { getEnv, getModeEnv } from "./EzEnv"
+import { DEFAULT_KEY, getEnv, getModeEnv } from "./EzEnv"
 import { getMode } from "./ModeState"
 
 export function activateTypeActionHandler(context: vscode.ExtensionContext) {
@@ -13,7 +13,7 @@ export function activateTypeActionHandler(context: vscode.ExtensionContext) {
       return vscode.commands.executeCommand("default:type", { text: keyChar })
     }
     const keyBindings = modeEnv.keyBindings
-    const keyBinding = keyBindings.get(keyChar) ?? keyBindings.get("default")
+    const keyBinding = keyBindings.get(keyChar) ?? keyBindings.get(DEFAULT_KEY)
     if (keyBinding) {
       return keyBinding.action.perform({ env, keyChar })
     }

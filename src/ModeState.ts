@@ -1,5 +1,5 @@
 import { EventEmitter } from "vscode"
-import { getEnv, getModeEnv } from "./EzEnv"
+import { ENTER_MODE_KEY, EXIT_MODE_KEY, getEnv, getModeEnv } from "./EzEnv"
 
 let mode: string = "type"
 const modeChangeEmitter = new EventEmitter<string>()
@@ -13,7 +13,7 @@ export function setMode(newMode: string) {
   const env = getEnv()
 
   const oldModeEnv = getModeEnv(env, getMode())
-  const exitAction = oldModeEnv?.keyBindings.get("exitmode")
+  const exitAction = oldModeEnv?.keyBindings.get(EXIT_MODE_KEY)
   if (exitAction) {
     exitAction.action.perform({ env, keyChar: null })
   }
@@ -21,7 +21,7 @@ export function setMode(newMode: string) {
   mode = newMode
 
   const newModeEnv = getModeEnv(env, getMode())
-  const enterAction = newModeEnv?.keyBindings.get("entermode")
+  const enterAction = newModeEnv?.keyBindings.get(ENTER_MODE_KEY)
   if (enterAction) {
     enterAction.action.perform({ env, keyChar: null })
   }
