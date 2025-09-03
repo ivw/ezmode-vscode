@@ -1,6 +1,7 @@
 import * as vscode from "vscode"
 import type { EzEnv } from "./EzEnv"
 import { setMode } from "./ModeState"
+import { changeCursorColor, resetCursorColor } from "./CursorColor"
 
 export type EzEvent = {
   env: EzEnv
@@ -43,5 +44,18 @@ export function createPopupAction(message: string): EzAction {
       vscode.window.showInformationMessage(message)
     },
     description: `Display notification: ${message}`,
+  }
+}
+
+export function createCursorColorAction(color: string): EzAction {
+  return {
+    perform: () => {
+      if (color === "default") {
+        resetCursorColor()
+      } else {
+        changeCursorColor(color)
+      }
+    },
+    description: `Change cursor color to ${color}`,
   }
 }

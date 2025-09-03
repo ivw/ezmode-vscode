@@ -10,6 +10,8 @@ export function getMode(): string {
 }
 
 export function setMode(newMode: string) {
+  if (newMode == getMode()) return
+
   const env = getEnv()
 
   const oldModeEnv = getModeEnv(env, getMode())
