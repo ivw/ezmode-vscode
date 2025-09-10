@@ -17,7 +17,7 @@ export function setMode(newMode: string) {
   const oldModeEnv = getModeEnv(env, getMode())
   const exitAction = oldModeEnv?.keyBindings.get(EXIT_MODE_KEY)
   if (exitAction) {
-    exitAction.action.perform({ env, keyChar: null })
+    exitAction.action.perform({ env, key: null })
   }
 
   mode = newMode
@@ -25,7 +25,7 @@ export function setMode(newMode: string) {
   const newModeEnv = getModeEnv(env, getMode())
   const enterAction = newModeEnv?.keyBindings.get(ENTER_MODE_KEY)
   if (enterAction) {
-    enterAction.action.perform({ env, keyChar: null })
+    enterAction.action.perform({ env, key: null })
   }
 
   modeChangeEmitter.fire(newMode)

@@ -6,6 +6,7 @@ export function changeCursorColor(color: string | undefined) {
   const configuration = vscode.workspace.getConfiguration("workbench")
 
   if (originalCursorColor === null) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     originalCursorColor = configuration.get<any>("colorCustomizations")?.["editorCursor.foreground"]
   }
 
