@@ -26,7 +26,7 @@
     },
     "properties": {
       "name": "variable.other.property.ezmoderc",
-      "match": "\\b(default|space|entermode|exitmode)\\b"
+      "match": "\\b(default|space|lt|gt|entermode|exitmode)\\b"
     },
     "template-substitution-element": {
       "name": "meta.template.expression.ezmoderc",

@@ -4,8 +4,7 @@
     // "blockComment": ["/*", "*/"]
   },
 
-  // Left empty because our language can use the bracket characters as keys, so they are not always closed.
-  "brackets": [],
+  "brackets": [["<", ">"]],
 
   "autoClosingPairs": [
     ["{", "}"],

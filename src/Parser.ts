@@ -217,10 +217,18 @@ export function parseAction(scanner: Scanner, isNestedAction: boolean): EzAction
       if (modeName === null) {
         throw new Error("Expected mode name for map action")
       }
-      const key = scanner.until(" ")
+      let key = scanner.until(" ")
       if (key === null) {
         throw new Error("Expected key for map action")
       }
+      if (key === "lt") {
+        key = "<"
+      } else if (key === "gt") {
+        key = ">"
+      } else if (key === "space") {
+        key = " "
+      }
+
       const actionChainString = getRemainingContent()
       if (actionChainString === null) {
         throw new Error("Expected action for map action")
