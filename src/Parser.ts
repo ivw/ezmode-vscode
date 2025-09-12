@@ -21,7 +21,7 @@ export function parseEzModeRc(content: string): Array<EzAction> {
         actions.push(action)
       }
     } catch (e) {
-      if (e! instanceof Error) throw e
+      if (!(e instanceof Error)) throw e
 
       throw new Error(`Error parsing line ${lineIndex + 1}: ${e.message}`)
     }
