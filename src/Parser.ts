@@ -130,8 +130,6 @@ export function parseActionChain(actionChainString: string): EzAction {
   let char: string | null = buf.nextChar()
   while (char !== null) {
     if (char === "<") {
-      console.log("Parsing nested action")
-      console.log(buf.content)
       const nestedActionString = buf.untilClosingBracket(">", "<")
       if (nestedActionString === null) {
         throw new Error("Expected closing '>'")

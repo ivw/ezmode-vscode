@@ -49,6 +49,9 @@ export class LexerBuffer {
     return null
   }
 
+  /**
+   * Assumes the opening bracket has already been consumed.
+   */
   untilClosingBracket(closingBracket: string, openingBracket: string): string | null {
     const start = this.start
     let depth = 0
