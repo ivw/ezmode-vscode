@@ -2,6 +2,7 @@ import {
   createCompositeEzAction,
   createKeyReferenceAction,
   createMapKeyBindingAction,
+  createOfModeAction,
   createPopupAction,
   createSetVarAction,
   createSwitchModeAction,
@@ -116,6 +117,29 @@ export function parseAction(buf: LexerBuffer): EzAction {
       }
       const action = parseActionChain(actionChainString)
       return createMapKeyBindingAction(modeName, { key, action })
+    }
+    case "ofmode": {
+      const mode = buf.remainingContent()
+      if (mode === null) {
+        throw new Error("Expected mode for ofmode action")
+      }
+      return createOfModeAction(mode)
+    }
+    case "quote": {
+      // TODO
+      return nativeEzAction
+    }
+    case "pair": {
+      // TODO
+      return nativeEzAction
+    }
+    case "toolwindow": {
+      // TODO
+      return nativeEzAction
+    }
+    case "numberop": {
+      // TODO
+      return nativeEzAction
     }
     default: {
       throw new Error(`Unknown action type: ${actionType}`)

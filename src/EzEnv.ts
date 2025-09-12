@@ -1,3 +1,4 @@
+import { baseActions } from "./EzModeRcFiles"
 import { EventEmitter } from "vscode"
 import {
   createCursorColorAction,
@@ -61,16 +62,7 @@ export function getActionForKey(
 }
 
 let env: EzEnv = {
-  modes: [
-    {
-      name: "ez",
-      keyBindings: new Map(),
-    },
-    {
-      name: "type",
-      keyBindings: new Map(),
-    },
-  ],
+  modes: [],
   vars: new Map(),
 }
 export const envChangeEmitter = new EventEmitter<EzEnv>()
@@ -85,16 +77,6 @@ export function setEnv(newEnv: EzEnv) {
   envChangeEmitter.fire(newEnv)
 }
 
-const keybindings: Array<KeyBinding> = [
-  { key: "a", action: createVsCodeEzAction("editor.action.addSelectionToNextFindMatch") },
-  { key: "A", action: createVsCodeEzAction("editor.action.selectAll") },
-  { key: "t", action: createSwitchModeAction("type") },
-  { key: ENTER_MODE_KEY, action: createCursorColorAction("#ff6200") },
-  { key: EXIT_MODE_KEY, action: createPopupAction("Exited ez mode") },
-]
-keybindings.forEach((it) => addBindingToModeEnv(env.modes[0], it))
-addBindingToModeEnv(env.modes[1], { key: DEFAULT_KEY, action: nativeEzAction })
-addBindingToModeEnv(env.modes[1], {
-  key: ENTER_MODE_KEY,
-  action: createCursorColorAction("default"),
+baseActions.forEach((action) => {
+  action.perform({ env, key: null })
 })

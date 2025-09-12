@@ -98,12 +98,21 @@ export function createSetVarAction(varName: string, value: string): EzAction {
 export function createKeyReferenceAction(key: string): EzAction {
   return {
     perform: (e) => {
-      if (e.key === null) return
-
       const mode = getMode()
       return getActionForKey(key, mode, e.env)?.perform({ env: e.env, key })
     },
     description: key,
+  }
+}
+
+export function createOfModeAction(mode: string): EzAction {
+  return {
+    perform: (e) => {
+      if (e.key === null) return
+
+      return getActionForKey(e.key, mode, e.env)?.perform({ env: e.env, key: e.key })
+    },
+    description: `Action in mode: ${mode}`,
   }
 }
 
@@ -112,6 +121,7 @@ export function createCompositeEzAction(actions: EzAction[]): EzAction {
     perform: (e) => {
       for (const action of actions) {
         action.perform(e)
+        // TODO handle async
       }
     },
     description: actions.map((a) => a.description).join(", "),
