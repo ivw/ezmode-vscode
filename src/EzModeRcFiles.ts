@@ -24,9 +24,9 @@ map ez 9 <vscode editor.action.moveSelectionToPreviousFindMatch>
 map ez ( <pair open ()>
 map ez 0 <vscode editor.action.addSelectionToNextFindMatch>
 map ez ) <pair close ()>
-map ez - <vscode ezmode.InsideTextObject> // TODO
-map ez = <vscode ezmode.AroundTextObject> // TODO
-map ez _ <vscode ezmode.DeleteDelimsTextObject> // TODO
+map ez - <vscode editor.action.selectToBracket {"selectBrackets": false}>
+map ez = <vscode editor.action.selectToBracket>
+map ez _ <vscode editor.action.removeBrackets>
 
 map ez q <vscode workbench.action.focusNextGroup>
 map ez Q <vscode workbench.action.closeEditorsInGroup>
@@ -63,7 +63,7 @@ map ez D <vscode deleteLeft>
 map ez f <vscode actions.find>
 map ez F <vscode workbench.action.findInFiles>
 map ez g <mode git>
-map ez G <vscode ChooseRunConfiguration> // TODO
+map ez G <vscode workbench.action.tasks.runTask>
 map ez h <vscode cursorHome>
 map ez H <vscode cursorTop>
 map ez j <vscode cursorLeft>
@@ -80,7 +80,7 @@ map ez " <quote ">
 map ez z <vscode undo>
 map ez Z <vscode workbench.action.reopenClosedEditor>
 map ez x <vscode editor.action.clipboardCutAction>
-map ez c <vscode editor.action.clipboardCopyAction><vscode ezmode.Unselect> // TODO
+map ez c <vscode editor.action.clipboardCopyAction><vscode cancelSelection>
 map ez v <vscode editor.action.clipboardPasteAction>
 map ez V <vscode editor.action.copyLinesDownAction>
 map ez b <vscode editor.action.joinLines>
