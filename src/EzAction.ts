@@ -1,12 +1,5 @@
 import * as vscode from "vscode"
-import {
-  getKeyBindingOrDefault,
-  getModeEnv,
-  getOrAddModeEnv,
-  getActionForKey,
-  type EzEnv,
-  type KeyBinding,
-} from "./EzEnv"
+import { getOrAddModeEnv, getActionForKey, type EzEnv, type KeyBinding } from "./EzEnv"
 import { getMode, setMode } from "./ModeState"
 import { changeCursorColor, resetCursorColor } from "./CursorColor"
 
@@ -29,12 +22,13 @@ export function createSwitchModeAction(mode: string): EzAction {
   }
 }
 
-export function createVsCodeEzAction(commandId: string): EzAction {
+export function createVsCodeEzAction(commandId: string, args: unknown): EzAction {
   return {
     perform: () => {
-      return vscode.commands.executeCommand(commandId)
+      console.log(`Executing VSCode command: ${commandId} with args: ${JSON.stringify(args)}`)
+      return vscode.commands.executeCommand(commandId, args)
     },
-    description: `Command: ${commandId}`,
+    description: `Command: ${commandId}, args: ${JSON.stringify(args)}`,
   }
 }
 

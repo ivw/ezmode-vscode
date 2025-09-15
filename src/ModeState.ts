@@ -1,7 +1,7 @@
 import { EventEmitter } from "vscode"
 import { ENTER_MODE_KEY, EXIT_MODE_KEY, getEnv, getModeEnv } from "./EzEnv"
 
-let mode: string = "type"
+let mode: string = "ez" // TODO use "type" as default mode
 const modeChangeEmitter = new EventEmitter<string>()
 export const onModeChange = modeChangeEmitter.event
 

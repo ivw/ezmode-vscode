@@ -7,97 +7,97 @@ map type default <native>
 map typeonce default <native><mode ez>
 
 
-map ez ~ <vscode ezmode.ToggleCase>
+map ez ~ <vscode ezmode.ToggleCase.TODO>
 map ez \` <quote \`>
-map ez 1 <toolwindow Project>
-map ez ! <vscode SelectInProjectView>
-map ez 2 <toolwindow Commit>
-map ez @ <vscode ActivateCommitToolWindow>
-map ez 3 <toolwindow Terminal>
-map ez # <vscode ActivateTerminalToolWindow>
-map ez 4 <vscode HideAllWindows>
-map ez $ <vscode HideActiveWindow>
+map ez 1 <vscode workbench.view.explorer><vscode workbench.view.explorer> // TODO
+map ez ! <vscode workbench.view.explorer>
+map ez 2 <vscode workbench.view.scm><vscode workbench.view.scm> // TODO
+map ez @ <vscode workbench.view.scm>
+map ez 3 <vscode workbench.action.terminal.toggleTerminal> // TODO
+map ez # <vscode workbench.action.terminal.toggleTerminal>
+map ez 4 <vscode workbench.action.closePanel>
+map ez $ <vscode workbench.action.closePanel>
 map ez 5 <vscode ezmode.ToggleCheatSheet>
 map ez 7 <mode special>
-map ez 8 <vscode GotoDeclaration>
-map ez 9 <vscode UnselectPreviousOccurrence>
+map ez 8 <vscode editor.action.goToImplementation>
+map ez 9 <vscode editor.action.moveSelectionToPreviousFindMatch>
 map ez ( <pair open ()>
-map ez 0 <vscode ezmode.SelectNextOccurrence>
+map ez 0 <vscode editor.action.addSelectionToNextFindMatch>
 map ez ) <pair close ()>
-map ez - <vscode ezmode.InsideTextObject>
-map ez = <vscode ezmode.AroundTextObject>
-map ez _ <vscode ezmode.DeleteDelimsTextObject>
+map ez - <vscode ezmode.InsideTextObject> // TODO
+map ez = <vscode ezmode.AroundTextObject> // TODO
+map ez _ <vscode ezmode.DeleteDelimsTextObject> // TODO
 
-map ez q <vscode NextSplitter>
-map ez Q <vscode CloseAllEditors>
-map ez w <vscode CloseContent>
-map ez W <vscode CloseAllEditorsButActive>
+map ez q <vscode workbench.action.focusNextGroup>
+map ez Q <vscode workbench.action.closeEditorsInGroup>
+map ez w <vscode workbench.action.closeActiveEditor>
+map ez W <vscode workbench.action.closeEditorsInOtherGroups>
 map ez e <mode select>
-map ez E <vscode ezmode.SelectLineContents><mode select>
-map ez r <vscode EditorDeleteLine>
-map ez R <vscode EditorDeleteLine><vscode EditorUp>
+map ez E <vscode ezmode.SelectLineContents><mode select> // TODO
+map ez r <vscode editor.action.deleteLines>
+map ez R <vscode editor.action.deleteLines><vscode cursorUp>
 map ez t <mode type>
 map ez T <mode typeonce>
-map ez y <vscode $Redo>
-map ez u <vscode EditorPreviousWord>
-map ez U <vscode EditorDeleteToWordStart>
-map ez i <vscode EditorUp>
-map ez I <vscode EditorBackwardParagraph>
-map ez o <vscode EditorNextWord>
-map ez O <vscode EditorDeleteToWordEnd>
-map ez p <vscode SearchEverywhere>
-map ez P <vscode GotoAction>
-map ez [ <vscode PreviousTab>
+map ez y <vscode redo>
+map ez u <vscode cursorWordLeft>
+map ez U <vscode deleteWordLeft>
+map ez i <vscode cursorUp>
+map ez I <vscode cursorMove {"to": "prevBlankLine"}>
+map ez o <vscode cursorWordRight>
+map ez O <vscode deleteWordRight>
+map ez p <vscode workbench.action.quickOpen>
+map ez P <vscode workbench.action.showCommands>
+map ez [ <vscode workbench.action.previousEditorInGroup>
 map ez { <pair open {} xml>
-map ez ] <vscode NextTab>
+map ez ] <vscode workbench.action.nextEditorInGroup>
 map ez } <pair close {} xml>
-map ez \\ <vscode SplitVertically>
-map ez | <vscode MoveTabRight>
+map ez \\ <vscode workbench.action.splitEditor>
+map ez | <vscode workbench.action.moveEditorToNextGroup>
 
-map ez a <vscode ezmode.SelectWord>
-map ez A <vscode $SelectAll>
-map ez s <vscode SaveAll>
-map ez S <vscode ReformatCode>
-map ez d <vscode $Delete>
-map ez D <vscode EditorBackSpace>
-map ez f <vscode Find>
-map ez F <vscode FindInPath>
+map ez a <vscode ezmode.SelectWord> // TODO
+map ez A <vscode editor.action.selectAll>
+map ez s <vscode workbench.action.files.save>
+map ez S <vscode editor.action.formatDocument>
+map ez d <vscode deleteRight>
+map ez D <vscode deleteLeft>
+map ez f <vscode actions.find>
+map ez F <vscode workbench.action.findInFiles>
 map ez g <mode git>
-map ez G <vscode ChooseRunConfiguration>
-map ez h <vscode EditorLineStart>
-map ez H <vscode EditorTextStart>
-map ez j <vscode EditorLeft>
-map ez J <vscode Back>
-map ez k <vscode EditorDown>
-map ez K <vscode EditorForwardParagraph>
-map ez l <vscode EditorRight>
-map ez L <vscode Forward>
-map ez ; <vscode EditorLineEnd>
-map ez : <vscode EditorTextEnd>
+map ez G <vscode ChooseRunConfiguration> // TODO
+map ez h <vscode cursorHome>
+map ez H <vscode cursorTop>
+map ez j <vscode cursorLeft>
+map ez J <vscode workbench.action.navigateBack>
+map ez k <vscode cursorDown>
+map ez K <vscode cursorMove {"to": "nextBlankLine"}>
+map ez l <vscode cursorRight>
+map ez L <vscode workbench.action.navigateForward>
+map ez ; <vscode cursorEnd>
+map ez : <vscode cursorBottom>
 map ez ' <quote '>
 map ez " <quote ">
 
-map ez z <vscode $Undo>
-map ez Z <vscode ReopenClosedTab>
-map ez x <vscode $Cut>
-map ez c <vscode $Copy><vscode ezmode.Unselect>
-map ez v <vscode $Paste>
-map ez V <vscode EditorDuplicate>
-map ez b <vscode EditorJoinLines>
-map ez B <vscode EditorUp><vscode EditorJoinLines>
-map ez n <vscode EditorStartNewLine>
-map ez N <vscode EditorStartNewLineBefore>
-// TODO use something like <scroll 50>
-map ez m <vscode EditorPageDown>
-map ez M <vscode EditorPageUp>
-map ez , <vscode ShowSettings>
-map ez lt <vscode ezmode.EzModeActionGroupPopup>
-map ez . <vscode CodeCompletion>
-map ez gt <vscode ParameterInfo>
-map ez / <vscode CommentByLineComment>
-map ez ? <vscode CommentByBlockComment>
+map ez z <vscode undo>
+map ez Z <vscode workbench.action.reopenClosedEditor>
+map ez x <vscode editor.action.clipboardCutAction>
+map ez c <vscode editor.action.clipboardCopyAction><vscode ezmode.Unselect> // TODO
+map ez v <vscode editor.action.clipboardPasteAction>
+map ez V <vscode editor.action.copyLinesDownAction>
+map ez b <vscode editor.action.joinLines>
+map ez B <vscode cursorUp><vscode editor.action.joinLines>
+map ez n <vscode editor.action.insertLineAfter>
+map ez N <vscode editor.action.insertLineBefore>
+// TODO use something like <scroll 50>. note: editorScroll does not work well.
+map ez m <vscode cursorPageDown>
+map ez M <vscode cursorPageUp>
+map ez , <vscode workbench.action.openSettings>
+map ez lt <vscode ezmode.EzModeActionGroupPopup> // TODO
+map ez . <vscode editor.action.triggerSuggest>
+map ez gt <vscode editor.action.triggerParameterHints>
+map ez / <vscode editor.action.commentLine>
+map ez ? <vscode editor.action.blockComment>
 
-map ez space <vscode AceAction>
+map ez space <vscode AceAction> // TODO
 
 
 map select default <ofmode ez>
@@ -107,54 +107,54 @@ map select ~ <ofmode ez><mode ez>
 map select e <mode ez>
 map select r <ofmode ez><mode ez>
 map select R <ofmode ez><mode ez>
-map select u <vscode EditorPreviousWordWithSelection>
+map select u <vscode cursorWordLeftSelect>
 map select U <ofmode ez><mode ez>
-map select i <vscode EditorUpWithSelection>
-map select I <vscode EditorBackwardParagraphWithSelection>
-map select o <vscode EditorNextWordWithSelection>
+map select i <vscode cursorUpSelect>
+map select I <vscode cursorMove {"to": "prevBlankLine", "select": true}>
+map select o <vscode cursorWordRightSelect>
 map select O <ofmode ez><mode ez>
 
 map select d <ofmode ez><mode ez>
 map select D <ofmode ez><mode ez>
-map select h <vscode EditorLineStartWithSelection>
-map select H <vscode EditorTextStartWithSelection>
-map select j <vscode EditorLeftWithSelection>
-map select k <vscode EditorDownWithSelection>
-map select K <vscode EditorForwardParagraphWithSelection>
-map select l <vscode EditorRightWithSelection>
-map select ; <vscode EditorLineEndWithSelection>
-map select : <vscode EditorTextEndWithSelection>
+map select h <vscode cursorHomeSelect>
+map select H <vscode cursorTopSelect>
+map select j <vscode cursorLeftSelect>
+map select k <vscode cursorDownSelect>
+map select K <vscode cursorMove {"to": "nextBlankLine", "select": true}>
+map select l <vscode cursorRightSelect>
+map select ; <vscode cursorEndSelect>
+map select : <vscode cursorBottomSelect>
 
 map select x <ofmode ez><mode ez>
 map select c <ofmode ez><mode ez>
 map select v <ofmode ez><mode ez>
-map select , <vscode EditorCloneCaretAbove>
+map select , <vscode editor.action.insertCursorAbove>
 map select lt <pair open angle>
-map select . <vscode EditorCloneCaretBelow>
+map select . <vscode editor.action.insertCursorBelow>
 map select gt <pair close angle>
 
 
 map git default <ofmode ez>
 
-map git w <vscode CloseContent><mode ez>
-map git r <vscode ezmode.ReviewChanges>
-map git u <vscode Vcs.UpdateProject><mode ez>
-map git i <vscode PreviousDiff>
-map git p <vscode Vcs.Push><mode ez>
-map git P <vscode Git.Pull><mode ez>
+map git w <vscode workbench.action.closeActiveEditor><mode ez>
+map git r <vscode git.viewChanges> // TODO
+map git u <vscode git.sync><mode ez>
+map git i <vscode workbench.action.compareEditor.previousChange>
+map git p <vscode git.push><mode ez>
+map git P <vscode git.pullFrom><mode ez>
 
-map git a <vscode Annotate><mode ez>
-map git s <vscode Vcs.Show.Log><mode ez>
-map git f <vscode Git.Fetch><mode ez>
+map git a <vscode gitlens.toggleFileBlame><mode ez> // TODO uses gitlens
+map git s <vscode workbench.scm.history.focus><mode ez>
+map git f <vscode git.fetchAll><mode ez>
 map git g <mode ez>
-map git h <vscode Vcs.ShowTabbedFileHistory><mode ez>
-map git j <vscode Diff.PrevChange>
-map git k <vscode NextDiff>
-map git l <vscode Diff.NextChange>
+map git h <vscode Vcs.ShowTabbedFileHistory><mode ez> // TODO need gitlens?
+map git j <vscode Diff.PrevChange> // TODO remove?
+map git k <vscode workbench.action.compareEditor.nextChange>
+map git l <vscode Diff.NextChange> // TODO remove?
 
-map git c <vscode CheckinProject><mode ez>
-map git b <vscode Git.Branches><mode ez>
-map git m <vscode Git.Merge><mode ez>
+map git c <vscode CheckinProject><mode ez> // TODO ?
+map git b <vscode git.checkout><mode ez>
+map git m <vscode git.merge><mode ez>
 
 
 map special default <ofmode ez>
@@ -168,8 +168,8 @@ map special i <write \${caretindex}><mode ez>
 map special f <write \${filename}><mode ez>
 map special l <write \${line}><mode ez>
 map special c <write \${column}><mode ez>
-map special r <vscode RenameElement><mode type>
-map special R <vscode RenameFile><mode ez>
+map special r <vscode editor.action.rename><mode type>
+map special R <vscode renameFile><mode ez>
 `
 
 export let baseActions: EzAction[] = []

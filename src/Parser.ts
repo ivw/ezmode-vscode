@@ -60,11 +60,19 @@ export function parseAction(buf: LexerBuffer): EzAction {
       return createSwitchModeAction(modeName)
     }
     case "vscode": {
-      const commandId = buf.remainingContent()
+      const commandId = buf.nextToken()
       if (commandId === null) {
         throw new Error("Expected command ID")
       }
-      return createVsCodeEzAction(commandId)
+      let args = buf.remainingContent()
+      if (args !== null) {
+        try {
+          args = JSON.parse(args)
+        } catch {
+          // Leave as string if not valid JSON
+        }
+      }
+      return createVsCodeEzAction(commandId, args)
     }
     case "write": {
       const text = buf.remainingContent()
