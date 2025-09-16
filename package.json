@@ -18,6 +18,14 @@
       {
         "command": "ezmode.enterEzMode",
         "title": "Enter EzMode"
+      },
+      {
+        "command": "ezmode.selectLine",
+        "title": "Select Current Line"
+      },
+      {
+        "command": "ezmode.selectWord",
+        "title": "Select Current Word"
       }
     ],
     "keybindings": [

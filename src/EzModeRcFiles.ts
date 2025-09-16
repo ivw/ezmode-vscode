@@ -33,7 +33,7 @@ map ez Q <vscode workbench.action.closeEditorsInGroup>
 map ez w <vscode workbench.action.closeActiveEditor>
 map ez W <vscode workbench.action.closeEditorsInOtherGroups>
 map ez e <mode select>
-map ez E <vscode ezmode.SelectLineContents><mode select> // TODO
+map ez E <vscode ezmode.selectLine><mode select>
 map ez r <vscode editor.action.deleteLines>
 map ez R <vscode editor.action.deleteLines><vscode cursorUp>
 map ez t <mode type>
@@ -54,7 +54,7 @@ map ez } <pair close {} xml>
 map ez \\ <vscode workbench.action.splitEditor>
 map ez | <vscode workbench.action.moveEditorToNextGroup>
 
-map ez a <vscode ezmode.SelectWord> // TODO
+map ez a <vscode ezmode.selectWord>
 map ez A <vscode editor.action.selectAll>
 map ez s <vscode workbench.action.files.save>
 map ez S <vscode editor.action.formatDocument>
