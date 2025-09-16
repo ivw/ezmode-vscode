@@ -2,6 +2,8 @@
   "name": "ezmode",
   "displayName": "EzMode",
   "description": "Modal editing without the steep learning curve.",
+  "repository": "github:ivw/ezmode-vscode",
+  "author": "Ivo Wijnker",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.103.0"

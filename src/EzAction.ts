@@ -135,3 +135,16 @@ export function createCompositeEzAction(actions: EzAction[]): EzAction {
 //     description: action.description,
 //   }
 // }
+
+export function createJumpToBracketAction(): EzAction {
+  return {
+    perform: (e) => {
+      const editor = vscode.window.activeTextEditor
+      if (!editor) {
+        return
+      }
+      // TODO
+    },
+    description: "Jump to bracket",
+  }
+}

@@ -1,5 +1,6 @@
 import {
   createCompositeEzAction,
+  createJumpToBracketAction,
   createKeyReferenceAction,
   createMapKeyBindingAction,
   createOfModeAction,
@@ -138,8 +139,7 @@ export function parseAction(buf: LexerBuffer): EzAction {
       return nativeEzAction
     }
     case "pair": {
-      // TODO
-      return nativeEzAction
+      return createJumpToBracketAction()
     }
     case "toolwindow": {
       // TODO

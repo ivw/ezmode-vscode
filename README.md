@@ -1,71 +1,129 @@
-# ezmode README
+EzMode is a plugin for Visual Studio Code that brings the power of modal editing, without the steep learning curve.
 
-This is the README for your extension "ezmode". After writing up a brief description, we recommend including the following sections.
+### What is modal editing?
 
-## Features
+In a modal editor, keys that normally insert characters can perform different actions based on the current mode.
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+For example, in EzMode you can press `a` to select a word, and `c` to copy it.
+This is less work than double-clicking with your mouse and pressing `Ctrl-c`.
 
-For example if there is an image subfolder under your extension project workspace:
+#### Then how do I type?
 
-\!\[feature X\]\(images/feature-x.png\)
+Press `t` to enter type mode, and press `Tab` to go back to ez mode.
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+#### So it's like Vim?
 
-## Requirements
+Yes, but a lot simpler. EzMode focuses just on _modes_.
+It does **not**:
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+- use any Ctrl or Alt shortcuts
+- use a block cursor
+- change how copy/paste works
+- use `hjkl` for arrow keys. EzMode uses `ijkl`.
 
-## Extension Settings
+EzMode is built for modern IDEs. It works well with viewing diffs,
+using multi-cursor, and managing tool windows.
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+TODO demo
 
-For example:
+### Keyboard layout:
 
-This extension contributes the following settings:
-
-- `myExtension.enable`: Enable/disable this extension.
-- `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
+TODO
+_[View on Keyboard Layout Editor](https://www.keyboard-layout-editor.com/#/gists/aee165d4c5c45849d72647829abe7038)_
 
 ---
 
-## Following extension guidelines
+## Getting Started
 
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
+TODO
 
-- [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
+## Customization
 
-## Working with Markdown
+The full keymap is defined in TODO,
+which you can override with your own `.ezmoderc` file.
 
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
+Key mappings use this format:
 
-- Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-- Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-- Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
+```
+map {mode} {keychar} {actions}
+```
 
-## For more information
+### `mode`
 
-- [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-- [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+The mode in which the key mapping is active. Built-in modes include `ez`, `type`, `select`, and `git`, but you can
+define your own as well.
 
-**Enjoy!**
+### `keychar`
+
+The character that has to be "typed" to trigger the action. Naturally, uppercase means you have to hold shift.
+
+Ctrl/Alt shortcuts are not characters and not handled by EzMode.
+
+Special values:
+
+- `<space>`: The space character.
+- `<default>`: The default key mapping, which will be triggered by any key that does not have a mapping for the given
+  mode.
+
+### `actions`
+
+A string of one or more actions with no separators.
+
+You can map an action to the parent keymap by typing its `keychar`,
+or you can use a base action:
+
+- `<vscode SomeCommandId>`: Invoke a VSCode command.
+- `<mode somemode>`: Switch to a different mode
+- `<ofmode somemode>`: Let another mode handle the `keychar`
+- `<native>`: Insert the `keychar` into the editor
+- `<write Hello word!>`: Insert a string into the editor
+- `<toolwindow ToolWindowId>`: Toggle a tool window
+- `<pair open/close {}>`: Jump to the opening/closing delimiter defined in the third argument, which must be two characters,
+  or `angle` for `<>`, or `xml` for XML/HTML tags. You can list multiple delimiters by separating them with spaces.
+
+### Variables
+
+In actions that take a text argument, you can use variables enclosed in `${}`,
+for example: `<write Hello, ${filename}!>`.
+
+- Custom variables: set in your config using `set varname value`
+- Built-in variables: `mode`, `key`, `caretindex`, `line`, `column`, `filename`, `projectname`, `clipboard`
+- Escape sequences: `space`, `tab`, `nl` (newline), `doubleslash` (for `//`)
+
+### Examples
+
+Map `C` (Shift + c) in `ez` mode to select all (`A`) and copy (`c`):
+
+```
+map ez C Ac
+```
+
+Create a mode that types every character twice:
+
+```
+map doubletype <default> <native><native>
+map ez X <mode doubletype>
+```
+
+More practical examples can be found in
+the TODO
+
+## Comparison with other modal editors
+
+EzMode doesn't add as many commands as Vim, for example, but EzMode can use any action that's already available in the IDE.
+
+EzMode uses _object-verb_ style like Kakoune, rather than Vim's _verb-object_ style. A few common examples:
+
+|                           | EzMode | Vim    | Kakoune     |
+| ------------------------- | ------ | ------ | ----------- |
+| Select word               | `a`    | `viw`  | `<Alt-i>w`  |
+| Delete word               | `ad`   | `diw`  | `<Alt-i>wd` |
+| Copy word                 | `ac`   | `yiw`  | `<Alt-i>wy` |
+| Change word               | `at`   | `ciw`  | `<Alt-i>wc` |
+| Select line               | `E`    | `V`    | `x`         |
+| Delete line               | `m`    | `dd`   | `xd`        |
+| Copy line                 | `c`    | `yy`   | `xy`        |
+| Change line               | `Et`   | `cc`   | `xc`        |
+| Jump to surrounding quote | `'`    | `f'`   | `f'`        |
+| Delete surrounding quote  | `'_`   | `ds'`  | -           |
+| Change surrounding quote  | `'_T"` | `cs'"` | -           |
