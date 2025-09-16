@@ -28,7 +28,7 @@ export function createVsCodeEzAction(commandId: string, args: unknown): EzAction
       console.log(`Executing VSCode command: ${commandId} with args: ${JSON.stringify(args)}`)
       return vscode.commands.executeCommand(commandId, args)
     },
-    description: `Command: ${commandId}, args: ${JSON.stringify(args)}`,
+    description: `Command: ${commandId}${args !== null ? `, args: ${JSON.stringify(args)}` : ""}`,
   }
 }
 

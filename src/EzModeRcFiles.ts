@@ -147,7 +147,7 @@ map git a <vscode gitlens.toggleFileBlame><mode ez> // TODO uses gitlens
 map git s <vscode workbench.scm.history.focus><mode ez>
 map git f <vscode git.fetchAll><mode ez>
 map git g <mode ez>
-map git h <vscode Vcs.ShowTabbedFileHistory><mode ez> // TODO need gitlens?
+map git h <vscode gitlens.showFileHistoryView><mode ez> // TODO need gitlens?
 map git j <vscode Diff.PrevChange> // TODO remove?
 map git k <vscode workbench.action.compareEditor.nextChange>
 map git l <vscode Diff.NextChange> // TODO remove?
