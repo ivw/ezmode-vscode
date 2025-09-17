@@ -1,6 +1,10 @@
 import * as vscode from "vscode"
 import { changeSelectionRange } from "../Utils"
 
+function startOfLine(line: vscode.TextLine): vscode.Position {
+  return line.range.start.translate(0, line.firstNonWhitespaceCharacterIndex)
+}
+
 export function activateSelectLine(context: vscode.ExtensionContext) {
   const disposable = vscode.commands.registerCommand("ezmode.selectLine", () => {
     const editor = vscode.window.activeTextEditor
@@ -12,14 +16,12 @@ export function activateSelectLine(context: vscode.ExtensionContext) {
     editor.selections = selections.map((sel) => {
       if (sel.isSingleLine) {
         const line = document.lineAt(sel.start.line)
-        return changeSelectionRange(sel, line.range.start, line.range.end)
+        return changeSelectionRange(sel, startOfLine(line), line.range.end)
       }
 
-      return changeSelectionRange(
-        sel,
-        document.lineAt(sel.start.line).range.start,
-        document.lineAt(sel.end.line).range.end,
-      )
+      const startLine = document.lineAt(sel.start.line)
+      const endLine = document.lineAt(sel.end.line)
+      return changeSelectionRange(sel, startOfLine(startLine), endLine.range.end)
     })
   })
   context.subscriptions.push(disposable)
