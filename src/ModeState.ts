@@ -1,3 +1,4 @@
+import * as vscode from "vscode"
 import { EventEmitter } from "vscode"
 import { ENTER_MODE_KEY, EXIT_MODE_KEY, getEnv, getModeEnv } from "./EzEnv"
 
@@ -29,4 +30,17 @@ export function setMode(newMode: string) {
   }
 
   modeChangeEmitter.fire(newMode)
+}
+
+export function activateModeListeners(context: vscode.ExtensionContext) {
+  context.subscriptions.push(
+    vscode.window.onDidChangeTextEditorSelection((e) => {
+      const hasSelection = !e.selections.every((sel) => sel.isEmpty)
+      if (hasSelection && getMode() === "ez") {
+        setMode("select")
+      } else if (!hasSelection && getMode() === "select") {
+        setMode("ez")
+      }
+    }),
+  )
 }

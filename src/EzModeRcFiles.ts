@@ -15,9 +15,9 @@ map ez 2 <vscode workbench.view.scm><vscode workbench.view.scm> // TODO
 map ez @ <vscode workbench.view.scm>
 map ez 3 <vscode workbench.action.terminal.toggleTerminal> // TODO
 map ez # <vscode workbench.action.terminal.toggleTerminal>
-map ez 4 <vscode workbench.action.closePanel>
-map ez $ <vscode workbench.action.closePanel>
-map ez 5 <vscode ezmode.ToggleCheatSheet>
+map ez 4 <vscode workbench.action.closePanel> // TODO
+map ez $ <vscode workbench.action.closePanel> // TODO
+map ez 5 <vscode ezmode.ToggleCheatSheet> // TODO
 map ez 7 <mode special>
 map ez 8 <vscode editor.action.goToImplementation>
 map ez 9 <vscode editor.action.moveSelectionToPreviousFindMatch>
@@ -31,7 +31,7 @@ map ez _ <vscode editor.action.removeBrackets>
 map ez q <vscode workbench.action.focusNextGroup>
 map ez Q <vscode workbench.action.closeEditorsInGroup>
 map ez w <vscode workbench.action.closeActiveEditor>
-map ez W <vscode workbench.action.closeEditorsInOtherGroups>
+map ez W <vscode workbench.action.closeOtherEditors>
 map ez e <mode select>
 map ez E <vscode ezmode.selectLine><mode select>
 map ez r <vscode editor.action.deleteLines>
@@ -104,7 +104,7 @@ map select default <ofmode ez>
 
 map select ~ <ofmode ez><mode ez>
 
-map select e <mode ez>
+map select e <vscode cancelSelection><mode ez>
 map select r <ofmode ez><mode ez>
 map select R <ofmode ez><mode ez>
 map select u <vscode cursorWordLeftSelect>
