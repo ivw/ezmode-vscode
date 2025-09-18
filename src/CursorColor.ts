@@ -1,5 +1,6 @@
 import * as vscode from "vscode"
 
+// TODO handle in global state. Another window might have changed it already.
 let originalCursorColor: string | undefined | null = null
 
 export function changeCursorColor(color: string | undefined) {
@@ -11,8 +12,6 @@ export function changeCursorColor(color: string | undefined) {
   }
 
   // Set the color in the global user settings.
-  // TODO problem: with multiple folders open, this will conflict.
-  //   you'd have to globally manage it and listen for editor focus or something.
   configuration.update("colorCustomizations", { "editorCursor.foreground": color }, true)
 }
 

@@ -1,6 +1,7 @@
 import * as vscode from "vscode"
 import { EventEmitter } from "vscode"
 import { ENTER_MODE_KEY, EXIT_MODE_KEY, getEnv, getModeEnv } from "./EzEnv"
+import { changeCursorColor, resetCursorColor } from "./CursorColor"
 
 let mode: string = "ez" // TODO use "type" as default mode
 const modeChangeEmitter = new EventEmitter<string>()
@@ -29,10 +30,23 @@ export function setMode(newMode: string) {
     enterAction.action.perform({ env, key: null })
   }
 
+  updateCursorColor()
   modeChangeEmitter.fire(newMode)
 }
 
+function updateCursorColor() {
+  if (mode === "type") {
+    resetCursorColor()
+  } else if (mode === "ez" || mode === "select") {
+    changeCursorColor("#FF6200")
+  } else {
+    changeCursorColor("#589DF6")
+  }
+}
+
 export function activateModeListeners(context: vscode.ExtensionContext) {
+  updateCursorColor()
+
   context.subscriptions.push(
     vscode.window.onDidChangeTextEditorSelection((e) => {
       const hasSelection = !e.selections.every((sel) => sel.isEmpty)
@@ -41,6 +55,23 @@ export function activateModeListeners(context: vscode.ExtensionContext) {
       } else if (!hasSelection && getMode() === "select") {
         setMode("ez")
       }
+    }),
+  )
+
+  context.subscriptions.push(
+    vscode.window.onDidChangeActiveTextEditor((editor) => {
+      console.log(`active editor: ${editor}`)
+    }),
+  )
+
+  context.subscriptions.push(
+    vscode.window.onDidChangeWindowState((e) => {
+      if (e.focused) {
+        updateCursorColor()
+      } else {
+        resetCursorColor()
+      }
+      console.log(`Active: ${e.active}, focused: ${e.focused}`)
     }),
   )
 }
