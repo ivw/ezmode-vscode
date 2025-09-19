@@ -16,5 +16,6 @@ export function changeCursorColor(color: string | undefined) {
 }
 
 export function resetCursorColor() {
-  changeCursorColor(originalCursorColor === null ? undefined : originalCursorColor)
+  changeCursorColor(undefined)
+  // changeCursorColor(originalCursorColor === null ? undefined : originalCursorColor)
 }
