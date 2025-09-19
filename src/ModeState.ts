@@ -24,6 +24,8 @@ export function setMode(newMode: string) {
 
   mode = newMode
 
+  onEditorSelectionCouldHaveChanged()
+
   const newModeEnv = getModeEnv(env, getMode())
   const enterAction = newModeEnv?.keyBindings.get(ENTER_MODE_KEY)
   if (enterAction) {
@@ -31,7 +33,7 @@ export function setMode(newMode: string) {
   }
 
   updateCursorColor()
-  modeChangeEmitter.fire(newMode)
+  modeChangeEmitter.fire(mode)
 }
 
 function updateCursorColor() {
@@ -44,23 +46,31 @@ function updateCursorColor() {
   }
 }
 
+function onEditorSelectionCouldHaveChanged(selections: readonly vscode.Selection[] | null = null) {
+  const sels = selections ?? vscode.window.activeTextEditor?.selections
+  if (sels) {
+    const hasSelection = !sels.every((sel) => sel.isEmpty)
+    if (hasSelection && getMode() === "ez") {
+      setMode("select")
+    } else if (!hasSelection && getMode() === "select") {
+      setMode("ez")
+    }
+  }
+}
+
 export function activateModeListeners(context: vscode.ExtensionContext) {
   updateCursorColor()
 
   context.subscriptions.push(
     vscode.window.onDidChangeTextEditorSelection((e) => {
-      const hasSelection = !e.selections.every((sel) => sel.isEmpty)
-      if (hasSelection && getMode() === "ez") {
-        setMode("select")
-      } else if (!hasSelection && getMode() === "select") {
-        setMode("ez")
-      }
+      onEditorSelectionCouldHaveChanged(e.selections)
     }),
   )
 
   context.subscriptions.push(
     vscode.window.onDidChangeActiveTextEditor((editor) => {
       console.log(`active editor: ${editor}`)
+      onEditorSelectionCouldHaveChanged()
     }),
   )
 
