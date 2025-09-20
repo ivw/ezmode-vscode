@@ -7,6 +7,8 @@ let mode: string = "ez" // TODO use "type" as default mode
 const modeChangeEmitter = new EventEmitter<string>()
 export const onModeChange = modeChangeEmitter.event
 
+let selectModeAnchor: vscode.Position | null = null
+
 export function getMode(): string {
   return mode
 }
@@ -23,6 +25,17 @@ export function setMode(newMode: string) {
   }
 
   mode = newMode
+
+  if (mode === "select") {
+    if (selectModeAnchor === null) {
+      const editor = vscode.window.activeTextEditor
+      if (editor) {
+        selectModeAnchor = editor.selection.anchor
+      }
+    }
+  } else {
+    selectModeAnchor = null
+  }
 
   onEditorSelectionCouldHaveChanged()
 
@@ -52,7 +65,12 @@ function onEditorSelectionCouldHaveChanged(selections: readonly vscode.Selection
     const hasSelection = !sels.every((sel) => sel.isEmpty)
     if (hasSelection && getMode() === "ez") {
       setMode("select")
-    } else if (!hasSelection && getMode() === "select") {
+    } else if (
+      !hasSelection &&
+      getMode() === "select" &&
+      (selectModeAnchor === null ||
+        !vscode.window.activeTextEditor?.selection?.anchor?.isEqual(selectModeAnchor))
+    ) {
       setMode("ez")
     }
   }
@@ -70,6 +88,7 @@ export function activateModeListeners(context: vscode.ExtensionContext) {
   context.subscriptions.push(
     vscode.window.onDidChangeActiveTextEditor((editor) => {
       console.log(`active editor: ${editor}`)
+      selectModeAnchor = null
       onEditorSelectionCouldHaveChanged()
     }),
   )
