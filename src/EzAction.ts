@@ -136,15 +136,36 @@ export function createCompositeEzAction(actions: EzAction[]): EzAction {
 //   }
 // }
 
-export function createJumpToBracketAction(): EzAction {
+export function createJumpToBracketAction(
+  findClosingDelim: boolean,
+  closingBracket: string,
+  openingBracket: string,
+): EzAction {
   return {
     perform: (e) => {
       const editor = vscode.window.activeTextEditor
-      if (!editor) {
-        return
-      }
-      // TODO
+      if (!editor) return
+
+      const doc = editor.document
+      const text = doc.getText()
+
+      editor.selections = editor.selections.map((sel) => {
+        let depth = 0
+        for (let i = doc.offsetAt(sel.active); i < text.length; i++) {
+          const char = text[i]
+          if (char === closingBracket) {
+            if (depth === 0) {
+              const pos = doc.positionAt(i)
+              return new vscode.Selection(pos, pos)
+            }
+            depth--
+          } else if (char === openingBracket) {
+            depth++
+          }
+        }
+        return sel
+      })
     },
-    description: "Jump to bracket",
+    description: "Jump to bracket", // TODO
   }
 }

@@ -76,6 +76,7 @@ map ez ; <vscode cursorEnd>
 map ez : <vscode cursorBottom>
 map ez ' <quote '>
 map ez " <quote ">
+map ez enter <native>
 
 map ez z <vscode undo>
 map ez Z <vscode workbench.action.reopenClosedEditor>
@@ -104,7 +105,7 @@ map select default <ofmode ez>
 
 map select ~ <ofmode ez><mode ez>
 
-map select e <vscode cancelSelection><mode ez>
+map select e <vscode cancelSelection><mode ez> // TODO cancelSelection cancels multicursor
 map select r <ofmode ez><mode ez>
 map select R <ofmode ez><mode ez>
 map select u <vscode cursorWordLeftSelect>

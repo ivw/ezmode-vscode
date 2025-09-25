@@ -6,11 +6,7 @@ function startOfLine(line: vscode.TextLine): vscode.Position {
 }
 
 export function activateSelectLine(context: vscode.ExtensionContext) {
-  const disposable = vscode.commands.registerCommand("ezmode.selectLine", () => {
-    const editor = vscode.window.activeTextEditor
-    if (!editor) {
-      return
-    }
+  const disposable = vscode.commands.registerTextEditorCommand("ezmode.selectLine", (editor) => {
     const { document, selections } = editor
 
     editor.selections = selections.map((sel) => {

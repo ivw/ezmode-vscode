@@ -50,6 +50,13 @@ export function parseLine(line: string): EzAction | null {
   return action
 }
 
+const keyBindingKeyMap: Record<string, string> = {
+  lt: "<",
+  gt: ">",
+  space: " ",
+  enter: "\n",
+}
+
 export function parseAction(buf: LexerBuffer): EzAction {
   const actionType = buf.nextToken()
   switch (actionType) {
@@ -112,13 +119,7 @@ export function parseAction(buf: LexerBuffer): EzAction {
       if (key === null) {
         throw new Error("Expected key for map action")
       }
-      if (key === "lt") {
-        key = "<"
-      } else if (key === "gt") {
-        key = ">"
-      } else if (key === "space") {
-        key = " "
-      }
+      key = keyBindingKeyMap[key] ?? key
 
       const actionChainString = buf.remainingContent()
       if (actionChainString === null) {
@@ -139,7 +140,7 @@ export function parseAction(buf: LexerBuffer): EzAction {
       return nativeEzAction
     }
     case "pair": {
-      return createJumpToBracketAction()
+      return createJumpToBracketAction(true, ">", "<")
     }
     case "toolwindow": {
       // TODO

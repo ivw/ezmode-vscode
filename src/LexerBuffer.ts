@@ -7,10 +7,10 @@ export class LexerBuffer {
   start: number
   end: number
 
-  constructor(content: string) {
+  constructor(content: string, start: number = 0, end: number = content.length) {
     this.content = content
-    this.start = 0
-    this.end = content.length
+    this.start = start
+    this.end = end
   }
 
   skipWhitespace(): void {
@@ -57,13 +57,13 @@ export class LexerBuffer {
     let depth = 0
     while (this.start < this.end) {
       const char = this.content[this.start++]
-      if (char === openingBracket) {
-        depth++
-      } else if (char === closingBracket) {
+      if (char === closingBracket) {
         if (depth === 0) {
           return this.content.substring(start, this.start - 1)
         }
         depth--
+      } else if (char === openingBracket) {
+        depth++
       }
     }
     return null

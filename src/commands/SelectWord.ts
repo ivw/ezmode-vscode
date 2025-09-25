@@ -2,11 +2,7 @@ import * as vscode from "vscode"
 import { changeSelectionRange } from "../Utils"
 
 export function activateSelectWord(context: vscode.ExtensionContext) {
-  const disposable = vscode.commands.registerCommand("ezmode.selectWord", () => {
-    const editor = vscode.window.activeTextEditor
-    if (!editor) {
-      return
-    }
+  const disposable = vscode.commands.registerTextEditorCommand("ezmode.selectWord", (editor) => {
     const { document, selections } = editor
 
     editor.selections = selections.map((sel) => {
