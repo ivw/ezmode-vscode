@@ -1,12 +1,12 @@
 import * as vscode from "vscode"
-import { setMode } from "../ModeState"
+import { switchMode } from "../ModeState"
 import { activateSelectLine } from "./SelectLine"
 import { activateSelectWord } from "./SelectWord"
 
 export function activateCommands(context: vscode.ExtensionContext) {
   context.subscriptions.push(
     vscode.commands.registerCommand("ezmode.enterEzMode", () => {
-      setMode("ez")
+      switchMode("ez")
     }),
   )
 

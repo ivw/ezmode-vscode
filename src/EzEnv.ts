@@ -1,13 +1,6 @@
 import { baseActions } from "./EzModeRcFiles"
 import { EventEmitter } from "vscode"
-import {
-  createCursorColorAction,
-  createPopupAction,
-  createSwitchModeAction,
-  createVsCodeEzAction,
-  nativeEzAction,
-  type EzAction,
-} from "./EzAction"
+import { type EzAction } from "./EzAction"
 import { getMode } from "./ModeState"
 
 export type EzEnv = {

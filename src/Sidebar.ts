@@ -1,6 +1,6 @@
 import * as vscode from "vscode"
 import { type KeyBinding, getEnv, getModeEnv, onEnvChange } from "./EzEnv"
-import { getMode, onModeChange } from "./ModeState"
+import { getMode, afterModeChange } from "./ModeState"
 
 export function activateSidebar(context: vscode.ExtensionContext) {
   const changeEmitter = new vscode.EventEmitter<KeyBinding | undefined | void>()
@@ -27,5 +27,5 @@ export function activateSidebar(context: vscode.ExtensionContext) {
   context.subscriptions.push(vscode.window.registerTreeDataProvider("ezmode.cheatsheet", provider))
 
   context.subscriptions.push(onEnvChange(() => changeEmitter.fire()))
-  context.subscriptions.push(onModeChange(() => changeEmitter.fire()))
+  context.subscriptions.push(afterModeChange(() => changeEmitter.fire()))
 }

@@ -1,6 +1,6 @@
 import * as vscode from "vscode"
 import { getOrAddModeEnv, getActionForKey, type EzEnv, type KeyBinding } from "./EzEnv"
-import { getMode, setMode } from "./ModeState"
+import { getMode, switchMode } from "./ModeState"
 import { changeCursorColor, resetCursorColor } from "./CursorColor"
 
 export type EzEvent = {
@@ -16,7 +16,7 @@ export type EzAction = {
 export function createSwitchModeAction(mode: string): EzAction {
   return {
     perform: () => {
-      setMode(mode)
+      switchMode(mode)
     },
     description: `Switch mode to: ${mode}`,
   }

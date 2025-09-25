@@ -1,5 +1,5 @@
 import * as vscode from "vscode"
-import { getMode, onModeChange } from "./ModeState"
+import { getMode, afterModeChange } from "./ModeState"
 
 export function activateModeStatusBarItem(context: vscode.ExtensionContext) {
   const item = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 1100)
@@ -8,7 +8,7 @@ export function activateModeStatusBarItem(context: vscode.ExtensionContext) {
   context.subscriptions.push(item)
 
   context.subscriptions.push(
-    onModeChange((mode: string) => {
+    afterModeChange((mode: string) => {
       item.text = mode
     }),
   )
