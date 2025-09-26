@@ -16,10 +16,10 @@ export function activateCursorColor(context: vscode.ExtensionContext) {
   )
 }
 
-function updateCursorColor(newMode: string) {
-  if (newMode === "type") {
+function updateCursorColor(mode: string) {
+  if (mode === "type") {
     resetCursorColor()
-  } else if (newMode === "ez" || newMode === "select") {
+  } else if (mode === "ez" || mode === "select") {
     changeCursorColor("#FF6200")
   } else {
     changeCursorColor("#589DF6")

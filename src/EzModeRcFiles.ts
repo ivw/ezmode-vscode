@@ -98,7 +98,7 @@ map ez gt <vscode editor.action.triggerParameterHints>
 map ez / <vscode editor.action.commentLine>
 map ez ? <vscode editor.action.blockComment>
 
-map ez space <vscode AceAction> // TODO
+map ez space <vscode extension.aceJump>
 
 
 map select default <ofmode ez>

@@ -26,9 +26,12 @@ export function createVsCodeEzAction(commandId: string, args: unknown): EzAction
   return {
     perform: () => {
       console.log(`Executing VSCode command: ${commandId} with args: ${JSON.stringify(args)}`)
-      return vscode.commands.executeCommand(commandId, args)
+      // Calling executeCommand with nullish args can cause problems, for example with `workbench.action.findInFiles`.
+      return args == null
+        ? vscode.commands.executeCommand(commandId)
+        : vscode.commands.executeCommand(commandId, args)
     },
-    description: `Command: ${commandId}${args !== null ? `, args: ${JSON.stringify(args)}` : ""}`,
+    description: `Command: ${commandId}${args != null ? `, args: ${JSON.stringify(args ?? undefined)}` : ""}`,
   }
 }
 
