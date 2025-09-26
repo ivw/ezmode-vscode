@@ -1,3 +1,4 @@
+import * as vscode from "vscode"
 import { EventEmitter } from "vscode"
 
 let mode: string = "ez" // TODO use "type" as default mode
@@ -12,6 +13,9 @@ export function getMode(): string {
 
 export function switchMode(newMode: string) {
   if (newMode == getMode()) return
+  if (newMode === "ez" && vscode.window.activeTextEditor?.selection?.isEmpty === false) {
+    newMode = "select"
+  }
   beforeModeChangeEmitter.fire(newMode)
   mode = newMode
   afterModeChangeEmitter.fire(newMode)
