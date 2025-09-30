@@ -1,3 +1,4 @@
+import { pairDelim } from "./delim/PairDelim"
 import {
   createCompositeEzAction,
   createJumpToBracketAction,
@@ -140,7 +141,9 @@ export function parseAction(buf: LexerBuffer): EzAction {
       return nativeEzAction
     }
     case "pair": {
-      return createJumpToBracketAction(true, ">", "<")
+      const direction = buf.nextToken()
+
+      return createJumpToBracketAction(direction === "close", pairDelim("<", ">"))
     }
     case "toolwindow": {
       // TODO

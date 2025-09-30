@@ -2,6 +2,7 @@ import * as vscode from "vscode"
 import { getOrAddModeEnv, getActionForKey, type EzEnv, type KeyBinding } from "./EzEnv"
 import { getMode, switchMode } from "./ModeState"
 import { changeCursorColor, resetCursorColor } from "./CursorColor"
+import type { Delim } from "./delim/Delim"
 
 export type EzEvent = {
   env: EzEnv
@@ -139,32 +140,22 @@ export function createCompositeEzAction(actions: EzAction[]): EzAction {
 //   }
 // }
 
-export function createJumpToBracketAction(
-  findClosingDelim: boolean,
-  closingBracket: string,
-  openingBracket: string,
-): EzAction {
+export function createJumpToBracketAction(findClosingDelim: boolean, delim: Delim): EzAction {
   return {
-    perform: (e) => {
+    perform: () => {
       const editor = vscode.window.activeTextEditor
       if (!editor) return
 
-      const doc = editor.document
-      const text = doc.getText()
-
       editor.selections = editor.selections.map((sel) => {
-        let depth = 0
-        for (let i = doc.offsetAt(sel.active); i < text.length; i++) {
-          const char = text[i]
-          if (char === closingBracket) {
-            if (depth === 0) {
-              const pos = doc.positionAt(i)
-              return new vscode.Selection(pos, pos)
-            }
-            depth--
-          } else if (char === openingBracket) {
-            depth++
-          }
+        const delimOffset = delim.findDelim(
+          findClosingDelim,
+          editor,
+          editor.document.offsetAt(sel.active),
+          true,
+        )
+        if (delimOffset !== null) {
+          const pos = editor.document.positionAt(delimOffset)
+          return new vscode.Selection(pos, pos)
         }
         return sel
       })
