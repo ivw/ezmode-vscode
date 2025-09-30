@@ -3,6 +3,7 @@ import { getOrAddModeEnv, getActionForKey, type EzEnv, type KeyBinding } from ".
 import { getMode, switchMode } from "./ModeState"
 import { changeCursorColor, resetCursorColor } from "./CursorColor"
 import type { Delim } from "./delim/Delim"
+import { moveSelectionBasedOnMode } from "./Utils"
 
 export type EzEvent = {
   env: EzEnv
@@ -154,8 +155,7 @@ export function createJumpToBracketAction(findClosingDelim: boolean, delim: Deli
           true,
         )
         if (delimOffset !== null) {
-          const pos = editor.document.positionAt(delimOffset)
-          return new vscode.Selection(pos, pos)
+          return moveSelectionBasedOnMode(sel, editor.document.positionAt(delimOffset))
         }
         return sel
       })
