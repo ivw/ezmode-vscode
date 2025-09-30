@@ -2,8 +2,7 @@ import * as vscode from "vscode"
 import { parseEzModeRc } from "./Parser"
 import type { EzAction } from "./EzAction"
 
-const baseRcString = `
-map type default <native>
+const baseRcString = `map type default <native>
 map typeonce default <native><mode ez>
 
 
@@ -48,9 +47,9 @@ map ez O <vscode deleteWordRight>
 map ez p <vscode workbench.action.quickOpen>
 map ez P <vscode workbench.action.showCommands>
 map ez [ <vscode workbench.action.previousEditorInGroup>
-map ez { <pair open {} xml>
+map ez { <pair open {}> // TODO xml
 map ez ] <vscode workbench.action.nextEditorInGroup>
-map ez } <pair close {} xml>
+map ez } <pair close {}> // TODO xml
 map ez \\ <vscode workbench.action.splitEditor>
 map ez | <vscode workbench.action.moveEditorToNextGroup>
 

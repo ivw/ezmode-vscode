@@ -1,4 +1,5 @@
-import { pairDelim } from "./delim/PairDelim"
+import type { Delim } from "./delim/Delim"
+import { anglePairDelim, pairDelim } from "./delim/PairDelim"
 import {
   createCompositeEzAction,
   createJumpToBracketAction,
@@ -138,19 +139,42 @@ export function parseAction(buf: LexerBuffer): EzAction {
     }
     case "quote": {
       // TODO
+      buf.remainingContent()
       return nativeEzAction
     }
     case "pair": {
       const direction = buf.nextToken()
-
-      return createJumpToBracketAction(direction === "close", pairDelim("<", ">"))
+      if (direction === null) {
+        throw new Error("First argument of `pair` must be open or close")
+      }
+      const delimString = buf.nextToken()
+      if (delimString === null) {
+        throw new Error("Second argument of `pair` must be a delimiter")
+      }
+      function parseDelimString(delimString: string): Delim {
+        if (delimString === "angle") {
+          return anglePairDelim
+        }
+        if (delimString.length !== 2) {
+          throw new Error("Second argument of `pair` must be 2 characters")
+        }
+        const openChar = delimString.charAt(0)
+        const closeChar = delimString.charAt(1)
+        if (openChar === closeChar) {
+          throw new Error("Second argument of `pair` must be 2 different characters")
+        }
+        return pairDelim(openChar, closeChar)
+      }
+      return createJumpToBracketAction(direction === "close", parseDelimString(delimString))
     }
     case "toolwindow": {
       // TODO
+      buf.remainingContent()
       return nativeEzAction
     }
     case "numberop": {
       // TODO
+      buf.remainingContent()
       return nativeEzAction
     }
     default: {
@@ -170,7 +194,13 @@ export function parseActionChain(actionChainString: string): EzAction {
       if (nestedActionString === null) {
         throw new Error("Expected closing '>'")
       }
-      actions.push(parseAction(new LexerBuffer(nestedActionString)))
+      const nestedActionBuf = new LexerBuffer(nestedActionString)
+      const nestedAction = parseAction(nestedActionBuf)
+      const extraneousToken = nestedActionBuf.nextToken()
+      if (extraneousToken !== null) {
+        throw new Error(`Unexpected token after action: ${extraneousToken}`)
+      }
+      actions.push(nestedAction)
     } else {
       actions.push(createKeyReferenceAction(char))
     }

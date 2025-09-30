@@ -44,3 +44,5 @@ export function pairDelim(openChar: string, closeChar: string): Delim {
     toNiceString: (isClosingDelim) => (isClosingDelim ? closeChar : openChar),
   }
 }
+
+export const anglePairDelim = pairDelim("<", ">")
