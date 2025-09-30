@@ -160,6 +160,6 @@ export function createJumpToBracketAction(findClosingDelim: boolean, delim: Deli
         return sel
       })
     },
-    description: "Jump to bracket", // TODO
+    description: `Move caret to ${delim.toNiceString(findClosingDelim)}`, // TODO
   }
 }
