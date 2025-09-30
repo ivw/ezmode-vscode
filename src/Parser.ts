@@ -143,15 +143,21 @@ export function parseAction(buf: LexerBuffer): EzAction {
       return nativeEzAction
     }
     case "pair": {
-      const direction = buf.nextToken()
-      if (direction === null) {
+      function parseShouldFindClosingDelim() {
+        const direction = buf.nextToken()
+        if (direction === "open") {
+          return false
+        }
+        if (direction === "close") {
+          return true
+        }
         throw new Error("First argument of `pair` must be open or close")
       }
-      const delimString = buf.nextToken()
-      if (delimString === null) {
-        throw new Error("Second argument of `pair` must be a delimiter")
-      }
-      function parseDelimString(delimString: string): Delim {
+      function parseDelimString(): Delim {
+        const delimString = buf.nextToken()
+        if (delimString === null) {
+          throw new Error("Second argument of `pair` must be a delimiter")
+        }
         if (delimString === "angle") {
           return anglePairDelim
         }
@@ -165,7 +171,7 @@ export function parseAction(buf: LexerBuffer): EzAction {
         }
         return pairDelim(openChar, closeChar)
       }
-      return createJumpToBracketAction(direction === "close", parseDelimString(delimString))
+      return createJumpToBracketAction(parseShouldFindClosingDelim(), parseDelimString())
     }
     case "toolwindow": {
       // TODO
