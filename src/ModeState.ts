@@ -19,4 +19,7 @@ export function switchMode(newMode: string) {
   beforeModeChangeEmitter.fire(newMode)
   mode = newMode
   afterModeChangeEmitter.fire(newMode)
+  vscode.commands.executeCommand("setContext", "ezmode.mode", newMode)
 }
+
+vscode.commands.executeCommand("setContext", "ezmode.mode", mode)

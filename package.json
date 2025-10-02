@@ -33,18 +33,8 @@
     "keybindings": [
       {
         "command": "ezmode.enterEzMode",
-        "key": "tab",
-        "when": "editorTextFocus && !editorTabMovesFocus && !suggestWidgetVisible"
-      },
-      {
-        "command": "tab",
-        "key": "alt+t",
-        "when": "editorTextFocus && !editorReadonly && !editorTabMovesFocus"
-      },
-      {
-        "command": "outdent",
-        "key": "shift+alt+t",
-        "when": "editorTextFocus && !editorReadonly && !editorTabMovesFocus"
+        "key": "escape",
+        "when": "editorTextFocus && !editorTabMovesFocus && !suggestWidgetVisible && ezmode.mode == type"
       }
     ],
     "viewsContainers": {
