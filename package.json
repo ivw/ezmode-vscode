@@ -34,7 +34,7 @@
       {
         "command": "ezmode.enterEzMode",
         "key": "escape",
-        "when": "editorTextFocus && !editorTabMovesFocus && !suggestWidgetVisible && ezmode.mode == type"
+        "when": "editorTextFocus && !suggestWidgetVisible && ezmode.mode == type"
       }
     ],
     "viewsContainers": {
