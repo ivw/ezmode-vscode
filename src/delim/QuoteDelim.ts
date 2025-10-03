@@ -15,12 +15,7 @@ function isCharEscaped(text: string, offset: number): boolean {
 }
 
 export function quoteDelim(char: string): QuoteDelim {
-  const findDelim = (
-    findClosingDelim: boolean,
-    editor: vscode.TextEditor,
-    offset: number,
-    ignoreMatchAtCaret: boolean,
-  ) => {
+  const findDelim: Delim["findDelim"] = (findClosingDelim, editor, offset, ignoreMatchAtCaret) => {
     const text = editor.document.getText()
 
     if (findClosingDelim) {
