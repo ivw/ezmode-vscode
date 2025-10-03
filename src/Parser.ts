@@ -1,8 +1,10 @@
 import type { Delim } from "./delim/Delim"
 import { anglePairDelim, pairDelim } from "./delim/PairDelim"
+import { quoteDelim } from "./delim/QuoteDelim"
 import {
   createCompositeEzAction,
   createJumpToBracketAction,
+  createJumpToQuoteAction,
   createKeyReferenceAction,
   createMapKeyBindingAction,
   createOfModeAction,
@@ -47,7 +49,7 @@ export function parseLine(line: string): EzAction | null {
   const action = parseAction(buf)
   const extraneousToken = buf.nextToken()
   if (extraneousToken !== null) {
-    throw new Error(`Unexpected token after action: ${extraneousToken}`)
+    throw new Error(`Unexpected token: ${extraneousToken}`)
   }
   return action
 }
@@ -138,9 +140,12 @@ export function parseAction(buf: LexerBuffer): EzAction {
       return createOfModeAction(mode)
     }
     case "quote": {
-      // TODO
-      buf.remainingContent()
-      return nativeEzAction
+      buf.skipWhitespace()
+      const char = buf.nextChar()
+      if (char === null) {
+        throw new Error("Expected character for quote action")
+      }
+      return createJumpToQuoteAction(quoteDelim(char))
     }
     case "pair": {
       function parseShouldFindClosingDelim() {
@@ -204,7 +209,7 @@ export function parseActionChain(actionChainString: string): EzAction {
       const nestedAction = parseAction(nestedActionBuf)
       const extraneousToken = nestedActionBuf.nextToken()
       if (extraneousToken !== null) {
-        throw new Error(`Unexpected token after action: ${extraneousToken}`)
+        throw new Error(`Unexpected token: ${extraneousToken}`)
       }
       actions.push(nestedAction)
     } else {

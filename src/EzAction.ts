@@ -4,6 +4,7 @@ import { getMode, switchMode } from "./ModeState"
 import { changeCursorColor, resetCursorColor } from "./CursorColor"
 import type { Delim } from "./delim/Delim"
 import { moveSelectionBasedOnMode } from "./Utils"
+import type { QuoteDelim } from "./delim/QuoteDelim"
 
 export type EzEvent = {
   env: EzEnv
@@ -160,6 +161,24 @@ export function createJumpToBracketAction(findClosingDelim: boolean, delim: Deli
         return sel
       })
     },
-    description: `Move caret to ${delim.toNiceString(findClosingDelim)}`, // TODO
+    description: `Move caret to ${delim.toNiceString(findClosingDelim)}`,
+  }
+}
+
+export function createJumpToQuoteAction(delim: QuoteDelim): EzAction {
+  return {
+    perform: () => {
+      const editor = vscode.window.activeTextEditor
+      if (!editor) return
+
+      editor.selections = editor.selections.map((sel) => {
+        const delimOffset = delim.findAuto(editor, editor.document.offsetAt(sel.active))
+        if (delimOffset !== null) {
+          return moveSelectionBasedOnMode(sel, editor.document.positionAt(delimOffset))
+        }
+        return sel
+      })
+    },
+    description: `Move caret to ${delim.char}`,
   }
 }
