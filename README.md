@@ -9,7 +9,7 @@ This is less work than double-clicking with your mouse and pressing `Ctrl-c`.
 
 #### Then how do I type?
 
-Press `t` to enter type mode, and press `Tab` to go back to ez mode.
+Press `t` to enter type mode, and press `Escape` to go back to ez mode.
 
 #### So it's like Vim?
 

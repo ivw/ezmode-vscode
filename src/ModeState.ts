@@ -1,9 +1,8 @@
 import * as vscode from "vscode"
-import { EventEmitter } from "vscode"
 
 let mode: string = "ez" // TODO use "type" as default mode
-const beforeModeChangeEmitter = new EventEmitter<string>()
-const afterModeChangeEmitter = new EventEmitter<string>()
+const beforeModeChangeEmitter = new vscode.EventEmitter<string>()
+const afterModeChangeEmitter = new vscode.EventEmitter<string>()
 export const beforeModeChange = beforeModeChangeEmitter.event
 export const afterModeChange = afterModeChangeEmitter.event
 
@@ -19,7 +18,10 @@ export function switchMode(newMode: string) {
   beforeModeChangeEmitter.fire(newMode)
   mode = newMode
   afterModeChangeEmitter.fire(newMode)
-  vscode.commands.executeCommand("setContext", "ezmode.mode", newMode)
+  updateContext()
 }
 
-vscode.commands.executeCommand("setContext", "ezmode.mode", mode)
+function updateContext() {
+  vscode.commands.executeCommand("setContext", "ezmode.mode", mode)
+}
+updateContext()
