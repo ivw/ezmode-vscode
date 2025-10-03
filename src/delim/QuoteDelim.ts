@@ -5,7 +5,7 @@ export type QuoteDelim = Delim & {
   char: string
 
   /**
-   * If the caret is at the opening quote, finds the closing quote, else finds the opening quote.
+   * If the caret is at the closing quote, finds the opening quote, else finds the closing quote.
    */
   findAuto: (editor: vscode.TextEditor, offset: number) => number | null
 }
@@ -41,14 +41,18 @@ export function quoteDelim(char: string): QuoteDelim {
   return {
     char,
     findDelim,
-    findAuto: (editor, offset) =>
-      findDelim(
-        offset <= 1 || editor.document.getText().charAt(offset - 1) == char,
+    findAuto: (editor, offset) => {
+      const text = editor.document.getText()
+      return findDelim(
+        offset < text.length - 1 && text.charAt(offset) != char,
         editor,
         offset,
         false,
-      ),
-    getMatchingDelim: () => null, // TODO
-    toNiceString: (isClosingDelim) => char,
+      )
+    },
+    getMatchingDelim: () => {
+      return null
+    }, // TODO
+    toNiceString: () => char,
   }
 }
