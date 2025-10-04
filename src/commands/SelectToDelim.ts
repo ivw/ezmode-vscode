@@ -1,5 +1,6 @@
 import * as vscode from "vscode"
 import { getAllDelims } from "../delim/Delim"
+import { selectionFromRange } from "../Utils"
 
 export function activateSelectToDelim(context: vscode.ExtensionContext) {
   const disposable = vscode.commands.registerTextEditorCommand("ezmode.selectToDelim", (editor) => {
@@ -7,19 +8,13 @@ export function activateSelectToDelim(context: vscode.ExtensionContext) {
       for (const delim of getAllDelims()) {
         const matchingDelim = delim.getMatchingDelim(false, editor, sel.start)
         if (matchingDelim !== null) {
-          return new vscode.Selection(
-            matchingDelim.insideRange.start,
-            matchingDelim.insideRange.end,
-          )
+          return selectionFromRange(matchingDelim.insideRange)
         }
       }
       for (const delim of getAllDelims()) {
         const matchingDelim = delim.getMatchingDelim(true, editor, sel.end)
         if (matchingDelim !== null) {
-          return new vscode.Selection(
-            matchingDelim.insideRange.start,
-            matchingDelim.insideRange.end,
-          )
+          return selectionFromRange(matchingDelim.insideRange)
         }
       }
 

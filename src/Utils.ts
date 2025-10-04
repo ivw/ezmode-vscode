@@ -23,3 +23,7 @@ export function moveSelectionBasedOnMode(
   }
   return new vscode.Selection(pos, pos)
 }
+
+export function selectionFromRange(range: vscode.Range) {
+  return new vscode.Selection(range.start, range.end)
+}
