@@ -28,13 +28,17 @@
       {
         "command": "ezmode.selectWord",
         "title": "Select Current Word"
+      },
+      {
+        "command": "ezmode.selectToDelim",
+        "title": "Select To Delimiter"
       }
     ],
     "keybindings": [
       {
         "command": "ezmode.enterEzMode",
         "key": "escape",
-        "when": "editorTextFocus && !suggestWidgetVisible && ezmode.mode != ez"
+        "when": "editorTextFocus && !suggestWidgetVisible && !(ezmode.mode == ez || ezmode.mode == select)"
       }
     ],
     "viewsContainers": {

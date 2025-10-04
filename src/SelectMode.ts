@@ -32,9 +32,11 @@ export function activateSelectModeListeners(context: vscode.ExtensionContext) {
   )
 
   context.subscriptions.push(
-    vscode.window.onDidChangeActiveTextEditor((editor) => {
+    vscode.window.onDidChangeActiveTextEditor(() => {
       selectModeAnchor = null
       onEditorSelectionCouldHaveChanged()
     }),
   )
+
+  onEditorSelectionCouldHaveChanged()
 }

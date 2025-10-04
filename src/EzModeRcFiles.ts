@@ -23,7 +23,7 @@ map ez 9 <vscode editor.action.moveSelectionToPreviousFindMatch>
 map ez ( <pair open ()>
 map ez 0 <vscode editor.action.addSelectionToNextFindMatch>
 map ez ) <pair close ()>
-map ez - <vscode editor.action.selectToBracket {"selectBrackets": false}>
+map ez - <vscode ezmode.selectToDelim>
 map ez = <vscode editor.action.selectToBracket>
 map ez _ <vscode editor.action.removeBrackets>
 
@@ -82,7 +82,7 @@ map ez Z <vscode workbench.action.reopenClosedEditor>
 map ez x <vscode editor.action.clipboardCutAction>
 map ez c <vscode editor.action.clipboardCopyAction><vscode cancelSelection>
 map ez v <vscode editor.action.clipboardPasteAction>
-map ez V <vscode editor.action.copyLinesDownAction>
+map ez V <vscode editor.action.copyLinesDownAction> // TODO we want not lines but exact selection
 map ez b <vscode editor.action.joinLines>
 map ez B <vscode cursorUp><vscode editor.action.joinLines>
 map ez n <vscode editor.action.insertLineAfter>
