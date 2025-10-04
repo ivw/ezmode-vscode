@@ -79,3 +79,10 @@ export function quoteDelim(char: string): QuoteDelim {
     toNiceString: () => char,
   }
 }
+
+export const quoteDelims: Record<string, QuoteDelim> = {
+  double: quoteDelim('"'),
+  single: quoteDelim("'"),
+  backtick: quoteDelim("`"),
+}
+export const allQuoteDelims = [quoteDelims.double, quoteDelims.single, quoteDelims.backtick]

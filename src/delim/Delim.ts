@@ -1,4 +1,6 @@
 import * as vscode from "vscode"
+import { allPairDelims, pairDelims } from "./PairDelim"
+import { allQuoteDelims } from "./QuoteDelim"
 
 // export interface Delim {
 //   findOpeningDelim(
@@ -53,6 +55,8 @@ export function delimRangesFixed(insideRange: vscode.Range, delimLength: number 
     ),
   }
 }
+
+export const allDelims: Array<Delim> = [...allPairDelims, ...allQuoteDelims]
 
 // export function findDelim(
 //   delim: Delim,

@@ -1,5 +1,5 @@
 import type { Delim } from "./delim/Delim"
-import { anglePairDelim, pairDelim } from "./delim/PairDelim"
+import { pairDelim, pairDelims } from "./delim/PairDelim"
 import { quoteDelim } from "./delim/QuoteDelim"
 import {
   createCompositeEzAction,
@@ -164,7 +164,7 @@ export function parseAction(buf: LexerBuffer): EzAction {
           throw new Error("Second argument of `pair` must be a delimiter")
         }
         if (delimString === "angle") {
-          return anglePairDelim
+          return pairDelims.angle
         }
         if (delimString.length !== 2) {
           throw new Error("Second argument of `pair` must be 2 characters")

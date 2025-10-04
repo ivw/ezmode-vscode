@@ -72,4 +72,15 @@ export function pairDelim(openChar: string, closeChar: string): Delim {
   }
 }
 
-export const anglePairDelim = pairDelim("<", ">")
+export const pairDelims: Record<string, Delim> = {
+  parentheses: pairDelim("(", ")"),
+  curly: pairDelim("{", "}"),
+  square: pairDelim("[", "]"),
+  angle: pairDelim("<", ">"),
+}
+export const allPairDelims = [
+  pairDelims.parentheses,
+  pairDelims.curly,
+  pairDelims.square,
+  pairDelims.angle,
+]
