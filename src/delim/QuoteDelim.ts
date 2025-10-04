@@ -1,5 +1,5 @@
 import * as vscode from "vscode"
-import type { Delim } from "./Delim"
+import { delimRangesFixed, type Delim } from "./Delim"
 
 export type QuoteDelim = Delim & {
   char: string
@@ -50,9 +50,32 @@ export function quoteDelim(char: string): QuoteDelim {
         false,
       )
     },
-    getMatchingDelim: () => {
+    getMatchingDelim: (
+      fromClosingDelim: boolean,
+      editor: vscode.TextEditor,
+      position: vscode.Position,
+    ) => {
+      const text = editor.document.getText()
+      const offset = editor.document.offsetAt(position)
+      if (fromClosingDelim) {
+        if (offset < text.length && text[offset] !== char) return null
+        const openingDelim = findDelim(false, editor, offset, false)
+        if (openingDelim !== null) {
+          return delimRangesFixed(
+            new vscode.Range(editor.document.positionAt(openingDelim), position),
+          )
+        }
+      } else {
+        if (offset > 0 && text[offset - 1] !== char) return null
+        const closingDelim = findDelim(true, editor, offset, false)
+        if (closingDelim !== null) {
+          return delimRangesFixed(
+            new vscode.Range(position, editor.document.positionAt(closingDelim)),
+          )
+        }
+      }
       return null
-    }, // TODO
+    },
     toNiceString: () => char,
   }
 }

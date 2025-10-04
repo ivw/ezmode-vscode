@@ -33,7 +33,7 @@ export type Delim = {
   getMatchingDelim: (
     fromClosingDelim: boolean,
     editor: vscode.TextEditor,
-    caretOffset: number,
+    position: vscode.Position,
   ) => DelimRanges | null
 
   toNiceString: (isClosingDelim: boolean) => string
