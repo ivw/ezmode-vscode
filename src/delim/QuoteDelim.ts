@@ -62,7 +62,7 @@ export function quoteDelim(char: string): QuoteDelim {
         const openingDelim = findDelim(false, editor, offset, false)
         if (openingDelim !== null) {
           return delimRangesFixed(
-            new vscode.Range(editor.document.positionAt(openingDelim), position),
+            new vscode.Selection(editor.document.positionAt(openingDelim), position),
           )
         }
       } else {
@@ -70,7 +70,7 @@ export function quoteDelim(char: string): QuoteDelim {
         const closingDelim = findDelim(true, editor, offset, false)
         if (closingDelim !== null) {
           return delimRangesFixed(
-            new vscode.Range(position, editor.document.positionAt(closingDelim)),
+            new vscode.Selection(position, editor.document.positionAt(closingDelim)),
           )
         }
       }

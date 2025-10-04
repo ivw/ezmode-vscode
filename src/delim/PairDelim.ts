@@ -54,7 +54,7 @@ export function pairDelim(openChar: string, closeChar: string): Delim {
         const openingDelim = findDelim(false, editor, offset, false)
         if (openingDelim !== null) {
           return delimRangesFixed(
-            new vscode.Range(editor.document.positionAt(openingDelim), position),
+            new vscode.Selection(position, editor.document.positionAt(openingDelim)),
           )
         }
       } else {
@@ -62,7 +62,7 @@ export function pairDelim(openChar: string, closeChar: string): Delim {
         const closingDelim = findDelim(true, editor, offset, false)
         if (closingDelim !== null) {
           return delimRangesFixed(
-            new vscode.Range(position, editor.document.positionAt(closingDelim)),
+            new vscode.Selection(position, editor.document.positionAt(closingDelim)),
           )
         }
       }

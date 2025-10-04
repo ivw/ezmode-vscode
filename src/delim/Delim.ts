@@ -42,16 +42,19 @@ export type Delim = {
 }
 
 export type DelimRanges = {
-  insideRange: vscode.Range
-  aroundRange: vscode.Range
+  insideRange: vscode.Selection
+  aroundRange: vscode.Selection
 }
 
-export function delimRangesFixed(insideRange: vscode.Range, delimLength: number = 1): DelimRanges {
+export function delimRangesFixed(
+  insideRange: vscode.Selection,
+  delimLength: number = 1,
+): DelimRanges {
   return {
     insideRange,
-    aroundRange: new vscode.Range(
-      insideRange.start.translate(0, -delimLength),
-      insideRange.end.translate(0, delimLength),
+    aroundRange: new vscode.Selection(
+      insideRange.anchor.translate(0, -delimLength), // TODO anchor could be right
+      insideRange.active.translate(0, delimLength),
     ),
   }
 }
