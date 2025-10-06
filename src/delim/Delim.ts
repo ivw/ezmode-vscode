@@ -1,28 +1,7 @@
 import * as vscode from "vscode"
 import { allPairDelims } from "./PairDelim"
 import { allQuoteDelims } from "./QuoteDelim"
-
-// export interface Delim {
-//   findOpeningDelim(
-//     editor: vscode.TextEditor,
-//     caretOffset: number,
-//     ignoreMatchAtCaret: boolean,
-//   ): number | null
-
-//   findClosingDelim(
-//     editor: vscode.TextEditor,
-//     caretOffset: number,
-//     ignoreMatchAtCaret: boolean,
-//   ): number | null
-
-//   getMatchingDelim(
-//     fromClosingDelim: boolean,
-//     editor: vscode.TextEditor,
-//     caretOffset: number,
-//   ): DelimRanges | null
-
-//   toNiceString(isClosingDelim: boolean): string
-// }
+import { changeSelectionRange } from "../Utils"
 
 export type Delim = {
   findDelim: (
@@ -52,24 +31,12 @@ export function delimRangesFixed(
 ): DelimRanges {
   return {
     insideRange,
-    aroundRange: new vscode.Selection(
-      insideRange.anchor.translate(0, -delimLength), // TODO anchor could be right
-      insideRange.active.translate(0, delimLength),
+    aroundRange: changeSelectionRange(
+      insideRange,
+      insideRange.start.translate(0, -delimLength),
+      insideRange.end.translate(0, delimLength),
     ),
   }
 }
 
 export const getAllDelims = (): Array<Delim> => [...allPairDelims, ...allQuoteDelims]
-// export const allDelims: Array<Delim> = [...allPairDelims, ...allQuoteDelims]
-
-// export function findDelim(
-//   delim: Delim,
-//   isClosingDelim: boolean,
-//   editor: vscode.TextEditor,
-//   caretOffset: number,
-//   ignoreMatchAtCaret: boolean,
-// ): number | null {
-//   return isClosingDelim
-//     ? delim.findClosingDelim(editor, caretOffset, ignoreMatchAtCaret)
-//     : delim.findOpeningDelim(editor, caretOffset, ignoreMatchAtCaret)
-// }
