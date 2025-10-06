@@ -6,7 +6,7 @@ const baseRcString = `map type default <native>
 map typeonce default <native><mode ez>
 
 
-map ez ~ <vscode ezmode.ToggleCase.TODO>
+map ez ~ <vscode ezmode.toggleCase>
 map ez \` <quote \`>
 map ez 1 <vscode workbench.view.explorer><vscode workbench.view.explorer> // TODO
 map ez ! <vscode workbench.view.explorer>

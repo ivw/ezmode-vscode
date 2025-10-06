@@ -36,6 +36,10 @@
       {
         "command": "ezmode.removeDelim",
         "title": "Remove Delimiter"
+      },
+      {
+        "command": "ezmode.toggleCase",
+        "title": "Toggle Case"
       }
     ],
     "keybindings": [
