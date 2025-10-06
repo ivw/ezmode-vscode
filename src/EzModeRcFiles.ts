@@ -82,7 +82,7 @@ map ez Z <vscode workbench.action.reopenClosedEditor>
 map ez x <vscode editor.action.clipboardCutAction>
 map ez c <vscode editor.action.clipboardCopyAction><vscode cancelSelection>
 map ez v <vscode editor.action.clipboardPasteAction>
-map ez V <vscode editor.action.copyLinesDownAction> // TODO we want not lines but exact selection
+map ez V <vscode editor.action.duplicateSelection>
 map ez b <vscode editor.action.joinLines>
 map ez B <vscode cursorUp><vscode editor.action.joinLines>
 map ez n <vscode editor.action.insertLineAfter>
