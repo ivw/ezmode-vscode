@@ -40,3 +40,19 @@ export function delimRangesFixed(
 }
 
 export const getAllDelims = (): Array<Delim> => [...allPairDelims, ...allQuoteDelims]
+
+export function getMatchingDelimEitherSide(
+  editor: vscode.TextEditor,
+  sel: vscode.Selection,
+): DelimRanges | null {
+  const delims = getAllDelims()
+  for (const delim of delims) {
+    const matchingDelim = delim.getMatchingDelim(false, editor, sel.start)
+    if (matchingDelim !== null) return matchingDelim
+  }
+  for (const delim of delims) {
+    const matchingDelim = delim.getMatchingDelim(true, editor, sel.end)
+    if (matchingDelim !== null) return matchingDelim
+  }
+  return null
+}

@@ -25,7 +25,7 @@ map ez 0 <vscode editor.action.addSelectionToNextFindMatch>
 map ez ) <pair close ()>
 map ez - <vscode ezmode.selectToDelim>
 map ez = <vscode ezmode.selectToDelim {"around": true}>
-map ez _ <vscode editor.action.removeBrackets>
+map ez _ <vscode ezmode.removeDelim {"selectContents": true}>
 
 map ez q <vscode workbench.action.focusNextGroup>
 map ez Q <vscode workbench.action.closeEditorsInGroup>
