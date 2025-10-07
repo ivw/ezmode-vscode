@@ -17,8 +17,10 @@ map ez # <vscode workbench.action.terminal.toggleTerminal>
 map ez 4 <vscode workbench.action.closePanel> // TODO
 map ez $ <vscode workbench.action.closePanel> // TODO
 map ez 5 <vscode ezmode.ToggleCheatSheet> // TODO
+map ez 6 <vscode editor.action.goToImplementation>
 map ez 7 <mode special>
-map ez 8 <vscode editor.action.goToImplementation>
+map ez 8 <vscode editor.action.insertCursorBelow>
+map ez * <vscode editor.action.insertCursorAbove>
 map ez 9 <vscode editor.action.moveSelectionToPreviousFindMatch>
 map ez ( <pair open ()>
 map ez 0 <vscode editor.action.addSelectionToNextFindMatch>
@@ -128,9 +130,8 @@ map select : <vscode cursorBottomSelect>
 map select x <ofmode ez><mode ez>
 map select c <ofmode ez><mode ez>
 map select v <ofmode ez><mode ez>
-map select , <vscode editor.action.insertCursorAbove>
 map select lt <pair open angle>
-map select . <vscode editor.action.insertCursorBelow>
+map select . <vscode ezmode.flipSelection>
 map select gt <pair close angle>
 
 

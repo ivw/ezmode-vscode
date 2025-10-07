@@ -40,6 +40,10 @@
       {
         "command": "ezmode.toggleCase",
         "title": "Toggle Case"
+      },
+      {
+        "command": "ezmode.flipSelection",
+        "title": "Flip Selection"
       }
     ],
     "keybindings": [
