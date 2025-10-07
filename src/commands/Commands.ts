@@ -6,6 +6,7 @@ import { activateSelectToDelim } from "./SelectToDelim"
 import { activateRemoveDelim } from "./RemoveDelim"
 import { activateToggleCase } from "./ToggleCase"
 import { activateFlipSelection } from "./FlipSelection"
+import { activateUnselect } from "./Unselect"
 
 export function activateCommands(context: vscode.ExtensionContext) {
   context.subscriptions.push(
@@ -20,4 +21,5 @@ export function activateCommands(context: vscode.ExtensionContext) {
   activateRemoveDelim(context)
   activateToggleCase(context)
   activateFlipSelection(context)
+  activateUnselect(context)
 }

@@ -106,7 +106,7 @@ map select default <ofmode ez>
 
 map select ~ <ofmode ez><mode ez>
 
-map select e <vscode cancelSelection><mode ez> // TODO cancelSelection cancels multicursor
+map select e <vscode ezmode.unselect><mode ez>
 map select r <ofmode ez><mode ez>
 map select R <ofmode ez><mode ez>
 map select u <vscode cursorWordLeftSelect>
