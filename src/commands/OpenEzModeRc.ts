@@ -1,5 +1,5 @@
 import * as vscode from "vscode"
-import { createRcFileIfNotExists, userVsCodeRcUri } from "../EzModeRcFiles"
+import { createRcFileIfNotExists, userVsCodeRcUri } from "../config/EzModeRcFiles"
 
 export function activateOpenEzModeRc(context: vscode.ExtensionContext) {
   const disposable = vscode.commands.registerCommand("ezmode.editEzModeRc", async () => {

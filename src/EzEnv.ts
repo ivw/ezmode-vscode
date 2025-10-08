@@ -1,4 +1,4 @@
-import { baseActions } from "./EzModeRcFiles"
+import { baseActions } from "./config/EzModeRcFiles"
 import { EventEmitter } from "vscode"
 import { type EzAction } from "./EzAction"
 import { getMode } from "./ModeState"

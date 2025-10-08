@@ -1,9 +1,9 @@
 import * as vscode from "vscode"
 import * as os from "os"
-import { parseEzModeRc } from "./Parser"
-import type { EzAction } from "./EzAction"
-import baseRcString from "./config/BaseEzModeRc"
-import templateRcString from "./config/EzModeRcTemplate"
+import { parseEzModeRc } from "../Parser"
+import type { EzAction } from "../EzAction"
+import baseRcString from "./BaseEzModeRc"
+import templateRcString from "./EzModeRcTemplate"
 
 export let baseActions: EzAction[] = []
 try {
