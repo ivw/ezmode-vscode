@@ -44,6 +44,11 @@
       {
         "command": "ezmode.flipSelection",
         "title": "Flip Selection"
+      },
+      {
+        "command": "ezmode.editEzModeRc",
+        "enablement": "!isWeb",
+        "title": "Edit .ezmoderc"
       }
     ],
     "keybindings": [
