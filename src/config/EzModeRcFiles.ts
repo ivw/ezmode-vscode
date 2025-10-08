@@ -3,7 +3,7 @@ import * as os from "os"
 import { parseEzModeRc } from "../Parser"
 import type { EzAction } from "../EzAction"
 import baseRcString from "./BaseEzModeRc"
-import templateRcString from "./EzModeRcTemplate"
+import templateRcString from "./TemplateEzModeRc"
 
 export let baseActions: EzAction[] = []
 try {
