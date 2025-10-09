@@ -1,4 +1,4 @@
-import { baseActions } from "./config/EzModeRcFiles"
+import { getConfig } from "./config/EzModeRcFiles"
 import { EventEmitter } from "vscode"
 import { type EzAction } from "./EzAction"
 import { getMode } from "./ModeState"
@@ -70,6 +70,8 @@ export function setEnv(newEnv: EzEnv) {
   envChangeEmitter.fire(newEnv)
 }
 
-baseActions.forEach((action) => {
-  action.perform({ env, key: null })
+getConfig().then((actions) => {
+  actions.forEach((action) => {
+    action.perform({ env, key: null })
+  })
 })
