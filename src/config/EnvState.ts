@@ -15,6 +15,7 @@ async function loadConfig() {
   actions.forEach((action) => {
     action.perform({ env, key: null })
   })
+  envChangeEmitter.fire(env)
 }
 
 let env: EzEnv = createEmptyEnv()
@@ -30,7 +31,6 @@ export const onEnvChange = envChangeEmitter.event
 export async function reloadConfig() {
   env = createEmptyEnv()
   await loadConfig()
-  envChangeEmitter.fire(env)
   vscode.window.showInformationMessage("Reloaded .ezmoderc")
 }
 
