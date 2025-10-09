@@ -1,5 +1,5 @@
 import * as vscode from "vscode"
-import { changeSelectionRange } from "../Utils"
+import { changeSelectionRange } from "../utils/Selection"
 
 function startOfLine(line: vscode.TextLine): vscode.Position {
   return line.range.start.translate(0, line.firstNonWhitespaceCharacterIndex)

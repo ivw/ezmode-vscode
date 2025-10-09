@@ -16,7 +16,7 @@ import {
   nativeEzAction,
   type EzAction,
 } from "./EzAction"
-import { LexerBuffer } from "./LexerBuffer"
+import { LexerBuffer } from "../utils/LexerBuffer"
 
 export function parseEzModeRc(content: string): Array<EzAction> {
   const actions: Array<EzAction> = []

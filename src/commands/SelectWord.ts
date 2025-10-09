@@ -1,5 +1,5 @@
 import * as vscode from "vscode"
-import { changeSelectionRange } from "../Utils"
+import { changeSelectionRange } from "../utils/Selection"
 
 export function activateSelectWord(context: vscode.ExtensionContext) {
   const disposable = vscode.commands.registerTextEditorCommand("ezmode.selectWord", (editor) => {

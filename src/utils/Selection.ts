@@ -1,5 +1,5 @@
 import * as vscode from "vscode"
-import { getMode } from "./ModeState"
+import { getMode } from "../ModeState"
 
 export function changeSelectionRange(
   sel: vscode.Selection,

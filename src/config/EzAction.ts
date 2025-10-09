@@ -3,7 +3,7 @@ import { getOrAddModeEnv, getActionForKey, type EzEnv, type KeyBinding } from ".
 import { getMode, switchMode } from "../ModeState"
 import { changeCursorColor, resetCursorColor } from "../CursorColor"
 import type { Delim } from "../delim/Delim"
-import { moveSelectionBasedOnMode } from "../Utils"
+import { moveSelectionBasedOnMode } from "../utils/Selection"
 import type { QuoteDelim } from "../delim/QuoteDelim"
 
 export type EzEvent = {
