@@ -1,7 +1,6 @@
-import { getConfig } from "./EzModeRcFiles"
-import { EventEmitter } from "vscode"
 import { type EzAction } from "./EzAction"
 import { getMode } from "../mode/ModeState"
+import { getEnv } from "./EnvState"
 
 export type EzEnv = {
   modes: Array<ModeEnv>
@@ -53,25 +52,3 @@ export function getActionForKey(
 
   return getKeyBindingOrDefault(modeEnv, key)?.action ?? null
 }
-
-let env: EzEnv = {
-  modes: [],
-  vars: new Map(),
-}
-export const envChangeEmitter = new EventEmitter<EzEnv>()
-export const onEnvChange = envChangeEmitter.event
-
-export function getEnv(): EzEnv {
-  return env
-}
-
-export function setEnv(newEnv: EzEnv) {
-  env = newEnv
-  envChangeEmitter.fire(newEnv)
-}
-
-getConfig().then((actions) => {
-  actions.forEach((action) => {
-    action.perform({ env, key: null })
-  })
-})

@@ -1,5 +1,5 @@
 import * as vscode from "vscode"
-import { getMatchingDelimEitherSide } from "../delim/Delim"
+import { getMatchingDelimEitherSide } from "../utils/delim/Delim"
 
 export function activateSelectToDelim(context: vscode.ExtensionContext) {
   const disposable = vscode.commands.registerTextEditorCommand(

@@ -49,6 +49,11 @@
         "command": "ezmode.editEzModeRc",
         "enablement": "!isWeb",
         "title": "Edit .ezmoderc"
+      },
+      {
+        "command": "ezmode.reloadEzModeRc",
+        "enablement": "!isWeb",
+        "title": "Reload .ezmoderc"
       }
     ],
     "keybindings": [

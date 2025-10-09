@@ -1,6 +1,7 @@
 import * as vscode from "vscode"
-import { getActionForKey, getEnv } from "./config/EzEnv"
+import { getActionForKey } from "./config/EzEnv"
 import { getMode } from "./mode/ModeState"
+import { getEnv } from "./config/EnvState"
 
 export function activateTypeActionHandler(context: vscode.ExtensionContext) {
   const disposable = vscode.commands.registerCommand("type", (args) => {
