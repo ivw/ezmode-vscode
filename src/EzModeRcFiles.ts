@@ -1,7 +1,7 @@
 import * as vscode from "vscode"
 import * as os from "os"
-import { parseEzModeRc } from "./Parser"
-import type { EzAction } from "./EzAction"
+import { parseEzModeRc } from "./config/Parser"
+import type { EzAction } from "./config/EzAction"
 import baseRcString from "./config/BaseEzModeRc"
 import templateRcString from "./config/TemplateEzModeRc"
 

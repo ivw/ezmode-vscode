@@ -1,5 +1,5 @@
 import * as assert from "assert"
-import { parseEzModeRc } from "../Parser"
+import { parseEzModeRc } from "../config/Parser"
 
 suite("Parser", () => {
   test("parseEzModeRc", () => {

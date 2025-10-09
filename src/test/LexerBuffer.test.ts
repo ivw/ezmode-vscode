@@ -1,5 +1,5 @@
 import * as assert from "assert"
-import { LexerBuffer } from "../LexerBuffer"
+import { LexerBuffer } from "../config/LexerBuffer"
 
 suite("LexerBuffer", () => {
   test("nextToken", () => {

@@ -1,10 +1,10 @@
 import * as vscode from "vscode"
 import { getOrAddModeEnv, getActionForKey, type EzEnv, type KeyBinding } from "./EzEnv"
-import { getMode, switchMode } from "./ModeState"
-import { changeCursorColor, resetCursorColor } from "./CursorColor"
-import type { Delim } from "./delim/Delim"
-import { moveSelectionBasedOnMode } from "./Utils"
-import type { QuoteDelim } from "./delim/QuoteDelim"
+import { getMode, switchMode } from "../ModeState"
+import { changeCursorColor, resetCursorColor } from "../CursorColor"
+import type { Delim } from "../delim/Delim"
+import { moveSelectionBasedOnMode } from "../Utils"
+import type { QuoteDelim } from "../delim/QuoteDelim"
 
 export type EzEvent = {
   env: EzEnv

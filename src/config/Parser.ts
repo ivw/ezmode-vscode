@@ -1,6 +1,6 @@
-import type { Delim } from "./delim/Delim"
-import { pairDelim, pairDelims } from "./delim/PairDelim"
-import { quoteDelim } from "./delim/QuoteDelim"
+import type { Delim } from "../delim/Delim"
+import { pairDelim, pairDelims } from "../delim/PairDelim"
+import { quoteDelim } from "../delim/QuoteDelim"
 import {
   createCompositeEzAction,
   createJumpToBracketAction,
