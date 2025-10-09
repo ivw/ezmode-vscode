@@ -1,5 +1,5 @@
 import * as vscode from "vscode"
-import { switchMode } from "../ModeState"
+import { switchMode } from "../mode/ModeState"
 import { activateSelectLine } from "./SelectLine"
 import { activateSelectWord } from "./SelectWord"
 import { activateSelectToDelim } from "./SelectToDelim"

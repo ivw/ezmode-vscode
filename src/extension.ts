@@ -1,11 +1,11 @@
 import * as vscode from "vscode"
-import { activateModeStatusBarItem } from "./ModeStatusBarItem"
-import { activateSidebar } from "./Sidebar"
+import { activateModeStatusBarItem } from "./ui/ModeStatusBarItem"
+import { activateSidebar } from "./ui/Sidebar"
 import { activateTypeActionHandler } from "./TypeActionHandler"
 import { activateCommands } from "./commands/Commands"
-import { activateCursorColor } from "./CursorColor"
-import { activateSelectModeListeners } from "./SelectMode"
-import { activateEnvModeSwitchHooks } from "./EnvModeSwitchHooks"
+import { activateCursorColor } from "./ui/CursorColor"
+import { activateSelectModeListeners } from "./mode/SelectMode"
+import { activateEnvModeSwitchHooks } from "./mode/EnvModeSwitchHooks"
 
 export function activate(context: vscode.ExtensionContext) {
   activateCommands(context)

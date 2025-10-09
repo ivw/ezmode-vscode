@@ -1,5 +1,5 @@
 import * as vscode from "vscode"
-import { afterModeChange, getMode } from "./ModeState"
+import { afterModeChange, getMode } from "../mode/ModeState"
 
 export function activateCursorColor(context: vscode.ExtensionContext) {
   updateCursorColor(getMode())

@@ -1,7 +1,7 @@
 import { getConfig } from "./EzModeRcFiles"
 import { EventEmitter } from "vscode"
 import { type EzAction } from "./EzAction"
-import { getMode } from "../ModeState"
+import { getMode } from "../mode/ModeState"
 
 export type EzEnv = {
   modes: Array<ModeEnv>

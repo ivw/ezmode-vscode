@@ -1,6 +1,6 @@
 import * as vscode from "vscode"
-import { type KeyBinding, getEnv, getModeEnv, onEnvChange } from "./config/EzEnv"
-import { getMode, afterModeChange } from "./ModeState"
+import { type KeyBinding, getEnv, getModeEnv, onEnvChange } from "../config/EzEnv"
+import { getMode, afterModeChange } from "../mode/ModeState"
 
 export function activateSidebar(context: vscode.ExtensionContext) {
   const changeEmitter = new vscode.EventEmitter<KeyBinding | undefined | void>()
