@@ -1,7 +1,7 @@
 import * as vscode from "vscode"
 import { allPairDelims } from "./PairDelim"
 import { allQuoteDelims } from "./QuoteDelim"
-import { changeSelectionRange } from "../utils/Selection"
+import { changeSelectionRange } from "../Selection"
 
 export type Delim = {
   findDelim: (
