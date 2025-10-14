@@ -1,8 +1,9 @@
 import * as vscode from "vscode"
 import { changeSelectionRange } from "../utils/Selection"
+import { registerTextEditorCommand } from "../utils/Commands"
 
 export function activateSelectWord(context: vscode.ExtensionContext) {
-  const disposable = vscode.commands.registerTextEditorCommand("ezmode.selectWord", (editor) => {
+  registerTextEditorCommand(context, "ezmode.selectWord", (editor) => {
     const { document, selections } = editor
 
     editor.selections = selections.map((sel) => {
@@ -20,5 +21,4 @@ export function activateSelectWord(context: vscode.ExtensionContext) {
       return changeSelectionRange(sel, startPosition, endPosition)
     })
   })
-  context.subscriptions.push(disposable)
 }

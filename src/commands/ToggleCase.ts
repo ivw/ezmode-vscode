@@ -1,21 +1,18 @@
 import * as vscode from "vscode"
+import { registerTextEditorCommand } from "../utils/Commands"
 
 export function activateToggleCase(context: vscode.ExtensionContext) {
-  const disposable = vscode.commands.registerTextEditorCommand(
-    "ezmode.toggleCase",
-    (editor, edit) => {
-      const { document, selections } = editor
+  registerTextEditorCommand(context, "ezmode.toggleCase", (editor, edit) => {
+    const { document, selections } = editor
 
-      editor.selections = selections.map((sel) => {
-        const toggleRange: vscode.Range = sel.isEmpty
-          ? new vscode.Range(sel.active, sel.active.translate(0, 1))
-          : sel
-        edit.replace(toggleRange, toggleCase(document.getText(toggleRange)))
-        return sel
-      })
-    },
-  )
-  context.subscriptions.push(disposable)
+    editor.selections = selections.map((sel) => {
+      const toggleRange: vscode.Range = sel.isEmpty
+        ? new vscode.Range(sel.active, sel.active.translate(0, 1))
+        : sel
+      edit.replace(toggleRange, toggleCase(document.getText(toggleRange)))
+      return sel
+    })
+  })
 }
 
 function toggleCase(text: string): string {
