@@ -12,7 +12,7 @@ map ez 3 <vscode workbench.action.terminal.toggleTerminal> // TODO
 map ez # <vscode workbench.action.terminal.toggleTerminal>
 map ez 4 <vscode workbench.action.closePanel> // TODO
 map ez $ <vscode workbench.action.closePanel> // TODO
-map ez 5 <vscode ezmode.ToggleCheatSheet> // TODO
+map ez 5 <vscode ezmode.cheatsheet.focus>
 map ez 6 <vscode editor.action.goToImplementation>
 map ez 7 <mode special>
 map ez 8 <vscode editor.action.insertCursorBelow>

@@ -1,23 +1,20 @@
 import * as vscode from "vscode"
-import { registerCommand } from "../utils/Commands"
+import { getCommandTitle, registerCommand } from "../utils/Commands"
 
-const menuCommands: Array<string> = ["ezmode.editEzModeRc", "ezmode.reloadEzModeRc"]
-
-type CommandObj = { command: string; title: string }
+const menuCommands: Array<string> = [
+  "ezmode.editEzModeRc",
+  "ezmode.reloadEzModeRc",
+  "ezmode.cheatsheet.focus",
+]
 
 type CommandQuickPickItem = vscode.QuickPickItem & { commandId: string }
 
 export function activateOpenEzModeMenu(context: vscode.ExtensionContext) {
   registerCommand(context, "ezmode.openEzModeMenu", async () => {
-    const commandObjs: Array<CommandObj> | undefined =
-      vscode.extensions.getExtension("ivw.ezmode")?.packageJSON?.contributes?.commands
-    const menuItems: Array<CommandQuickPickItem> = menuCommands.map((menuCommand) => {
-      const commandObj = commandObjs?.find((commandObj) => commandObj.command === menuCommand)
-      return {
-        commandId: menuCommand,
-        label: commandObj?.title ?? menuCommand,
-      }
-    })
+    const menuItems: Array<CommandQuickPickItem> = menuCommands.map((menuCommand) => ({
+      commandId: menuCommand,
+      label: getCommandTitle(menuCommand),
+    }))
 
     const pickedItem = await vscode.window.showQuickPick(menuItems, {})
     if (pickedItem) {

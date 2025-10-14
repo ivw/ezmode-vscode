@@ -19,3 +19,13 @@ export function registerTextEditorCommand(
   const disposable = vscode.commands.registerTextEditorCommand(command, callback)
   context.subscriptions.push(disposable)
 }
+
+type CommandObj = { command: string; title: string }
+
+const commandObjs: Array<CommandObj> | undefined =
+  vscode.extensions.getExtension("ivw.ezmode")?.packageJSON?.contributes?.commands
+
+export function getCommandTitle(id: string) {
+  const commandObj = commandObjs?.find((commandObj) => commandObj.command === id)
+  return commandObj?.title ?? id
+}
