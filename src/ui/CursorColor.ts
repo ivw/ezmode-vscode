@@ -1,28 +1,43 @@
 import * as vscode from "vscode"
 import { afterModeChange, getMode } from "../mode/ModeState"
+import { getEnv, onEnvChange } from "../config/EnvState"
 
 export function activateCursorColor(context: vscode.ExtensionContext) {
-  updateCursorColor(getMode())
+  updateCursorColor()
 
   context.subscriptions.push(afterModeChange(updateCursorColor))
 
   context.subscriptions.push(
     vscode.window.onDidChangeWindowState((e) => {
       if (e.focused) {
-        updateCursorColor(getMode())
+        updateCursorColor()
       }
       console.log(`Active: ${e.active}, focused: ${e.focused}`)
     }),
   )
+
+  context.subscriptions.push(
+    onEnvChange(() => {
+      updateCursorColor()
+    }),
+  )
 }
 
-function updateCursorColor(mode: string) {
+function getPrimaryCursorColor(): string {
+  return getEnv().vars.get("primarycolor") ?? "#FF6200"
+}
+
+function getSecondaryCursorColor(): string {
+  return getEnv().vars.get("secondarycolor") ?? "#589DF6"
+}
+
+function updateCursorColor(mode: string = getMode()) {
   if (mode === "type") {
     resetCursorColor()
   } else if (mode === "ez" || mode === "select") {
-    changeCursorColor("#FF6200")
+    changeCursorColor(getPrimaryCursorColor())
   } else {
-    changeCursorColor("#589DF6")
+    changeCursorColor(getSecondaryCursorColor())
   }
 }
 export function changeCursorColor(color: string | undefined) {
