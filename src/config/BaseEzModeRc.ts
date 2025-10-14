@@ -89,7 +89,7 @@ map ez N <vscode editor.action.insertLineBefore>
 map ez m <vscode cursorPageDown>
 map ez M <vscode cursorPageUp>
 map ez , <vscode workbench.action.openSettings>
-map ez lt <vscode ezmode.EzModeActionGroupPopup> // TODO
+map ez lt <vscode ezmode.openEzModeMenu>
 map ez . <vscode editor.action.triggerSuggest>
 map ez gt <vscode editor.action.triggerParameterHints>
 map ez / <vscode editor.action.commentLine>

@@ -4,6 +4,7 @@ import { getMode, afterModeChange } from "../mode/ModeState"
 export function activateModeStatusBarItem(context: vscode.ExtensionContext) {
   const item = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 1100)
   item.text = getMode()
+  item.command = "ezmode.openEzModeMenu"
   item.show()
   context.subscriptions.push(item)
 

@@ -1,5 +1,6 @@
 {
   "name": "ezmode",
+  "publisher": "ivw",
   "displayName": "EzMode",
   "description": "Modal editing without the steep learning curve.",
   "repository": "github:ivw/ezmode-vscode",
@@ -54,6 +55,10 @@
         "command": "ezmode.reloadEzModeRc",
         "enablement": "!isWeb",
         "title": "Reload .ezmoderc"
+      },
+      {
+        "command": "ezmode.openEzModeMenu",
+        "title": "Open EzMode menu"
       }
     ],
     "keybindings": [
