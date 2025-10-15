@@ -12,6 +12,7 @@ import { activateReloadEzModeRc } from "./ReloadEzModeRc"
 import { registerCommand } from "../utils/Commands"
 import { activateOpenEzModeMenu } from "./ShowEzModeMenu"
 import { activateExecuteEzCommand } from "./ExecuteEzCommand"
+import { activateOpenEzModeTutorial } from "./OpenEzModeTutorial"
 
 export function activateCommands(context: vscode.ExtensionContext) {
   registerCommand(context, "ezmode.enterEzMode", () => {
@@ -29,4 +30,5 @@ export function activateCommands(context: vscode.ExtensionContext) {
   activateReloadEzModeRc(context)
   activateOpenEzModeMenu(context)
   activateExecuteEzCommand(context)
+  activateOpenEzModeTutorial(context)
 }
