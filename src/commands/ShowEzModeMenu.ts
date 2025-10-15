@@ -8,6 +8,7 @@ function createCommandQuickPickItem(commandId: string): CommandQuickPickItem {
 }
 
 const menuItems: Array<CommandQuickPickItem> = [
+  createCommandQuickPickItem("ezmode.executeCommand"),
   createCommandQuickPickItem("ezmode.editEzModeRc"),
   createCommandQuickPickItem("ezmode.reloadEzModeRc"),
   { label: "Toggle EzMode cheat sheet", commandId: "ezmode.cheatsheet.focus" },

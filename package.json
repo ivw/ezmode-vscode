@@ -59,6 +59,10 @@
       {
         "command": "ezmode.openEzModeMenu",
         "title": "Open EzMode menu"
+      },
+      {
+        "command": "ezmode.executeCommand",
+        "title": "Execute EzMode Command"
       }
     ],
     "keybindings": [
