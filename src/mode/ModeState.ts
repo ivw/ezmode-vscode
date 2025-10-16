@@ -1,6 +1,6 @@
 import * as vscode from "vscode"
 
-let mode: string = "ez" // TODO use "type" as default mode
+let mode: string = "type"
 const beforeModeChangeEmitter = new vscode.EventEmitter<string>()
 const afterModeChangeEmitter = new vscode.EventEmitter<string>()
 export const beforeModeChange = beforeModeChangeEmitter.event

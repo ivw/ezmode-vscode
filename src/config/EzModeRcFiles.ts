@@ -2,7 +2,10 @@ import * as vscode from "vscode"
 import * as os from "os"
 import { parseEzModeRc } from "./Parser"
 import type { EzAction } from "./EzAction"
-import templateRcString from "./TemplateEzModeRc"
+
+const homeDirUri = vscode.Uri.file(os.homedir())
+export const userRcUri = vscode.Uri.joinPath(homeDirUri, ".ezmoderc")
+export const userVsCodeRcUri = vscode.Uri.joinPath(homeDirUri, ".vscode.ezmoderc")
 
 let baseConfigCache: EzAction[] | null = null
 
@@ -21,11 +24,6 @@ async function parseBaseConfig(context: vscode.ExtensionContext): Promise<EzActi
   }
 }
 
-const homeDirUri = vscode.Uri.file(os.homedir())
-export const userRcUri = vscode.Uri.joinPath(homeDirUri, ".ezmoderc")
-export const userVsCodeRcUri = vscode.Uri.joinPath(homeDirUri, ".vscode.ezmoderc")
-
-const encoder = new TextEncoder()
 const decoder = new TextDecoder()
 
 function fileExists(uri: vscode.Uri): Thenable<boolean> {
@@ -35,10 +33,12 @@ function fileExists(uri: vscode.Uri): Thenable<boolean> {
   )
 }
 
-export async function createRcFileIfNotExists(uri: vscode.Uri) {
+export async function createRcFileIfNotExists(context: vscode.ExtensionContext, uri: vscode.Uri) {
   if (await fileExists(uri)) return
-  const content = encoder.encode(templateRcString)
-  await vscode.workspace.fs.writeFile(uri, content)
+  await vscode.workspace.fs.copy(
+    vscode.Uri.joinPath(context.extensionUri, "data", "template.ezmoderc"),
+    uri,
+  )
 }
 
 export async function readFileToString(uri: vscode.Uri): Promise<string> {

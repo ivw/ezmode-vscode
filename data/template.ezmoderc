@@ -1,4 +1,4 @@
-export default `// Documentation: https://github.com/ivw/ezmode-intellij?tab=readme-ov-file#customization
+// Documentation: https://github.com/ivw/ezmode-intellij?tab=readme-ov-file#customization
 // Full base config: https://github.com/ivw/ezmode-intellij/blob/main/src/main/resources/com/github/ivw/ezmode/config/base.ezmoderc
 // TODO update links
 
@@ -17,4 +17,3 @@ mode ez
 
 // Example: Use the space bar to type spaces in ez mode:
 // map ez space <native>
-`
