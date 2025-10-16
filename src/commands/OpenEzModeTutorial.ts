@@ -1,6 +1,6 @@
 import * as vscode from "vscode"
 import { registerCommand } from "../utils/Commands"
-import { readFileToString } from "../config/EzModeRcFiles"
+import { readFileToString } from "../utils/Files"
 
 export function activateOpenEzModeTutorial(context: vscode.ExtensionContext) {
   registerCommand(context, "ezmode.openEzModeTutorial", async () => {
