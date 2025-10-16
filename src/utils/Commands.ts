@@ -26,6 +26,6 @@ const commandObjs: Array<CommandObj> | undefined =
   vscode.extensions.getExtension("ivw.ezmode")?.packageJSON?.contributes?.commands
 
 export function getCommandTitle(id: string) {
-  const commandObj = commandObjs?.find((commandObj) => commandObj.command === id)
+  const commandObj = commandObjs?.find(({ command }) => command === id)
   return commandObj?.title ?? id
 }

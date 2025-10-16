@@ -1,9 +1,9 @@
-export default `map type default <native>
+map type default <native>
 map typeonce default <native><mode ez>
 
 
 map ez ~ <vscode ezmode.toggleCase>
-map ez \` <quote \`>
+map ez ` <quote `>
 map ez 1 <vscode workbench.view.explorer><vscode workbench.view.explorer> // TODO
 map ez ! <vscode workbench.view.explorer>
 map ez 2 <vscode workbench.view.scm><vscode workbench.view.scm> // TODO
@@ -48,7 +48,7 @@ map ez [ <vscode workbench.action.previousEditorInGroup>
 map ez { <pair open {}> // TODO xml
 map ez ] <vscode workbench.action.nextEditorInGroup>
 map ez } <pair close {}> // TODO xml
-map ez \\ <vscode workbench.action.splitEditor>
+map ez \ <vscode workbench.action.splitEditor>
 map ez | <vscode workbench.action.moveEditorToNextGroup>
 
 map ez a <vscode ezmode.selectWord>
@@ -161,10 +161,9 @@ map special + <numberop +>
 map special - <numberop ->
 map special * <numberop *>
 map special / <numberop />
-map special i <write \${caretindex}><mode ez>
-map special f <write \${filename}><mode ez>
-map special l <write \${line}><mode ez>
-map special c <write \${column}><mode ez>
+map special i <write ${caretindex}><mode ez>
+map special f <write ${filename}><mode ez>
+map special l <write ${line}><mode ez>
+map special c <write ${column}><mode ez>
 map special r <vscode editor.action.rename><mode type>
 map special R <vscode renameFile><mode ez>
-`

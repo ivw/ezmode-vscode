@@ -10,8 +10,8 @@ function createEmptyEnv(): EzEnv {
   }
 }
 
-async function loadConfig() {
-  const actions = await getConfig()
+export async function loadConfig(context: vscode.ExtensionContext) {
+  const actions = await getConfig(context)
   actions.forEach((action) => {
     action.perform({ env, key: null })
   })
@@ -19,7 +19,6 @@ async function loadConfig() {
 }
 
 let env: EzEnv = createEmptyEnv()
-loadConfig()
 
 export function getEnv(): EzEnv {
   return env
@@ -28,9 +27,9 @@ export function getEnv(): EzEnv {
 const envChangeEmitter = new vscode.EventEmitter<EzEnv>()
 export const onEnvChange = envChangeEmitter.event
 
-export async function reloadConfig() {
+export async function reloadConfig(context: vscode.ExtensionContext) {
   env = createEmptyEnv()
-  await loadConfig()
+  await loadConfig(context)
   vscode.window.showInformationMessage("Reloaded .ezmoderc")
 }
 

@@ -6,8 +6,10 @@ import { activateCommands } from "./commands"
 import { activateCursorColor } from "./ui/CursorColor"
 import { activateSelectModeListeners } from "./mode/SelectMode"
 import { activateEnvModeSwitchHooks } from "./mode/EnvModeSwitchHooks"
+import { loadConfig } from "./config/EnvState"
 
 export function activate(context: vscode.ExtensionContext) {
+  loadConfig(context)
   activateCommands(context)
   activateTypeActionHandler(context)
   activateCursorColor(context)
