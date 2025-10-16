@@ -23,3 +23,7 @@ export function moveSelectionBasedOnMode(
   }
   return new vscode.Selection(pos, pos)
 }
+
+export function unselect(sel: vscode.Selection): vscode.Selection {
+  return new vscode.Selection(sel.active, sel.active)
+}

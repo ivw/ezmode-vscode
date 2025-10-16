@@ -3,7 +3,7 @@ import { getOrAddModeEnv, getActionForKey, type EzEnv, type KeyBinding } from ".
 import { getMode, switchMode } from "../mode/ModeState"
 import { changeCursorColor, resetCursorColor } from "../ui/CursorColor"
 import type { Delim } from "../utils/delim/Delim"
-import { moveSelectionBasedOnMode } from "../utils/Selection"
+import { moveSelectionBasedOnMode, unselect } from "../utils/Selection"
 import type { QuoteDelim } from "../utils/delim/QuoteDelim"
 
 export type EzEvent = {
@@ -48,7 +48,20 @@ export const nativeEzAction: EzAction = {
 export function createWriteAction(message: string): EzAction {
   return {
     perform: () => {
-      // TODO
+      const editor = vscode.window.activeTextEditor
+      if (!editor) return
+
+      editor.edit((edit) => {
+        editor.selections = editor.selections.map((sel) => {
+          if (sel.isEmpty) {
+            edit.insert(sel.active, message)
+            return sel
+          } else {
+            edit.replace(sel, message)
+            return unselect(sel)
+          }
+        })
+      })
     },
     description: `Write: ${message}`,
   }
