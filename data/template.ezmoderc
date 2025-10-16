@@ -1,6 +1,5 @@
-// Documentation: https://github.com/ivw/ezmode-intellij?tab=readme-ov-file#customization
-// Full base config: https://github.com/ivw/ezmode-intellij/blob/main/src/main/resources/com/github/ivw/ezmode/config/base.ezmoderc
-// TODO update links
+// Documentation: https://github.com/ivw/ezmode-vscode?tab=readme-ov-file#customization
+// Full base config: https://github.com/ivw/ezmode-vscode/blob/main/data/base.ezmoderc
 
 // Set mode when starting up:
 mode ez
