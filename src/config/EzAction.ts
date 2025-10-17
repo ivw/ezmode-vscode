@@ -5,9 +5,10 @@ import { changeCursorColor, resetCursorColor } from "../ui/CursorColor"
 import type { Delim } from "../utils/delim/Delim"
 import { moveSelectionBasedOnMode, unselect } from "../utils/Selection"
 import type { QuoteDelim } from "../utils/delim/QuoteDelim"
+import { resolveVars, varContext } from "./Variables"
 
 export type EzEvent = {
-  env: EzEnv
+  env: EzEnv // TODO still needed?
   key: string | null
 }
 
@@ -47,17 +48,18 @@ export const nativeEzAction: EzAction = {
 
 export function createWriteAction(message: string): EzAction {
   return {
-    perform: () => {
+    perform: (e) => {
       const editor = vscode.window.activeTextEditor
       if (!editor) return
 
       editor.edit((edit) => {
-        editor.selections = editor.selections.map((sel) => {
+        editor.selections = editor.selections.map((sel, selectionIndex) => {
+          const text = resolveVars(message, varContext(e.key, sel, selectionIndex))
           if (sel.isEmpty) {
-            edit.insert(sel.active, message)
+            edit.insert(sel.active, text)
             return sel
           } else {
-            edit.replace(sel, message)
+            edit.replace(sel, text)
             return unselect(sel)
           }
         })
@@ -69,8 +71,8 @@ export function createWriteAction(message: string): EzAction {
 
 export function createPopupAction(message: string): EzAction {
   return {
-    perform: () => {
-      vscode.window.showInformationMessage(message)
+    perform: (e) => {
+      vscode.window.showInformationMessage(resolveVars(message, varContext(e.key)))
     },
     description: `Display notification: ${message}`,
   }
@@ -102,7 +104,7 @@ export function createMapKeyBindingAction(mode: string, keyBinding: KeyBinding):
 export function createSetVarAction(varName: string, value: string): EzAction {
   return {
     perform: (e) => {
-      e.env.vars.set(varName, value)
+      e.env.vars.set(varName, resolveVars(value, varContext(e.key)))
     },
     description: `Set variable '${varName}' to '${value}'`,
   }
