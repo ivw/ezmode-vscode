@@ -36,8 +36,6 @@ export function resolveVar(varName: string, ctx: VarContext): string | null {
       return getMode()
     case "key":
       return ctx.key
-    // case "clipboard":
-    //   return vscode.env.clipboard.readText()
     case "space":
       return " "
     case "tab":
