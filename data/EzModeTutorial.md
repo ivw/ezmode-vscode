@@ -20,10 +20,11 @@ Use `i`, `j`, `k`, `l` to move, just like the arrow keys.
 `H` / `:`: Move to the start/end of a file
 `m` / `M`: Scroll half a page down/up
 
-_If you have the AceJump plugin installed:_
+<!-- TODO -->
+<!-- _If you have the AceJump plugin installed:_
 To jump to any visible symbol, press `Space`,
 then type one or more of the characters you want to jump to,
-and type the adjacent tag.
+and type the adjacent tag. -->
 
 ## Selecting text
 
@@ -111,7 +112,7 @@ Exercise: Remove the number next to every x: x0 x1 x2 x3 x4
 
 _Hint: Press `e` to exit select mode while keeping the multiple carets._
 
-In select mode (`e`), use `.` / `,` to add a new caret below/above.
+Press `8`/`*` `.` / `,` to add a new caret below/above.
 
 ```
 Exercise: Add a dash to the start of these 3 sentences.
@@ -135,21 +136,17 @@ Use `4` to hide all tool windows.
 ## Customization
 
 In EzMode, every character key is customizable. You can even define your own modes.
-Open your config file by typing `<` in EzMode, and choosing "Open .ezmoderc".
+Open your config file by typing `<` in EzMode, and choosing "Edit .ezmoderc".
 This will create a template with some examples if the file doesn't already exist.
 After editing and saving this file, use `<` again and
 choose "Reload .ezmoderc" to apply the changes.
-
-Tab is the default key to enter EzMode because it's easy to press and not often used
-in modern IDEs with automatic indentation. The original Tab functionality is moved to `Alt-T`.
-You can change any of this in _Settings > Keymap_.
 
 ## Tutorial complete
 
 EzMode has many other useful keys. You can always press `5` to see a full list,
 or view the keyboard layout here:
-https://github.com/ivw/ezmode-intellij/blob/main/KeyboardLayout.png
+https://github.com/ivw/ezmode-vscode/blob/main/KeyboardLayout.png
 
-The full documentation can be found at https://github.com/ivw/ezmode-intellij
+The full documentation can be found at https://github.com/ivw/ezmode-vscode
 
 Enjoy! If you have suggestions, email me at ivo@ezmode.dev
