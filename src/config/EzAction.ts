@@ -13,7 +13,7 @@ export type EzEvent = {
 }
 
 export type EzAction = {
-  perform: (e: EzEvent) => unknown
+  perform: (e: EzEvent) => Thenable<unknown> | void
   description: string
 }
 
@@ -30,7 +30,8 @@ export function createVsCodeEzAction(commandId: string, args: unknown): EzAction
   return {
     perform: () => {
       console.log(`Executing VSCode command: ${commandId} with args: ${JSON.stringify(args)}`)
-      // Calling executeCommand with nullish args can cause problems, for example with `workbench.action.findInFiles`.
+      // Note: Calling executeCommand with nullish args can cause problems,
+      //   for example with `workbench.action.findInFiles`.
       return args == null
         ? vscode.commands.executeCommand(commandId)
         : vscode.commands.executeCommand(commandId, args)
@@ -52,7 +53,7 @@ export function createWriteAction(message: string): EzAction {
       const editor = vscode.window.activeTextEditor
       if (!editor) return
 
-      editor.edit((edit) => {
+      return editor.edit((edit) => {
         editor.selections = editor.selections.map((sel, selectionIndex) => {
           const text = resolveVars(message, varContext(e.key, sel, selectionIndex))
           if (sel.isEmpty) {
@@ -75,19 +76,6 @@ export function createPopupAction(message: string): EzAction {
       vscode.window.showInformationMessage(resolveVars(message, varContext(e.key)))
     },
     description: `Display notification: ${message}`,
-  }
-}
-
-export function createCursorColorAction(color: string): EzAction {
-  return {
-    perform: () => {
-      if (color === "default") {
-        resetCursorColor()
-      } else {
-        changeCursorColor(color)
-      }
-    },
-    description: `Change cursor color to ${color}`,
   }
 }
 
@@ -133,10 +121,9 @@ export function createOfModeAction(mode: string): EzAction {
 
 export function createCompositeEzAction(actions: EzAction[]): EzAction {
   return {
-    perform: (e) => {
+    perform: async (e) => {
       for (const action of actions) {
-        action.perform(e)
-        // TODO handle async
+        await action.perform(e)
       }
     },
     description: actions.map((a) => a.description).join(", "),
