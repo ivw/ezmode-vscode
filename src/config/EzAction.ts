@@ -3,7 +3,7 @@ import { getOrAddModeEnv, getActionForKey, type EzEnv, type KeyBinding } from ".
 import { getMode, switchMode } from "../mode/ModeState"
 import { changeCursorColor, resetCursorColor } from "../ui/CursorColor"
 import type { Delim } from "../utils/delim/Delim"
-import { moveSelectionBasedOnMode, unselect } from "../utils/Selection"
+import { moveSelectionBasedOnMode, revealCursor, unselect } from "../utils/Selection"
 import type { QuoteDelim } from "../utils/delim/QuoteDelim"
 import { resolveVars, varContext } from "./Variables"
 
@@ -53,18 +53,22 @@ export function createWriteAction(message: string): EzAction {
       const editor = vscode.window.activeTextEditor
       if (!editor) return
 
-      return editor.edit((edit) => {
-        editor.selections = editor.selections.map((sel, selectionIndex) => {
-          const text = resolveVars(message, varContext(e.key, sel, selectionIndex))
-          if (sel.isEmpty) {
-            edit.insert(sel.active, text)
-            return sel
-          } else {
-            edit.replace(sel, text)
-            return unselect(sel)
-          }
+      return editor
+        .edit((edit) => {
+          editor.selections = editor.selections.map((sel, selectionIndex) => {
+            const text = resolveVars(message, varContext(e.key, sel, selectionIndex))
+            if (sel.isEmpty) {
+              edit.insert(sel.active, text)
+              return sel
+            } else {
+              edit.replace(sel, text)
+              return unselect(sel)
+            }
+          })
         })
-      })
+        .then(() => {
+          revealCursor(editor)
+        })
     },
     description: `Write: ${message}`,
   }
@@ -162,6 +166,7 @@ export function createJumpToBracketAction(findClosingDelim: boolean, delim: Deli
         }
         return sel
       })
+      revealCursor(editor)
     },
     description: `Move caret to ${delim.toNiceString(findClosingDelim)}`,
   }
@@ -180,6 +185,7 @@ export function createJumpToQuoteAction(delim: QuoteDelim): EzAction {
         }
         return sel
       })
+      revealCursor(editor)
     },
     description: `Move caret to ${delim.char}`,
   }

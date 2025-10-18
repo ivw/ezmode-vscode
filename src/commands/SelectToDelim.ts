@@ -1,6 +1,7 @@
 import * as vscode from "vscode"
 import { getMatchingDelimEitherSide } from "../utils/delim/Delim"
 import { registerTextEditorCommand } from "../utils/Commands"
+import { revealCursor } from "../utils/Selection"
 
 export function activateSelectToDelim(context: vscode.ExtensionContext) {
   registerTextEditorCommand(context, "ezmode.selectToDelim", (editor, _edit, args) => {
@@ -14,5 +15,6 @@ export function activateSelectToDelim(context: vscode.ExtensionContext) {
       }
       return sel
     })
+    revealCursor(editor)
   })
 }

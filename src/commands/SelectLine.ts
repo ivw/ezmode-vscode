@@ -1,5 +1,5 @@
 import * as vscode from "vscode"
-import { changeSelectionRange } from "../utils/Selection"
+import { changeSelectionRange, revealCursor } from "../utils/Selection"
 import { registerTextEditorCommand } from "../utils/Commands"
 
 function startOfLine(line: vscode.TextLine): vscode.Position {
@@ -20,5 +20,6 @@ export function activateSelectLine(context: vscode.ExtensionContext) {
       const endLine = document.lineAt(sel.end.line)
       return changeSelectionRange(sel, startOfLine(startLine), endLine.range.end)
     })
+    revealCursor(editor)
   })
 }

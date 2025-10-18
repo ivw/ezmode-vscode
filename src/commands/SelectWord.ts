@@ -1,5 +1,5 @@
 import * as vscode from "vscode"
-import { changeSelectionRange } from "../utils/Selection"
+import { changeSelectionRange, revealCursor } from "../utils/Selection"
 import { registerTextEditorCommand } from "../utils/Commands"
 
 export function activateSelectWord(context: vscode.ExtensionContext) {
@@ -20,5 +20,6 @@ export function activateSelectWord(context: vscode.ExtensionContext) {
 
       return changeSelectionRange(sel, startPosition, endPosition)
     })
+    revealCursor(editor)
   })
 }

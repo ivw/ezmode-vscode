@@ -27,3 +27,11 @@ export function moveSelectionBasedOnMode(
 export function unselect(sel: vscode.Selection): vscode.Selection {
   return new vscode.Selection(sel.active, sel.active)
 }
+
+export function emptyRange(position: vscode.Position) {
+  return new vscode.Range(position, position)
+}
+
+export function revealCursor(editor: vscode.TextEditor) {
+  editor.revealRange(emptyRange(editor.selection.active))
+}
