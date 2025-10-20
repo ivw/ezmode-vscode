@@ -1,19 +1,14 @@
 import * as vscode from "vscode"
-import { getOrAddModeEnv, getActionForKey, type EzEnv, type KeyBinding } from "./EzEnv"
+import { getOrAddModeEnv, getActionForKey, type KeyBinding } from "./EzEnv"
 import { getMode, switchMode } from "../mode/ModeState"
-import { changeCursorColor, resetCursorColor } from "../ui/CursorColor"
 import type { Delim } from "../utils/delim/Delim"
 import { moveSelectionBasedOnMode, revealCursor, unselect } from "../utils/Selection"
 import type { QuoteDelim } from "../utils/delim/QuoteDelim"
 import { resolveVars, varContext } from "./Variables"
-
-export type EzEvent = {
-  env: EzEnv // TODO still needed?
-  key: string | null
-}
+import { getEnv } from "./EnvState"
 
 export type EzAction = {
-  perform: (e: EzEvent) => Thenable<unknown> | void
+  perform: (key: string | null) => Thenable<unknown> | void
   description: string
 }
 
@@ -41,22 +36,22 @@ export function createVsCodeEzAction(commandId: string, args: unknown): EzAction
 }
 
 export const nativeEzAction: EzAction = {
-  perform: (e) => {
-    return vscode.commands.executeCommand("default:type", { text: e.key })
+  perform: (key) => {
+    return vscode.commands.executeCommand("default:type", { text: key })
   },
   description: "Native",
 }
 
 export function createWriteAction(message: string): EzAction {
   return {
-    perform: (e) => {
+    perform: (key) => {
       const editor = vscode.window.activeTextEditor
       if (!editor) return
 
       return editor
         .edit((edit) => {
           editor.selections = editor.selections.map((sel, selectionIndex) => {
-            const text = resolveVars(message, varContext(e.key, sel, selectionIndex))
+            const text = resolveVars(message, varContext(key, sel, selectionIndex))
             if (sel.isEmpty) {
               edit.insert(sel.active, text)
               return sel
@@ -76,8 +71,8 @@ export function createWriteAction(message: string): EzAction {
 
 export function createPopupAction(message: string): EzAction {
   return {
-    perform: (e) => {
-      vscode.window.showInformationMessage(resolveVars(message, varContext(e.key)))
+    perform: (key) => {
+      vscode.window.showInformationMessage(resolveVars(message, varContext(key)))
     },
     description: `Display notification: ${message}`,
   }
@@ -85,8 +80,8 @@ export function createPopupAction(message: string): EzAction {
 
 export function createMapKeyBindingAction(mode: string, keyBinding: KeyBinding): EzAction {
   return {
-    perform: (e) => {
-      const modeEnv = getOrAddModeEnv(e.env, mode)
+    perform: () => {
+      const modeEnv = getOrAddModeEnv(getEnv(), mode)
       modeEnv.keyBindings.set(keyBinding.key, keyBinding)
     },
     description: `Map '${keyBinding.key}' in mode '${mode}' to: ${keyBinding.action.description}`,
@@ -95,8 +90,8 @@ export function createMapKeyBindingAction(mode: string, keyBinding: KeyBinding):
 
 export function createSetVarAction(varName: string, value: string): EzAction {
   return {
-    perform: (e) => {
-      e.env.vars.set(varName, resolveVars(value, varContext(e.key)))
+    perform: (key) => {
+      getEnv().vars.set(varName, resolveVars(value, varContext(key)))
     },
     description: `Set variable '${varName}' to '${value}'`,
   }
@@ -104,9 +99,9 @@ export function createSetVarAction(varName: string, value: string): EzAction {
 
 export function createKeyReferenceAction(key: string): EzAction {
   return {
-    perform: (e) => {
+    perform: () => {
       const mode = getMode()
-      return getActionForKey(key, mode, e.env)?.perform({ env: e.env, key })
+      return getActionForKey(key, mode, getEnv())?.perform(key)
     },
     description: key,
   }
@@ -114,10 +109,10 @@ export function createKeyReferenceAction(key: string): EzAction {
 
 export function createOfModeAction(mode: string): EzAction {
   return {
-    perform: (e) => {
-      if (e.key === null) return
+    perform: (key) => {
+      if (key === null) return
 
-      return getActionForKey(e.key, mode, e.env)?.perform({ env: e.env, key: e.key })
+      return getActionForKey(key, mode)?.perform(key)
     },
     description: `Action in mode: ${mode}`,
   }
@@ -135,13 +130,13 @@ export function createCompositeEzAction(actions: EzAction[]): EzAction {
 }
 
 // export function createKeyEzAction(action: {
-//   perform: (keyChar: string, e: EzEvent) => unknown
+//   perform: (keyChar: string, key: string | null) => unknown
 //   description: string
 // }): EzAction {
 //   return {
 //     perform: (e) => {
-//       if (e.keyChar !== null) {
-//         return action.perform(e.keyChar, e)
+//       if (key !== null) {
+//         return action.perform(key)
 //       }
 //     },
 //     description: action.description,

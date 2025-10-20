@@ -13,7 +13,7 @@ function createEmptyEnv(): EzEnv {
 export async function loadConfig(context: vscode.ExtensionContext) {
   const actions = await getConfig(context)
   actions.forEach((action) => {
-    action.perform({ env, key: null })
+    action.perform(null)
   })
   envChangeEmitter.fire(env)
 }
@@ -34,6 +34,6 @@ export async function reloadConfig(context: vscode.ExtensionContext) {
 }
 
 export function performSingleAction(action: EzAction) {
-  action.perform({ env, key: null })
+  action.perform(null)
   envChangeEmitter.fire(env)
 }
