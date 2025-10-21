@@ -10,7 +10,8 @@ map ez 2 <vscode workbench.view.scm><vscode workbench.action.focusActiveEditorGr
 map ez @ <vscode workbench.view.scm>
 map ez 3 <vscode workbench.action.terminal.toggleTerminal><vscode workbench.action.focusActiveEditorGroup>
 map ez # <vscode workbench.action.terminal.toggleTerminal>
-map ez 4 <vscode workbench.action.closePanel><vscode workbench.action.closeSidebar>
+map ez 4 <vscode workbench.action.closePanel>
+map ez $ <vscode workbench.action.closePanel><vscode workbench.action.closeSidebar>
 map ez 5 <vscode ezmode.cheatsheet.focus>
 map ez 6 <vscode editor.action.goToImplementation>
 map ez 7 <mode special>
