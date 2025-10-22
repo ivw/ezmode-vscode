@@ -12,9 +12,7 @@ export function activateNextChangedFile(context: vscode.ExtensionContext) {
     const changes = repo.state.workingTreeChanges
     if (changes.length <= 1) return
 
-    console.log(changes.map((change) => change.uri))
     const uris = changes.map((change) => change.uri).sort(compareUris)
-    console.log(uris)
 
     const currentUri = getCurrentUri()
     const i = currentUri ? uris.findIndex((uri) => uri.fsPath === currentUri.fsPath) : -1
@@ -25,27 +23,21 @@ export function activateNextChangedFile(context: vscode.ExtensionContext) {
   })
 }
 
+/**
+ * Orders files the same way as the list view does: files before folders if at the same depth.
+ */
 function compareUris(a: vscode.Uri, b: vscode.Uri): number {
   const aParts = a.path.toLowerCase().split("/")
   const bParts = b.path.toLowerCase().split("/")
+  for (let i = 0; i < aParts.length; i++) {
+    const aIsFile = aParts.length - 1 === i
+    const bIsFile = bParts.length - 1 === i
+    if (aIsFile && !bIsFile) return -1
+    if (!aIsFile && bIsFile) return 1
 
-  if (aParts.length > bParts.length) return 1
-  if (aParts.length < bParts.length) return -1
-
-  return a.fsPath.localeCompare(b.fsPath)
-}
-
-function compareUris2(a: vscode.Uri, b: vscode.Uri): number {
-  const aParts = a.path.toLowerCase().split("/")
-  const bParts = b.path.toLowerCase().split("/")
-
-  const len = Math.min(aParts.length, bParts.length)
-  for (let i = 0; i < len; i++) {
     if (aParts[i] < bParts[i]) return -1
     if (aParts[i] > bParts[i]) return 1
   }
-  if (aParts.length < bParts.length) return -1
-  if (aParts.length > bParts.length) return 1
   return 0
 }
 
