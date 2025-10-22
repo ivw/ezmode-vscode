@@ -9,6 +9,8 @@ export function activateNextChangedFile(context: vscode.ExtensionContext) {
     const repo = gitAPI.repositories[0]
     if (!repo) return
 
+    // Using only the workingTreeChanges because the indexChanges don't get highlighted in the sidebar for some reason.
+    // Also, you may not want to view the changes you've already staged.
     const changes = repo.state.workingTreeChanges
     if (changes.length <= 1) return
 
