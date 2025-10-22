@@ -10,19 +10,43 @@ export function activateNextChangedFile(context: vscode.ExtensionContext) {
     if (!repo) return
 
     const changes = repo.state.workingTreeChanges
-    if (changes.length <= 0) return
+    if (changes.length <= 1) return
 
-    const currentFile = getCurrentFile()
-    const i = currentFile
-      ? changes.findIndex((change) => change.uri.fsPath === currentFile.fsPath)
-      : -1
+    console.log(changes.map((change) => change.uri))
+    const uris = changes.map((change) => change.uri).sort(compareUris)
+    console.log(uris)
 
-    const nextI = args?.reversed
-      ? (i - 1 + changes.length) % changes.length
-      : (i + 1) % changes.length
+    const currentUri = getCurrentUri()
+    const i = currentUri ? uris.findIndex((uri) => uri.fsPath === currentUri.fsPath) : -1
 
-    return vscode.commands.executeCommand("git.openChange", changes[nextI].uri)
+    const nextI = (args?.reversed ? i - 1 + uris.length : i + 1) % uris.length
+
+    return vscode.commands.executeCommand("git.openChange", uris[nextI])
   })
+}
+
+function compareUris(a: vscode.Uri, b: vscode.Uri): number {
+  const aParts = a.path.toLowerCase().split("/")
+  const bParts = b.path.toLowerCase().split("/")
+
+  if (aParts.length > bParts.length) return 1
+  if (aParts.length < bParts.length) return -1
+
+  return a.fsPath.localeCompare(b.fsPath)
+}
+
+function compareUris2(a: vscode.Uri, b: vscode.Uri): number {
+  const aParts = a.path.toLowerCase().split("/")
+  const bParts = b.path.toLowerCase().split("/")
+
+  const len = Math.min(aParts.length, bParts.length)
+  for (let i = 0; i < len; i++) {
+    if (aParts[i] < bParts[i]) return -1
+    if (aParts[i] > bParts[i]) return 1
+  }
+  if (aParts.length < bParts.length) return -1
+  if (aParts.length > bParts.length) return 1
+  return 0
 }
 
 function getGitAPI() {
@@ -32,7 +56,7 @@ function getGitAPI() {
   return gitExtension.getAPI(1)
 }
 
-function getCurrentFile(): vscode.Uri | null {
+function getCurrentUri(): vscode.Uri | null {
   const editor = vscode.window.activeTextEditor
   if (!editor) return null
   return editor.document.uri

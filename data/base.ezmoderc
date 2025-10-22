@@ -165,5 +165,5 @@ map special i <write ${caretindex}><mode ez>
 map special f <write ${filename}><mode ez>
 map special l <write ${line}><mode ez>
 map special c <write ${column}><mode ez>
-map special r <vscode editor.action.rename><mode type>
+map special r <vscode editor.action.rename><mode ez>
 map special R <vscode workbench.view.explorer><vscode workbench.action.focusActiveEditorGroup><vscode renameFile><mode ez>
