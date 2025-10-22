@@ -18,11 +18,16 @@ export function activateNextChangedFile(context: vscode.ExtensionContext) {
 
     const currentUri = getCurrentUri()
     const i = currentUri ? uris.findIndex((uri) => uri.fsPath === currentUri.fsPath) : -1
-
-    const nextI = (args?.reversed ? i - 1 + uris.length : i + 1) % uris.length
-
+    const nextI = getNextIndex(i, uris.length, args?.reversed)
     return vscode.commands.executeCommand("git.openChange", uris[nextI])
   })
+}
+
+function getNextIndex(i: number, length: number, reversed: boolean): number {
+  if (i < 0) {
+    return reversed ? length - 1 : 0
+  }
+  return (reversed ? i - 1 + length : i + 1) % length
 }
 
 /**
