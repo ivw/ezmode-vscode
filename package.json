@@ -67,6 +67,10 @@
       {
         "command": "ezmode.openEzModeTutorial",
         "title": "Open EzMode Tutorial"
+      },
+      {
+        "command": "ezmode.nextChangedFile",
+        "title": "View next changed file"
       }
     ],
     "keybindings": [

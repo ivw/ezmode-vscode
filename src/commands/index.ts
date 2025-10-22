@@ -13,6 +13,7 @@ import { registerCommand } from "../utils/Commands"
 import { activateOpenEzModeMenu } from "./ShowEzModeMenu"
 import { activateExecuteEzCommand } from "./ExecuteEzCommand"
 import { activateOpenEzModeTutorial } from "./OpenEzModeTutorial"
+import { activateNextChangedFile } from "./NextChangedFile"
 
 export function activateCommands(context: vscode.ExtensionContext) {
   registerCommand(context, "ezmode.enterEzMode", () => {
@@ -31,4 +32,5 @@ export function activateCommands(context: vscode.ExtensionContext) {
   activateOpenEzModeMenu(context)
   activateExecuteEzCommand(context)
   activateOpenEzModeTutorial(context)
+  activateNextChangedFile(context)
 }

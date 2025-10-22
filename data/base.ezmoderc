@@ -145,9 +145,9 @@ map git s <vscode workbench.scm.history.focus><mode ez>
 map git f <vscode git.fetchAll><mode ez>
 map git g <mode ez>
 map git h <vscode gitlens.showFileHistoryView><mode ez> // TODO need gitlens?
-map git j <vscode Diff.PrevChange> // TODO remove?
+map git j <vscode ezmode.nextChangedFile {"reversed": true}>
 map git k <vscode workbench.action.compareEditor.nextChange>
-map git l <vscode Diff.NextChange> // TODO remove?
+map git l <vscode ezmode.nextChangedFile>
 
 map git c <vscode CheckinProject><mode ez> // TODO ?
 map git b <vscode git.checkout><mode ez>
@@ -166,4 +166,4 @@ map special f <write ${filename}><mode ez>
 map special l <write ${line}><mode ez>
 map special c <write ${column}><mode ez>
 map special r <vscode editor.action.rename><mode type>
-map special R <vscode renameFile><mode ez>
+map special R <vscode workbench.view.explorer><vscode renameFile><mode ez>
