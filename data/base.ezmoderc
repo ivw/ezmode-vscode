@@ -134,7 +134,7 @@ map select gt <pair close angle>
 map git default <ofmode ez>
 
 map git w <vscode workbench.action.closeActiveEditor><mode ez>
-map git r <vscode git.viewChanges> // TODO
+map git r <vscode workbench.view.scm><vscode workbench.action.focusActiveEditorGroup><vscode ezmode.gitReview>
 map git u <vscode git.sync><mode ez>
 map git i <vscode ezmode.nextChange {"reversed": true}>
 map git p <vscode git.push><mode ez>

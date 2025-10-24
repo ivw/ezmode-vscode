@@ -75,6 +75,10 @@
       {
         "command": "ezmode.nextChange",
         "title": "View next change"
+      },
+      {
+        "command": "ezmode.gitReview",
+        "title": "Open/close changes"
       }
     ],
     "keybindings": [

@@ -15,6 +15,7 @@ import { activateExecuteEzCommand } from "./ExecuteEzCommand"
 import { activateOpenEzModeTutorial } from "./OpenEzModeTutorial"
 import { activateNextChangedFile } from "./NextChangedFile"
 import { activateNextChange } from "./NextChange"
+import { activateGitReview } from "./GitReviewAction"
 
 export function activateCommands(context: vscode.ExtensionContext) {
   registerCommand(context, "ezmode.enterEzMode", () => {
@@ -35,4 +36,5 @@ export function activateCommands(context: vscode.ExtensionContext) {
   activateOpenEzModeTutorial(context)
   activateNextChangedFile(context)
   activateNextChange(context)
+  activateGitReview(context)
 }
