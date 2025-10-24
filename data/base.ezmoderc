@@ -136,7 +136,7 @@ map git default <ofmode ez>
 map git w <vscode workbench.action.closeActiveEditor><mode ez>
 map git r <vscode git.viewChanges> // TODO
 map git u <vscode git.sync><mode ez>
-map git i <vscode workbench.action.compareEditor.previousChange>
+map git i <vscode ezmode.nextChange {"reversed": true}>
 map git p <vscode git.push><mode ez>
 map git P <vscode git.pullFrom><mode ez>
 
@@ -146,7 +146,7 @@ map git f <vscode git.fetchAll><mode ez>
 map git g <mode ez>
 map git h <vscode gitlens.showFileHistoryView><mode ez> // TODO need gitlens?
 map git j <vscode ezmode.nextChangedFile {"reversed": true}>
-map git k <vscode workbench.action.compareEditor.nextChange>
+map git k <vscode ezmode.nextChange>
 map git l <vscode ezmode.nextChangedFile>
 
 map git c <vscode CheckinProject><mode ez> // TODO ?
