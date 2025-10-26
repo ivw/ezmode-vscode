@@ -19,7 +19,7 @@ export function createSwitchModeAction(mode: string): EzAction {
     },
     description: `Switch mode to: ${mode}`,
   }
-} // TODO
+}
 
 export function createVsCodeEzAction(commandId: string, args: unknown): EzAction {
   return {

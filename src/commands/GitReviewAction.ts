@@ -10,7 +10,9 @@ export function activateGitReview(context: vscode.ExtensionContext) {
       switchMode("ez")
     } else {
       const uris = getChanges()
-      await vscode.commands.executeCommand(`git.openChange`, uris[0])
+      if (uris.length > 0) {
+        await vscode.commands.executeCommand(`git.openChange`, uris[0])
+      }
     }
   })
 }

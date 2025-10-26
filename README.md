@@ -94,8 +94,6 @@ for example: `<write Hello, ${filename}!>`.
 
 Map `C` (Shift + c) in `ez` mode to select all (`A`) and copy (`c`):
 
-<!-- HELLO -->
-
 ```
 map ez C Ac
 ```
