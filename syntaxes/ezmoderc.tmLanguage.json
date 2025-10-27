@@ -20,7 +20,7 @@
       "patterns": [
         {
           "name": "entity.name.function.ezmoderc",
-          "match": "(?<=^|<)(set|map|write|popup|mode|vscode|native|ofmode|nop|pair|quote|toolwindow|numberop)\\b"
+          "match": "(?<=^|<)(set|map|write|popup|mode|vscode|native|ofmode|nop|pair|quote|numberop)\\b"
         }
       ]
     },

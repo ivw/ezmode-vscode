@@ -178,11 +178,6 @@ export function parseAction(buf: LexerBuffer): EzAction {
       }
       return createJumpToBracketAction(parseShouldFindClosingDelim(), parseDelimString())
     }
-    case "toolwindow": {
-      // TODO
-      buf.remainingContent()
-      return nativeEzAction
-    }
     case "numberop": {
       // TODO
       buf.remainingContent()
