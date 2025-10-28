@@ -79,6 +79,10 @@
       {
         "command": "ezmode.gitReview",
         "title": "Open/close changes"
+      },
+      {
+        "command": "ezmode.numberOperation",
+        "title": "Number operation (+ - * /)"
       }
     ],
     "keybindings": [

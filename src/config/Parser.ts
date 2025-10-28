@@ -178,11 +178,6 @@ export function parseAction(buf: LexerBuffer): EzAction {
       }
       return createJumpToBracketAction(parseShouldFindClosingDelim(), parseDelimString())
     }
-    case "numberop": {
-      // TODO
-      buf.remainingContent()
-      return nativeEzAction
-    }
     default: {
       throw new Error(`Unknown action type: ${actionType}`)
     }

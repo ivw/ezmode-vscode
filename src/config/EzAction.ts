@@ -129,20 +129,6 @@ export function createCompositeEzAction(actions: EzAction[]): EzAction {
   }
 }
 
-// export function createKeyEzAction(action: {
-//   perform: (keyChar: string, key: string | null) => unknown
-//   description: string
-// }): EzAction {
-//   return {
-//     perform: (e) => {
-//       if (key !== null) {
-//         return action.perform(key)
-//       }
-//     },
-//     description: action.description,
-//   }
-// }
-
 export function createJumpToBracketAction(findClosingDelim: boolean, delim: Delim): EzAction {
   return {
     perform: () => {
