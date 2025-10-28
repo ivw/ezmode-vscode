@@ -90,7 +90,7 @@ map ez m <vscode cursorPageDown>
 map ez M <vscode cursorPageUp>
 map ez , <vscode workbench.action.openSettings>
 map ez lt <vscode ezmode.openEzModeMenu>
-map ez . <vscode editor.action.triggerSuggest>
+map ez . <vscode editor.action.quickFix>
 map ez gt <vscode editor.action.triggerParameterHints>
 map ez / <vscode editor.action.commentLine>
 map ez ? <vscode editor.action.blockComment>
@@ -149,7 +149,7 @@ map git j <vscode ezmode.nextChangedFile {"reversed": true}>
 map git k <vscode ezmode.nextChange>
 map git l <vscode ezmode.nextChangedFile>
 
-map git c <vscode CheckinProject><mode ez> // TODO ?
+map git c <vscode git.commit><mode ez>
 map git b <vscode git.checkout><mode ez>
 map git m <vscode git.merge><mode ez>
 
