@@ -126,6 +126,8 @@ map select : <vscode cursorBottomSelect>
 map select x <ofmode ez><mode ez>
 map select c <ofmode ez><mode ez>
 map select v <ofmode ez><mode ez>
+map select m <vscode cursorPageDownSelect>
+map select M <vscode cursorPageUpSelect>
 map select lt <pair open angle>
 map select . <vscode ezmode.flipSelection>
 map select gt <pair close angle>

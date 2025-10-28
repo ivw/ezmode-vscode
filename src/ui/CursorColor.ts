@@ -12,7 +12,6 @@ export function activateCursorColor(context: vscode.ExtensionContext) {
       if (e.focused) {
         updateCursorColor()
       }
-      console.log(`Active: ${e.active}, focused: ${e.focused}`)
     }),
   )
 

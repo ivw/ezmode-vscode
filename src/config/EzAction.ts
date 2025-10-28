@@ -24,7 +24,6 @@ export function createSwitchModeAction(mode: string): EzAction {
 export function createVsCodeEzAction(commandId: string, args: unknown): EzAction {
   return {
     perform: () => {
-      console.log(`Executing VSCode command: ${commandId} with args: ${JSON.stringify(args)}`)
       // Note: Calling executeCommand with nullish args can cause problems,
       //   for example with `workbench.action.findInFiles`.
       return args == null
