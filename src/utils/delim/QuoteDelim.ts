@@ -58,7 +58,7 @@ export function quoteDelim(char: string): QuoteDelim {
       const text = editor.document.getText()
       const offset = editor.document.offsetAt(position)
       if (fromClosingDelim) {
-        if (offset < text.length && text[offset] !== char) return null
+        if (offset >= text.length || text[offset] !== char) return null
         const openingDelim = findDelim(false, editor, offset, false)
         if (openingDelim !== null) {
           return delimRangesFixed(
@@ -66,7 +66,7 @@ export function quoteDelim(char: string): QuoteDelim {
           )
         }
       } else {
-        if (offset > 0 && text[offset - 1] !== char) return null
+        if (offset <= 0 || text[offset - 1] !== char) return null
         const closingDelim = findDelim(true, editor, offset, false)
         if (closingDelim !== null) {
           return delimRangesFixed(

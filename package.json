@@ -82,7 +82,7 @@
       },
       {
         "command": "ezmode.numberOperation",
-        "title": "Number operation (+ - * /)"
+        "title": "Number operation (default: increment)"
       }
     ],
     "keybindings": [
