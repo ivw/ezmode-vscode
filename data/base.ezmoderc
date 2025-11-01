@@ -85,9 +85,8 @@ map ez b <vscode editor.action.joinLines>
 map ez B <vscode cursorUp><vscode editor.action.joinLines>
 map ez n <vscode editor.action.insertLineAfter>
 map ez N <vscode editor.action.insertLineBefore>
-// TODO use something like <scroll 50>. note: editorScroll does not work well.
-map ez m <vscode cursorPageDown>
-map ez M <vscode cursorPageUp>
+map ez m <vscode ezmode.scroll>
+map ez M <vscode ezmode.scroll {"direction": "up"}>
 map ez , <vscode workbench.action.openSettings>
 map ez lt <vscode ezmode.openEzModeMenu>
 map ez . <vscode editor.action.quickFix>

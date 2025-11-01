@@ -83,6 +83,10 @@
       {
         "command": "ezmode.numberOperation",
         "title": "Number operation (default: increment)"
+      },
+      {
+        "command": "ezmode.scroll",
+        "title": "Scroll half a page (down by default)"
       }
     ],
     "keybindings": [
