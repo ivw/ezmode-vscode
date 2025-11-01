@@ -150,7 +150,7 @@ map git j <vscode ezmode.nextChangedFile {"reversed": true}>
 map git k <vscode ezmode.nextChange>
 map git l <vscode ezmode.nextChangedFile>
 
-map git c <vscode git.commit><mode ez>
+map git c <mode type><vscode git.commit><mode ez>
 map git b <vscode git.checkout><mode ez>
 map git m <vscode git.merge><mode ez>
 
