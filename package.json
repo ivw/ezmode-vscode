@@ -117,7 +117,7 @@
       {
         "id": "ezmoderc",
         "aliases": [
-          "EzMode configuration"
+          "EzMode"
         ],
         "extensions": [
           ".ezmoderc"
