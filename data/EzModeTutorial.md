@@ -11,6 +11,7 @@ To return to typing, press `t`. In type mode, everything behaves as usual.
 I recommend using EzMode as the default mode, using type mode only when actively typing.
 Once you're used to it, you can edit quickly without moving your hands off the home row.
 
+
 ## Moving the caret
 
 Use `i`, `j`, `k`, `l` to move, just like the arrow keys.
@@ -20,11 +21,6 @@ Use `i`, `j`, `k`, `l` to move, just like the arrow keys.
 `H` / `:`: Move to the start/end of a file
 `m` / `M`: Scroll half a page down/up
 
-<!-- TODO -->
-<!-- _If you have the AceJump plugin installed:_
-To jump to any visible symbol, press `Space`,
-then type one or more of the characters you want to jump to,
-and type the adjacent tag. -->
 
 ## Selecting text
 
@@ -40,20 +36,18 @@ Press `t` to type over the selection, `c` to copy, `d` to delete, or `e` to canc
 ```
 Exercise: select THIS_WORD and change it to something else.
 ```
-
-_Hint: combine "select word" and "type": `at`_
+*Hint: combine "select word" and "type": `at`*
 
 ```
 Exercise: keep this part. Delete this part.
 ```
-
-_Hint: don't forget `;` from the previous section._
+*Hint: don't forget `;` from the previous section.*
 
 ```
 exercise: make this whole line upper case
 ```
+*Hint: use `~` to toggle case.*
 
-_Hint: use `~` to toggle case._
 
 ## Basic actions
 
@@ -72,8 +66,8 @@ To view the full keymap, press `5`.
 ```
 Exercise: Copy this line and paste it 3 more times.
 ```
+*Hint: To copy a line, you don't need to select it. Simply press `c`.*
 
-_Hint: To copy a line, you don't need to select it. Simply press `c`._
 
 ## Brackets and quotes
 
@@ -94,8 +88,8 @@ exercise + (remove + parentheses)
 ```
 exercise('Change the quotes to double quotes')
 ```
+*Hint: After removing the quotes, use `T"` to surround them with double quotes.*
 
-_Hint: After removing the quotes, use `T"` to surround them with double quotes._
 
 ## Multiple carets
 
@@ -109,8 +103,7 @@ Exercise: Change every 0 to a 1: 0 0 0 0 0
 ```
 Exercise: Remove the number next to every x: x0 x1 x2 x3 x4
 ```
-
-_Hint: Press `e` to exit select mode while keeping the multiple carets._
+*Hint: Press `e` to exit select mode while keeping the multiple carets.*
 
 Press `8`/`*` `.` / `,` to add a new caret below/above.
 
@@ -119,6 +112,7 @@ Exercise: Add a dash to the start of these 3 sentences.
 Including this one.
 And this one.
 ```
+
 
 ## Files and windows
 
@@ -133,6 +127,7 @@ Toggle tool windows with the lower number keys:
 To focus a tool window, use the above keys with shift. Press `Esc` to unfocus.
 Use `4` to hide all tool windows.
 
+
 ## Customization
 
 In EzMode, every character key is customizable. You can even define your own modes.
@@ -140,6 +135,7 @@ Open your config file by typing `<` in EzMode, and choosing "Edit .ezmoderc".
 This will create a template with some examples if the file doesn't already exist.
 After editing and saving this file, use `<` again and
 choose "Reload .ezmoderc" to apply the changes.
+
 
 ## Tutorial complete
 

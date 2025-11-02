@@ -13,9 +13,8 @@ Press `t` to enter type mode, and press `Escape` to go back to ez mode.
 
 #### So it's like Vim?
 
-Yes, but a lot simpler. EzMode focuses just on _modes_.
+Yes, but a lot simpler. EzMode focuses just on *modes*.
 It does **not**:
-
 - use any Ctrl or Alt shortcuts
 - use a block cursor
 - change how copy/paste works
@@ -29,7 +28,8 @@ TODO demo
 ### Keyboard layout:
 
 TODO
-_[View on Keyboard Layout Editor](https://www.keyboard-layout-editor.com/#/gists/aee165d4c5c45849d72647829abe7038)_
+![Keyboard layout](KeyboardLayout.png)
+*[View on Keyboard Layout Editor](https://www.keyboard-layout-editor.com/#/gists/aee165d4c5c45849d72647829abe7038)*
 
 ---
 
@@ -39,7 +39,8 @@ TODO
 
 ## Customization
 
-The full keymap is defined in TODO,
+TODO
+The full keymap is defined in [base.ezmoderc](src/main/resources/com/github/ivw/ezmode/config/base.ezmoderc),
 which you can override with your own `.ezmoderc` file.
 
 Key mappings use this format:
@@ -105,16 +106,17 @@ map ez X <mode doubletype>
 ```
 
 More practical examples can be found in
-the TODO
+the [.ezmoderc template](src/main/resources/com/github/ivw/ezmode/config/template.ezmoderc)
+TODO
 
 ## Comparison with other modal editors
 
 EzMode doesn't add as many commands as Vim, for example, but EzMode can use any action that's already available in the IDE.
 
-EzMode uses _object-verb_ style like Kakoune, rather than Vim's _verb-object_ style. A few common examples:
+EzMode uses *object-verb* style like Kakoune, rather than Vim's *verb-object* style. A few common examples:
 
 |                           | EzMode | Vim    | Kakoune     |
-| ------------------------- | ------ | ------ | ----------- |
+|---------------------------|--------|--------|-------------|
 | Select word               | `a`    | `viw`  | `<Alt-i>w`  |
 | Delete word               | `ad`   | `diw`  | `<Alt-i>wd` |
 | Copy word                 | `ac`   | `yiw`  | `<Alt-i>wy` |
