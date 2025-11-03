@@ -131,6 +131,40 @@
         "scopeName": "source.ezmoderc",
         "path": "./syntaxes/ezmoderc.tmLanguage.json"
       }
+    ],
+    "walkthroughs": [
+      {
+        "id": "ezmode.walkthrough",
+        "title": "EzMode",
+        "icon": "media/ezmode.svg",
+        "description": "Modal editing without the steep learning curve.",
+        "steps": [
+          {
+            "id": "tutorial",
+            "title": "Follow the tutorial",
+            "description": "This tutorial will lead you through the basics of EzMode\n[Open Tutorial](command:ezmode.openEzModeTutorial)",
+            "media": {
+              "svg": "media/ezmode.svg",
+              "altText": "EzMode"
+            },
+            "completionEvents": [
+              "onCommand:ezmode.openEzModeTutorial"
+            ]
+          },
+          {
+            "id": "configure",
+            "title": "Configure your .ezmoderc",
+            "description": "Create a new .ezmoderc file from a template\n[Edit .ezmoderc](command:ezmode.editEzModeRc)",
+            "media": {
+              "svg": "media/ezmode.svg",
+              "altText": "EzMode"
+            },
+            "completionEvents": [
+              "onCommand:ezmode.editEzModeRc"
+            ]
+          }
+        ]
+      }
     ]
   },
   "scripts": {
