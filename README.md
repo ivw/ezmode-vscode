@@ -36,11 +36,11 @@ TODO
 ## Getting Started
 
 TODO
+4. Open the [tutorial](data/EzModeTutorial.md) in VS Code by clicking the mode indicator in the bottom-right corner.
 
 ## Customization
 
-TODO
-The full keymap is defined in [base.ezmoderc](src/main/resources/com/github/ivw/ezmode/config/base.ezmoderc),
+The full keymap is defined in [base.ezmoderc](data/base.ezmoderc),
 which you can override with your own `.ezmoderc` file.
 
 Key mappings use this format:
@@ -106,8 +106,7 @@ map ez X <mode doubletype>
 ```
 
 More practical examples can be found in
-the [.ezmoderc template](src/main/resources/com/github/ivw/ezmode/config/template.ezmoderc)
-TODO
+the [.ezmoderc template](data/template.ezmoderc)
 
 ## Comparison with other modal editors
 
