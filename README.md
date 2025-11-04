@@ -25,9 +25,8 @@ using multi-cursor, and managing tool windows.
 
 TODO demo
 
-### Keyboard layout:
+### Keyboard layout
 
-TODO
 ![Keyboard layout](KeyboardLayout.png)
 *[View on Keyboard Layout Editor](https://www.keyboard-layout-editor.com/#/gists/aee165d4c5c45849d72647829abe7038)*
 
