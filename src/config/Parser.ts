@@ -140,12 +140,11 @@ export function parseAction(buf: LexerBuffer): EzAction {
       return createOfModeAction(mode)
     }
     case "quote": {
-      buf.skipWhitespace()
-      const char = buf.nextChar()
-      if (char === null) {
+      const args = buf.remainingContent()
+      if (args === null) {
         throw new Error("Expected character for quote action")
       }
-      return createJumpToQuoteAction(quoteDelim(char))
+      return createJumpToQuoteAction(args.split(" ").map(quoteDelim))
     }
     case "pair": {
       function parseShouldFindClosingDelim() {
@@ -158,26 +157,29 @@ export function parseAction(buf: LexerBuffer): EzAction {
         }
         throw new Error("First argument of `pair` must be open or close")
       }
-      function parseDelimString(): Delim {
-        const delimString = buf.nextToken()
-        if (delimString === null) {
-          throw new Error("Second argument of `pair` must be a delimiter")
+      function parseDelims(): Array<Delim> {
+        const args = buf.remainingContent()
+        if (args === null) {
+          throw new Error("Expected arguments for pair action")
         }
-        if (delimString === "angle") {
-          return pairDelims.angle
-        }
-        if (delimString.length !== 2) {
-          throw new Error("Second argument of `pair` must be 2 characters")
-        }
-        const openChar = delimString.charAt(0)
-        const closeChar = delimString.charAt(1)
-        if (openChar === closeChar) {
-          throw new Error("Second argument of `pair` must be 2 different characters")
-        }
-        return pairDelim(openChar, closeChar)
+        return args.split(" ").map((delimString) => {
+          if (delimString === "angle") {
+            return pairDelims.angle
+          }
+          if (delimString.length !== 2) {
+            throw new Error("Second argument of `pair` must be 2 characters")
+          }
+          const openChar = delimString.charAt(0)
+          const closeChar = delimString.charAt(1)
+          if (openChar === closeChar) {
+            throw new Error("Second argument of `pair` must be 2 different characters")
+          }
+          return pairDelim(openChar, closeChar)
+        })
       }
-      return createJumpToBracketAction(parseShouldFindClosingDelim(), parseDelimString())
+      return createJumpToBracketAction(parseShouldFindClosingDelim(), parseDelims())
     }
+
     default: {
       throw new Error(`Unknown action type: ${actionType}`)
     }

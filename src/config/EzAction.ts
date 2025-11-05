@@ -128,45 +128,52 @@ export function createCompositeEzAction(actions: EzAction[]): EzAction {
   }
 }
 
-export function createJumpToBracketAction(findClosingDelim: boolean, delim: Delim): EzAction {
+export function createJumpToBracketAction(
+  findClosingDelim: boolean,
+  delims: Array<Delim>,
+): EzAction {
   return {
     perform: () => {
       const editor = vscode.window.activeTextEditor
       if (!editor) return
 
       editor.selections = editor.selections.map((sel) => {
-        const delimOffset = delim.findDelim(
-          findClosingDelim,
-          editor,
-          editor.document.offsetAt(sel.active),
-          true,
-        )
-        if (delimOffset !== null) {
-          return moveSelectionBasedOnMode(sel, editor.document.positionAt(delimOffset))
+        for (const delim of delims) {
+          const delimOffset = delim.findDelim(
+            findClosingDelim,
+            editor,
+            editor.document.offsetAt(sel.active),
+            true,
+          )
+          if (delimOffset !== null) {
+            return moveSelectionBasedOnMode(sel, editor.document.positionAt(delimOffset))
+          }
         }
         return sel
       })
       revealCursor(editor)
     },
-    description: `Move caret to ${delim.toNiceString(findClosingDelim)}`,
+    description: `Move caret to ${delims.map((delim) => delim.toNiceString(findClosingDelim)).join(" or ")}`,
   }
 }
 
-export function createJumpToQuoteAction(delim: QuoteDelim): EzAction {
+export function createJumpToQuoteAction(delims: Array<QuoteDelim>): EzAction {
   return {
     perform: () => {
       const editor = vscode.window.activeTextEditor
       if (!editor) return
 
       editor.selections = editor.selections.map((sel) => {
-        const delimOffset = delim.findAuto(editor, editor.document.offsetAt(sel.active))
-        if (delimOffset !== null) {
-          return moveSelectionBasedOnMode(sel, editor.document.positionAt(delimOffset))
+        for (const delim of delims) {
+          const delimOffset = delim.findAuto(editor, editor.document.offsetAt(sel.active))
+          if (delimOffset !== null) {
+            return moveSelectionBasedOnMode(sel, editor.document.positionAt(delimOffset))
+          }
         }
         return sel
       })
       revealCursor(editor)
     },
-    description: `Move caret to ${delim.char}`,
+    description: `Move caret to ${delims.map((delim) => delim.char).join(" or ")}`,
   }
 }

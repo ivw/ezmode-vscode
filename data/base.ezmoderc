@@ -2,8 +2,8 @@ map type default <native>
 map typeonce default <native><mode ez>
 
 
+map ez ` <vscode ezmode.cheatsheet.focus><vscode workbench.action.focusActiveEditorGroup>
 map ez ~ <vscode ezmode.toggleCase>
-map ez ` <quote `>
 map ez 1 <vscode workbench.view.explorer><vscode workbench.action.focusActiveEditorGroup>
 map ez ! <vscode workbench.view.explorer>
 map ez 2 <vscode workbench.view.scm><vscode workbench.action.focusActiveEditorGroup>
@@ -12,8 +12,7 @@ map ez 3 <vscode workbench.action.terminal.toggleTerminal><vscode workbench.acti
 map ez # <vscode workbench.action.terminal.toggleTerminal>
 map ez 4 <vscode workbench.action.closePanel><vscode workbench.action.closeSidebar>
 map ez $ <vscode workbench.action.closePanel>
-map ez 5 <vscode ezmode.cheatsheet.focus>
-map ez 6 <vscode editor.action.goToImplementation>
+map ez 5 <vscode editor.action.goToImplementation>
 map ez 7 <mode special>
 map ez 8 <vscode editor.action.insertCursorBelow>
 map ez * <vscode editor.action.insertCursorAbove>
@@ -21,12 +20,13 @@ map ez 9 <vscode editor.action.moveSelectionToPreviousFindMatch>
 map ez ( <pair open ()>
 map ez 0 <vscode editor.action.addSelectionToNextFindMatch>
 map ez ) <pair close ()>
-map ez - <vscode ezmode.selectToDelim>
-map ez = <vscode ezmode.selectToDelim {"around": true}>
+map ez - <vscode ezmode.removeDelim {"selectContents": false}>
 map ez _ <vscode ezmode.removeDelim {"selectContents": true}>
+map ez = <vscode workbench.action.focusNextGroup>
+map ez + <vscode workbench.action.closeEditorsInGroup>
 
-map ez q <vscode workbench.action.focusNextGroup>
-map ez Q <vscode workbench.action.closeEditorsInGroup>
+map ez q <vscode ezmode.selectToDelim>
+map ez Q <vscode ezmode.selectToDelim {"around": true}>
 map ez w <vscode workbench.action.closeActiveEditor>
 map ez W <vscode workbench.action.closeOtherEditors>
 map ez e <mode select>
@@ -71,8 +71,8 @@ map ez l <vscode cursorRight>
 map ez L <vscode workbench.action.navigateForward>
 map ez ; <vscode cursorEnd>
 map ez : <vscode cursorBottom>
-map ez ' <quote '>
-map ez " <quote ">
+map ez ' <quote ' " `>
+map ez " <quote " `>
 map ez enter <native>
 
 map ez z <vscode undo>
