@@ -120,7 +120,7 @@ EzMode uses *object-verb* style like Kakoune, rather than Vim's *verb-object* st
 | Copy word                 | `ac`   | `yiw`  | `<Alt-i>wy` |
 | Change word               | `at`   | `ciw`  | `<Alt-i>wc` |
 | Select line               | `E`    | `V`    | `x`         |
-| Delete line               | `m`    | `dd`   | `xd`        |
+| Delete line               | `r`    | `dd`   | `xd`        |
 | Copy line                 | `c`    | `yy`   | `xy`        |
 | Change line               | `Et`   | `cc`   | `xc`        |
 | Jump to surrounding quote | `'`    | `f'`   | `f'`        |
