@@ -54,5 +54,19 @@ export function getMatchingDelimEitherSide(
     const matchingDelim = delim.getMatchingDelim(true, editor, sel.end)
     if (matchingDelim !== null) return matchingDelim
   }
+
+  // Try the inner character, in case the cursor is outside the delim.
+  const innerStart = sel.start.translate(0, 1)
+  for (const delim of delims) {
+    const matchingDelim = delim.getMatchingDelim(false, editor, innerStart)
+    if (matchingDelim !== null) return matchingDelim
+  }
+  if (sel.end.character > 0) {
+    const innerEnd = sel.end.translate(0, -1)
+    for (const delim of delims) {
+      const matchingDelim = delim.getMatchingDelim(true, editor, innerEnd)
+      if (matchingDelim !== null) return matchingDelim
+    }
+  }
   return null
 }

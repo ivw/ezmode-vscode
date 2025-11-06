@@ -34,12 +34,13 @@ function calculateLinesToMove(visibleRange: vscode.Range, amount: unknown): numb
       return Math.ceil((visibleRange.end.line - visibleRange.start.line) / 2)
     case "page":
       return visibleRange.end.line - visibleRange.start.line
-    default:
+    default: {
       const n = Number(amount)
       if (!Number.isNaN(n)) {
         return Math.floor(n)
       } else {
         return null
       }
+    }
   }
 }
