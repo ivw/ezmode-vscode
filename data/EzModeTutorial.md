@@ -2,7 +2,7 @@
 
 Welcome to EzMode - fast and intuitive modal editing for modern IDEs.
 
-To enter EzMode, press Escape. The caret will turn orange,
+To enter EzMode, press Escape. The cursor will turn orange,
 and the mode indicator in the bottom-right corner will show "ez".
 In EzMode, character keys are mapped to actions. Ctrl/Alt shortcuts still work normally.
 
@@ -12,7 +12,7 @@ I recommend using EzMode as the default mode, using type mode only when actively
 Once you're used to it, you can edit quickly without moving your hands off the home row.
 
 
-## Moving the caret
+## Moving the cursor
 
 Use `i`, `j`, `k`, `l` to move, just like the arrow keys.
 
@@ -72,10 +72,11 @@ Exercise: Copy this line and paste it 3 more times.
 ## Brackets and quotes
 
 Type a bracket or quote character like `{} () '' ""` to jump to the nearest surrounding one.
-With the caret in that position:
+With the cursor next to the bracket or quote:
 `q`: Select inside the brackets or quotes
 `Q`: Select around the brackets or quotes
-`-`: Remove the brackets or quotes and select the contents
+`-`: Remove the brackets or quotes
+`_`: Remove the brackets or quotes and select the contents
 
 ```
 exercise(remove, these, arguments)
@@ -91,7 +92,7 @@ exercise('Change the quotes to double quotes')
 *Hint: After removing the quotes, use `T"` to surround them with double quotes.*
 
 
-## Multiple carets
+## Multiple cursors
 
 Press `0` to add the next occurrence of the current selection to the selection.
 Press `9` to undo the last added selection.
@@ -103,9 +104,9 @@ Exercise: Change every 0 to a 1: 0 0 0 0 0
 ```
 Exercise: Remove the number next to every x: x0 x1 x2 x3 x4
 ```
-*Hint: Press `e` to exit select mode while keeping the multiple carets.*
+*Hint: Press `e` to exit select mode while keeping the multiple cursors.*
 
-Press `8`/`*` `.` / `,` to add a new caret below/above.
+Press `8`/`*` `.` / `,` to add a new cursor below/above.
 
 ```
 Exercise: Add a dash to the start of these 3 sentences.
