@@ -73,9 +73,9 @@ Exercise: Copy this line and paste it 3 more times.
 
 Type a bracket or quote character like `{} () '' ""` to jump to the nearest surrounding one.
 With the caret in that position:
-`-`: Select inside the brackets or quotes
-`=`: Select around the brackets or quotes
-`_`: Remove the brackets or quotes and select the contents
+`q`: Select inside the brackets or quotes
+`Q`: Select around the brackets or quotes
+`-`: Remove the brackets or quotes and select the contents
 
 ```
 exercise(remove, these, arguments)
