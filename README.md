@@ -76,7 +76,7 @@ or you can use a base action:
 - `<mode somemode>`: Switch to a different mode
 - `<ofmode somemode>`: Let another mode handle the `keychar`
 - `<native>`: Insert the `keychar` into the editor
-- `<write Hello word!>`: Insert a string into the editor
+- `<write Hello world!>`: Insert a string into the editor
 - `<pair open/close {}>`: Jump to the opening/closing delimiter defined in the third argument, which must be two characters,
   or `angle` for `<>`, or `xml` for XML/HTML tags. You can list multiple delimiters by separating them with spaces.
 
