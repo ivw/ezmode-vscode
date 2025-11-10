@@ -11,10 +11,10 @@ export type Delim = {
     ignoreMatchAtCaret: boolean,
   ) => number | null
 
-  getMatchingDelim: (
-    fromClosingDelim: boolean,
+  findDelimRanges: (
     editor: vscode.TextEditor,
-    position: vscode.Position,
+    sel: vscode.Selection,
+    purpose: DelimRangePurpose,
   ) => DelimRanges | null
 
   toNiceString: (isClosingDelim: boolean) => string
@@ -24,6 +24,8 @@ export type DelimRanges = {
   insideRange: vscode.Selection
   aroundRange: vscode.Selection
 }
+
+export type DelimRangePurpose = "selectInside" | "selectAround" | "removeDelim"
 
 export function delimRangesFixed(
   insideRange: vscode.Selection,
@@ -41,32 +43,15 @@ export function delimRangesFixed(
 
 export const getAllDelims = (): Array<Delim> => [...allPairDelims, ...allQuoteDelims]
 
-export function getMatchingDelimEitherSide(
+export function findDelimRanges(
   editor: vscode.TextEditor,
   sel: vscode.Selection,
+  purpose: DelimRangePurpose,
 ): DelimRanges | null {
   const delims = getAllDelims()
-
   for (const delim of delims) {
-    const matchingDelim = delim.getMatchingDelim(false, editor, sel.start)
-    if (matchingDelim !== null) return matchingDelim
-  }
-  const innerStart = sel.start.translate(0, 1)
-  for (const delim of delims) {
-    const matchingDelim = delim.getMatchingDelim(false, editor, innerStart)
-    if (matchingDelim !== null) return matchingDelim
-  }
-
-  for (const delim of delims) {
-    const matchingDelim = delim.getMatchingDelim(true, editor, sel.end)
-    if (matchingDelim !== null) return matchingDelim
-  }
-  if (sel.end.character > 0) {
-    const innerEnd = sel.end.translate(0, -1)
-    for (const delim of delims) {
-      const matchingDelim = delim.getMatchingDelim(true, editor, innerEnd)
-      if (matchingDelim !== null) return matchingDelim
-    }
+    const delimRanges = delim.findDelimRanges(editor, sel, purpose)
+    if (delimRanges !== null) return delimRanges
   }
   return null
 }

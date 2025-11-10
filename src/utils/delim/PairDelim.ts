@@ -1,5 +1,5 @@
 import * as vscode from "vscode"
-import { delimRangesFixed, type Delim } from "./Delim"
+import { delimRangesFixed, type Delim, type DelimRanges } from "./Delim"
 
 export function pairDelim(openChar: string, closeChar: string): Delim {
   const findDelim: Delim["findDelim"] = (findClosingDelim, editor, offset, ignoreMatchAtCaret) => {
@@ -40,34 +40,47 @@ export function pairDelim(openChar: string, closeChar: string): Delim {
 
     return null
   }
-  return {
-    findDelim,
-    getMatchingDelim: (
-      fromClosingDelim: boolean,
-      editor: vscode.TextEditor,
-      position: vscode.Position,
-    ) => {
-      const text = editor.document.getText()
-      const offset = editor.document.offsetAt(position)
-      if (fromClosingDelim) {
-        if (offset >= text.length || text[offset] !== closeChar) return null
-        const openingDelim = findDelim(false, editor, offset, false)
-        if (openingDelim !== null) {
-          return delimRangesFixed(
-            new vscode.Selection(position, editor.document.positionAt(openingDelim)),
-          )
-        }
-      } else {
-        if (offset <= 0 || text[offset - 1] !== openChar) return null
-        const closingDelim = findDelim(true, editor, offset, false)
+
+  function findDelimRanges(editor: vscode.TextEditor, sel: vscode.Selection): DelimRanges | null {
+    const text = editor.document.getText()
+    const offset = editor.document.offsetAt(sel.active)
+
+    // Look for the opening delim to the left and right of the cursor
+    for (let i = offset - 1; i <= offset; i++) {
+      if (i >= 0 && text[i] === openChar) {
+        const closingDelim = findDelim(true, editor, i + 1, false)
         if (closingDelim !== null) {
           return delimRangesFixed(
-            new vscode.Selection(position, editor.document.positionAt(closingDelim)),
+            new vscode.Selection(
+              editor.document.positionAt(i + 1),
+              editor.document.positionAt(closingDelim),
+            ),
           )
         }
       }
-      return null
-    },
+    }
+
+    // Look for the closing delim to the right and left of the cursor
+    for (let i = offset; i >= offset - 1; i--) {
+      if (i >= 0 && text[i] === closeChar) {
+        const openingDelim = findDelim(false, editor, i, false)
+        if (openingDelim !== null) {
+          return delimRangesFixed(
+            new vscode.Selection(
+              editor.document.positionAt(openingDelim),
+              editor.document.positionAt(i),
+            ),
+          )
+        }
+      }
+    }
+
+    return null
+  }
+
+  return {
+    findDelim,
+    findDelimRanges,
     toNiceString: (isClosingDelim) => (isClosingDelim ? closeChar : openChar),
   }
 }

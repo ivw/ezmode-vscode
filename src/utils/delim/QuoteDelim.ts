@@ -1,5 +1,5 @@
 import * as vscode from "vscode"
-import { delimRangesFixed, type Delim } from "./Delim"
+import { delimRangesFixed, type Delim, type DelimRangePurpose, type DelimRanges } from "./Delim"
 
 export type QuoteDelim = Delim & {
   char: string
@@ -38,6 +38,41 @@ export function quoteDelim(char: string): QuoteDelim {
 
     return null
   }
+
+  function findDelimRanges(
+    editor: vscode.TextEditor,
+    sel: vscode.Selection,
+    purpose: DelimRangePurpose,
+  ): DelimRanges | null {
+    const pos = sel.active
+    const line = editor.document.lineAt(pos).text
+    if (line.length > 1000) return null
+
+    let openingQuote: number | null = null
+    for (let i = 0; i < line.length; i++) {
+      if (line[i] === char && !isCharEscaped(line, i)) {
+        if (openingQuote === null) {
+          openingQuote = i
+        } else {
+          if (i >= pos.character - 1) {
+            const ranges = delimRangesFixed(
+              new vscode.Selection(
+                pos.with({ character: openingQuote + 1 }),
+                pos.with({ character: i }),
+              ),
+            )
+            const isSameSelection =
+              (purpose === "selectInside" && sel.isEqual(ranges.insideRange)) ||
+              (purpose === "selectAround" && sel.isEqual(ranges.aroundRange))
+            if (!isSameSelection) return ranges
+          }
+          openingQuote = null
+        }
+      }
+    }
+    return null
+  }
+
   return {
     char,
     findDelim,
@@ -50,32 +85,7 @@ export function quoteDelim(char: string): QuoteDelim {
         false,
       )
     },
-    getMatchingDelim: (
-      fromClosingDelim: boolean,
-      editor: vscode.TextEditor,
-      position: vscode.Position,
-    ) => {
-      const text = editor.document.getText()
-      const offset = editor.document.offsetAt(position)
-      if (fromClosingDelim) {
-        if (offset >= text.length || text[offset] !== char) return null
-        const openingDelim = findDelim(false, editor, offset, false)
-        if (openingDelim !== null) {
-          return delimRangesFixed(
-            new vscode.Selection(editor.document.positionAt(openingDelim), position),
-          )
-        }
-      } else {
-        if (offset <= 0 || text[offset - 1] !== char) return null
-        const closingDelim = findDelim(true, editor, offset, false)
-        if (closingDelim !== null) {
-          return delimRangesFixed(
-            new vscode.Selection(position, editor.document.positionAt(closingDelim)),
-          )
-        }
-      }
-      return null
-    },
+    findDelimRanges,
     toNiceString: () => char,
   }
 }
