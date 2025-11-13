@@ -97,6 +97,7 @@ map ez ? <vscode editor.action.blockComment>
 map ez space <mode find>
 map find default <find ${key}><mode ez>
 
+
 map select default <ofmode ez>
 
 map select ~ <ofmode ez><mode ez>
