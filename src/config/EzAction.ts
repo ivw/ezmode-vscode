@@ -177,3 +177,26 @@ export function createJumpToQuoteAction(delims: Array<QuoteDelim>): EzAction {
     description: `Move caret to ${delims.map((delim) => delim.char).join(" or ")}`,
   }
 }
+
+export function createFindAction(target: string): EzAction {
+  return {
+    perform: (key) => {
+      const editor = vscode.window.activeTextEditor
+      if (!editor) return
+
+      const text = editor.document.getText()
+      const targetChar = resolveVars(target, varContext(key))
+
+      editor.selections = editor.selections.map((sel) => {
+        for (let i = editor.document.offsetAt(sel.active) + 1; i < text.length; i++) {
+          if (text[i] === targetChar) {
+            return moveSelectionBasedOnMode(sel, editor.document.positionAt(i))
+          }
+        }
+        return sel
+      })
+      revealCursor(editor)
+    },
+    description: `Move caret to ${target}`,
+  }
+}

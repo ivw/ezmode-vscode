@@ -3,6 +3,7 @@ import { pairDelim, pairDelims } from "../utils/delim/PairDelim"
 import { quoteDelim } from "../utils/delim/QuoteDelim"
 import {
   createCompositeEzAction,
+  createFindAction,
   createJumpToBracketAction,
   createJumpToQuoteAction,
   createKeyReferenceAction,
@@ -145,6 +146,13 @@ export function parseAction(buf: LexerBuffer): EzAction {
         throw new Error("Expected character for quote action")
       }
       return createJumpToQuoteAction(args.split(" ").map(quoteDelim))
+    }
+    case "find": {
+      const arg = buf.nextToken()
+      if (arg === null) {
+        throw new Error("Expected argument for find action")
+      }
+      return createFindAction(arg)
     }
     case "pair": {
       function parseShouldFindClosingDelim() {
