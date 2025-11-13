@@ -12,28 +12,24 @@ To return to typing, press `t`. In type mode, everything behaves as usual.
 ## Basic keyboard editing
 
 Most of the basic editing actions are on the left-hand side of the keyboard,
-so that you can use them with your right hand on the mouse. Try the exercises below:
+so you can use them with your right hand on the mouse.
 
-Select the word FOO using `a` and copy it with `c`
+Try the exercises below:
 
-Select the word BAR using `a` and paste over it with `v`
-
-Select the contents of "this string" using `q` and copy them with `c`
-
-Select the contents of (these parentheses) using `q` and delete them with `d`
-*Make sure the cursor is next to a parenthesis*
-
-Select the contents of "this other string" using `q` and paste over them with `v`
-
-Remove this line using `r`
-
-Duplicate this line using `V`
+- Select the word FOO using `a` and copy it with `c`
+- Select the word BAR using `a` and paste over it with `v`
+- Select the contents of "this string" using `q` and copy with `c`
+- Select the contents of (these parentheses) using `q` and delete with `d`.
+  *Make sure the cursor is next to a parenthesis*
+- Select the contents of "this other string" using `q` and paste over it with `v`
+- Remove this line using `r`
+- Duplicate this line using `V`
 
 
 ## Two-handed keyboard editing
 
-Instead of using a mouse, you have the option to use the right-hand side of the keyboard
-to move the cursor. This is handy when both hands are already on the keyboard from typing.
+Instead of using the mouse, you can move the cursor with the right-hand keys.
+This is handy when both hands are already on the keyboard from typing.
 
 Use `i`, `j`, `k`, `l` to move, just like the arrow keys.
 
@@ -92,8 +88,8 @@ exercise('Change the quotes to double quotes')
 
 ## Multiple cursors
 
-Press `0` to add the next occurrence of the current selection to the selection.
-Press `9` to undo the last added selection.
+Press `0` to add the next match of the current selection.
+Press `9` to remove the last added cursor.
 
 ```
 Exercise: Change every 0 to a 1: 0 0 0 0 0
@@ -103,6 +99,8 @@ Exercise: Change every 0 to a 1: 0 0 0 0 0
 Exercise: Remove the number next to every x: x0 x1 x2 x3 x4
 ```
 *Hint: Press `e` to exit select mode while keeping the multiple cursors.*
+
+---
 
 Press `8`/`*` to add a new cursor below/above.
 
@@ -132,8 +130,7 @@ Use `4` to hide the sidebar and bottom panel.
 In EzMode, every character key is customizable. You can even define your own modes.
 Open your config file by typing `<` in EzMode, and choosing "Edit .ezmoderc".
 This will create a template with some examples if the file doesn't already exist.
-After editing and saving this file, use `<` again and
-choose "Reload .ezmoderc" to apply the changes.
+After editing and saving this file, use `<` again and choose "Reload .ezmoderc".
 
 
 ## Tutorial complete
