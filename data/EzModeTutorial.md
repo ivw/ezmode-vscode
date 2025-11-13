@@ -8,11 +8,32 @@ In EzMode, character keys are mapped to actions. Ctrl/Alt shortcuts still work n
 
 To return to typing, press `t`. In type mode, everything behaves as usual.
 
-I recommend using EzMode as the default mode, using type mode only when actively typing.
-Once you're used to it, you can edit quickly without moving your hands off the home row.
+
+## Basic keyboard editing
+
+Most of the basic editing actions are on the left-hand side of the keyboard,
+so that you can use them with your right hand on the mouse. Try the exercises below:
+
+Select the word FOO using `a` and copy it with `c`
+
+Select the word BAR using `a` and paste over it with `v`
+
+Select the contents of "this string" using `q` and copy them with `c`
+
+Select the contents of (these parentheses) using `q` and delete them with `d`
+*Make sure the cursor is next to a parenthesis*
+
+Select the contents of "this other string" using `q` and paste over them with `v`
+
+Remove this line using `r`
+
+Duplicate this line using `V`
 
 
-## Moving the cursor
+## Two-handed keyboard editing
+
+Instead of using a mouse, you have the option to use the right-hand side of the keyboard
+to move the cursor. This is handy when both hands are already on the keyboard from typing.
 
 Use `i`, `j`, `k`, `l` to move, just like the arrow keys.
 
@@ -22,16 +43,12 @@ Use `i`, `j`, `k`, `l` to move, just like the arrow keys.
 `m` / `M`: Scroll half a page down/up
 
 
-## Selecting text
+### Selecting text
 
 Press `e` to enter select mode, then use movement keys (see above) to extend the selection.
+Select mode is automatically activated whenever something is selected in EzMode.
 
-Other ways to enter select mode:
-`E`: Select line
-`a`: Select word
-`A`: Select all
-
-Press `t` to type over the selection, `c` to copy, `d` to delete, or `e` to cancel selection.
+Press `t` to type over the selection, `c` to copy, `d` to delete, or `e` to unselect.
 
 ```
 Exercise: select THIS_WORD and change it to something else.
@@ -49,29 +66,10 @@ exercise: make this whole line upper case
 *Hint: use `~` to toggle case.*
 
 
-## Basic actions
-
-`z` / `y`: Undo/redo
-`x`: Cut
-`c`: Copy
-`v`: Paste
-`s`: Save
-`f` / `r`: Find/replace
-`/`: Comment line
-
-You probably already know these - they match common Ctrl shortcuts.
-
-To view the full keymap, press `5`.
-
-```
-Exercise: Copy this line and paste it 3 more times.
-```
-*Hint: To copy a line, you don't need to select it. Simply press `c`.*
-
-
 ## Brackets and quotes
 
-Type a bracket or quote character like `{} () '' ""` to jump to the nearest surrounding one.
+Use `'` or `"` to jump to the surrounding quote,
+or `{}` or `()` to jump to the opening/closing bracket.
 With the cursor next to the bracket or quote:
 `q`: Select inside the brackets or quotes
 `Q`: Select around the brackets or quotes
@@ -89,7 +87,7 @@ exercise + (remove + parentheses)
 ```
 exercise('Change the quotes to double quotes')
 ```
-*Hint: After removing the quotes, use `T"` to surround them with double quotes.*
+*Hint: After removing the quotes, use `T"` to surround the selection with double quotes.*
 
 
 ## Multiple cursors
@@ -106,7 +104,7 @@ Exercise: Remove the number next to every x: x0 x1 x2 x3 x4
 ```
 *Hint: Press `e` to exit select mode while keeping the multiple cursors.*
 
-Press `8`/`*` `.` / `,` to add a new cursor below/above.
+Press `8`/`*` to add a new cursor below/above.
 
 ```
 Exercise: Add a dash to the start of these 3 sentences.
@@ -121,12 +119,12 @@ Use `p` to open any file. Use `w` to close a tab or `W` to close all other tabs.
 
 Use `\` to split the editor into two windows,
 or `|` to do the same but without the copy on the left.
-Use `q` to move between split windows and `Q` to close a split window.
+Use `=` to move between split windows and `+` to close a split window.
 
-Toggle tool windows with the lower number keys:
+Open the sidebar with the lower number keys:
 `1`: File tree, `2`: Local changes, `3`: Terminal.
-To focus a tool window, use the above keys with shift. Press `Esc` to unfocus.
-Use `4` to hide all tool windows.
+To focus a tool window, use the above keys with shift.
+Use `4` to hide the sidebar and bottom panel.
 
 
 ## Customization
@@ -140,7 +138,7 @@ choose "Reload .ezmoderc" to apply the changes.
 
 ## Tutorial complete
 
-EzMode has many other useful keys. You can always press `5` to see a full list,
+EzMode has many other useful keys. You can always press ` to see a full list,
 or view the keyboard layout here:
 https://github.com/ivw/ezmode-vscode/blob/main/KeyboardLayout.png
 

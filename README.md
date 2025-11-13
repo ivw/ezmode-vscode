@@ -57,7 +57,7 @@ define your own as well.
 
 The character that has to be "typed" to trigger the action. Naturally, uppercase means you have to hold shift.
 
-Ctrl/Alt shortcuts are not characters and not handled by EzMode.
+Ctrl/Alt shortcuts are not characters and are not handled by EzMode.
 
 Special values:
 
