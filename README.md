@@ -23,7 +23,9 @@ It does **not**:
 EzMode is built for modern IDEs. It works well with viewing diffs,
 using multi-cursor, and managing tool windows.
 
-TODO demo
+![Basic demo](demo_basic.gif)
+
+![Advanced demo](demo_advanced.gif)
 
 ### Keyboard layout
 
