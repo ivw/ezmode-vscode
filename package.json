@@ -16,6 +16,13 @@
     "onStartupFinished"
   ],
   "main": "./out/extension.js",
+  "files": [
+    "out",
+    "data",
+    "LICENSE",
+    "syntaxes",
+    "media"
+  ],
   "contributes": {
     "commands": [
       {
