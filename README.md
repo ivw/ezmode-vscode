@@ -1,5 +1,15 @@
 EzMode is a plugin for Visual Studio Code that brings the power of modal editing, without the steep learning curve.
 
+![Basic demo](demo_basic.gif)
+
+*The speed and precision of the mouse, combined with the left-hand keys*
+
+---
+
+![Advanced demo](demo_advanced.gif)
+
+*Advanced editing using the full keyboard*
+
 ### What is modal editing?
 
 In a modal editor, keys that normally insert characters can perform different actions based on the current mode.
@@ -22,10 +32,6 @@ It does **not**:
 
 EzMode is built for modern IDEs. It works well with viewing diffs,
 using multi-cursor, and managing tool windows.
-
-![Basic demo](demo_basic.gif)
-
-![Advanced demo](demo_advanced.gif)
 
 ### Keyboard layout
 
@@ -122,7 +128,7 @@ EzMode uses *object-verb* style like Kakoune, rather than Vim's *verb-object* st
 | Copy word                 | `ac`   | `yiw`  | `<Alt-i>wy` |
 | Change word               | `at`   | `ciw`  | `<Alt-i>wc` |
 | Select line               | `E`    | `V`    | `x`         |
-| Delete line               | `r`    | `dd`   | `xd`        |
+| Remove line               | `r`    | `dd`   | `xd`        |
 | Copy line                 | `c`    | `yy`   | `xy`        |
 | Change line               | `Et`   | `cc`   | `xc`        |
 | Jump to surrounding quote | `'`    | `f'`   | `f'`        |

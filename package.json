@@ -10,6 +10,7 @@
     "vscode": "^1.103.0"
   },
   "categories": [
+    "Keymaps",
     "Other"
   ],
   "activationEvents": [
