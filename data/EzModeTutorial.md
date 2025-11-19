@@ -134,6 +134,9 @@ Open your config file by typing `<` in EzMode, and choosing "Edit .ezmoderc".
 This will create a template with some examples if the file doesn't already exist.
 After editing and saving this file, use `<` again and choose "Reload .ezmoderc".
 
+By default, the Escape key switches to EzMode. To change this,
+open VS Code's keyboard shortcuts by pressing `Ctrl-KS` and search for `Enter EzMode`.
+
 
 ## Tutorial complete
 

@@ -1,44 +1,38 @@
 EzMode is a plugin for Visual Studio Code that brings the power of modal editing, without the steep learning curve.
-
-![Basic demo](demo_basic.gif)
-
-*The speed and precision of the mouse, combined with the left-hand keys*
-
----
+Edit faster than ever, with or without a mouse.
 
 ![Advanced demo](demo_advanced.gif)
 
-*Advanced editing using the full keyboard*
+<!-- *Advanced editing using the full keyboard* -->
+
+<!-- --- -->
+
+![Basic demo](demo_basic.gif)
+
+<!-- *The speed and precision of the mouse, combined with the left-hand keys* -->
+
+---
+
+- Built for modern IDEs
+- Tiny core, powerful actions
+- Fully customizable modes and keybindings
+- No Ctrl or Alt needed
+- Cursor color indicates mode
+- Git mode and diff navigation
+- Built-in tutorial and cheat sheet
 
 ### What is modal editing?
 
-In a modal editor, keys that normally insert characters can perform different actions based on the current mode.
-
-For example, in EzMode you can press `a` to select a word, and `c` to copy it.
-This is less work than double-clicking with your mouse and pressing `Ctrl-c`.
-
-#### Then how do I type?
-
-Press `t` to enter type mode, and press `Escape` to go back to ez mode.
-
-#### So it's like Vim?
-
-Yes, but a lot simpler. EzMode focuses just on *modes*.
-It does **not**:
-- use any Ctrl or Alt shortcuts
-- use a block cursor
-- change how copy/paste works
-- use `hjkl` for arrow keys. EzMode uses `ijkl`.
-
-EzMode is built for modern IDEs. It works well with viewing diffs,
-using multi-cursor, and managing tool windows.
+It adds modes to your keyboard. In type mode, the `c` key types the letter `c`, but in EzMode it copies, and in git mode it commits.
 
 ### Keyboard layout
 
 ![Keyboard layout](KeyboardLayout.png)
 *[View on Keyboard Layout Editor](https://www.keyboard-layout-editor.com/#/gists/aee165d4c5c45849d72647829abe7038)*
 
----
+All motion keys are on the right, so your right hand moves the cursor, whether on the keyboard or the mouse.
+
+Common actions like copy/paste/undo/save are on the keys everyone already knows.
 
 ## Getting Started
 
@@ -118,6 +112,10 @@ the [.ezmoderc template](data/template.ezmoderc)
 ## Comparison with other modal editors
 
 EzMode doesn't add as many commands as Vim, for example, but EzMode can use any action that's already available in the IDE.
+
+- No block cursor
+- No changes to copy/paste behavior
+- `ijkl` instead of `hjkl`
 
 EzMode uses *object-verb* style like Kakoune, rather than Vim's *verb-object* style. A few common examples:
 
