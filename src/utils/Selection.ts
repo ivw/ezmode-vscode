@@ -13,15 +13,22 @@ export function changeSelectionRange(
   }
 }
 
+export function moveSelection(
+  sel: vscode.Selection,
+  pos: vscode.Position,
+  shouldSelect: boolean,
+): vscode.Selection {
+  if (shouldSelect) {
+    return new vscode.Selection(sel.anchor, pos)
+  }
+  return new vscode.Selection(pos, pos)
+}
+
 export function moveSelectionBasedOnMode(
   sel: vscode.Selection,
   pos: vscode.Position,
 ): vscode.Selection {
-  const mode = getMode()
-  if (mode === "select") {
-    return new vscode.Selection(sel.anchor, pos)
-  }
-  return new vscode.Selection(pos, pos)
+  return moveSelection(sel, pos, getMode() === "select")
 }
 
 export function unselect(sel: vscode.Selection): vscode.Selection {

@@ -2,7 +2,7 @@ import * as vscode from "vscode"
 import { getOrAddModeEnv, getActionForKey, type KeyBinding } from "./EzEnv"
 import { getMode, switchMode } from "../mode/ModeState"
 import type { Delim } from "../utils/delim/Delim"
-import { moveSelectionBasedOnMode, revealCursor, unselect } from "../utils/Selection"
+import { moveSelection, moveSelectionBasedOnMode, revealCursor, unselect } from "../utils/Selection"
 import type { QuoteDelim } from "../utils/delim/QuoteDelim"
 import { resolveVars, varContext } from "./Variables"
 import { getEnv } from "./EnvState"
@@ -178,7 +178,11 @@ export function createJumpToQuoteAction(delims: Array<QuoteDelim>): EzAction {
   }
 }
 
-export function createFindAction(target: string): EzAction {
+export function createFindAction(
+  target: string,
+  findPrev: boolean = false,
+  shouldSelect: boolean = false,
+): EzAction {
   return {
     perform: (key) => {
       const editor = vscode.window.activeTextEditor
@@ -188,9 +192,17 @@ export function createFindAction(target: string): EzAction {
       const targetChar = resolveVars(target, varContext(key))
 
       editor.selections = editor.selections.map((sel) => {
-        for (let i = editor.document.offsetAt(sel.active) + 1; i < text.length; i++) {
-          if (text[i] === targetChar) {
-            return moveSelectionBasedOnMode(sel, editor.document.positionAt(i))
+        if (findPrev) {
+          for (let i = editor.document.offsetAt(sel.active) - 2; i >= 0; i--) {
+            if (text[i] === targetChar) {
+              return moveSelection(sel, editor.document.positionAt(i), shouldSelect)
+            }
+          }
+        } else {
+          for (let i = editor.document.offsetAt(sel.active) + 1; i < text.length; i++) {
+            if (text[i] === targetChar) {
+              return moveSelection(sel, editor.document.positionAt(i), shouldSelect)
+            }
           }
         }
         return sel

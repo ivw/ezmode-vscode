@@ -3,13 +3,7 @@ Edit faster than ever, with or without a mouse.
 
 ![Advanced demo](demo_advanced.gif)
 
-<!-- *Advanced editing using the full keyboard* -->
-
-<!-- --- -->
-
 ![Basic demo](demo_basic.gif)
-
-<!-- *The speed and precision of the mouse, combined with the left-hand keys* -->
 
 ---
 
