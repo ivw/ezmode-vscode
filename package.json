@@ -20,9 +20,10 @@
   "files": [
     "out",
     "data",
+    "media",
     "LICENSE",
     "syntaxes",
-    "media"
+    "ezmoderc-language-configuration.json"
   ],
   "contributes": {
     "commands": [
