@@ -190,6 +190,9 @@ export function createFindAction(
 
       const text = editor.document.getText()
       const targetChar = resolveVars(target, varContext(key))
+      if (targetChar.length !== 1) {
+        return
+      }
 
       editor.selections = editor.selections.map((sel) => {
         if (findPrev) {

@@ -90,19 +90,22 @@ map ez m <vscode ezmode.scroll>
 map ez M <vscode ezmode.scroll {"direction": "up"}>
 map ez , <vscode workbench.action.openSettings>
 map ez lt <vscode ezmode.openEzModeMenu>
+set lastfindchar .
+set lastfindprev false
+map ez . <find ${lastfindchar}> // TODO  {"prev": ${lastfindprev}}
 map ez gt <vscode editor.action.triggerParameterHints>
 map ez / <vscode editor.action.commentLine>
 map ez ? <vscode editor.action.blockComment>
 
 map ez space <mode find>
-map find default <find ${key}><mode ez>
+map find default <find ${key}><mode ez><set lastfindchar ${key}><set lastfindprev false>
 map find space <mode findprev>
-map findprev default <find ${key} {"prev": true}><mode ez>
+map findprev default <find ${key} {"prev": true}><mode ez><set lastfindchar ${key}><set lastfindprev true>
 map findprev space <mode find>
 map select space <mode findselect>
-map findselect default <find ${key} {"select": true}><mode ez>
+map findselect default <find ${key} {"select": true}><mode ez><set lastfindchar ${key}><set lastfindprev false>
 map findselect space <mode findprevselect>
-map findprevselect default <find ${key} {"prev": true, "select": true}><mode ez>
+map findprevselect default <find ${key} {"prev": true, "select": true}><mode ez><set lastfindchar ${key}><set lastfindprev true>
 map findprevselect space <mode findselect>
 
 
@@ -118,7 +121,7 @@ map select U <ofmode ez><mode ez>
 map select i <vscode cursorUpSelect>
 map select I <vscode cursorMove {"to": "prevBlankLine", "select": true}>
 map select o <vscode cursorWordRightSelect>
-map select O <ofmode ez><mode ez>
+map select O <vscode ezmode.flipSelection>
 
 map select d <ofmode ez><mode ez>
 map select D <ofmode ez><mode ez>
@@ -137,7 +140,6 @@ map select v <ofmode ez><mode ez>
 map select m <vscode cursorPageDownSelect>
 map select M <vscode cursorPageUpSelect>
 map select lt <pair open angle>
-map select . <vscode ezmode.flipSelection>
 map select gt <pair close angle>
 
 
