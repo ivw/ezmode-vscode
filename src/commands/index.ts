@@ -6,8 +6,7 @@ import { activateSelectToDelim } from "./SelectToDelim"
 import { activateRemoveDelim } from "./RemoveDelim"
 import { activateToggleCase } from "./ToggleCase"
 import { activateSelectBasics } from "./SelectBasics"
-import { activateOpenEzModeRc } from "./OpenEzModeRc"
-import { activateReloadEzModeRc } from "./ReloadEzModeRc"
+import { activateEzModeRcCommands } from "./EzModeRc"
 import { registerCommand } from "../utils/Commands"
 import { activateOpenEzModeMenu } from "./ShowEzModeMenu"
 import { activateExecuteEzCommand } from "./ExecuteEzCommand"
@@ -29,8 +28,7 @@ export function activateCommands(context: vscode.ExtensionContext) {
   activateRemoveDelim(context)
   activateToggleCase(context)
   activateSelectBasics(context)
-  activateOpenEzModeRc(context)
-  activateReloadEzModeRc(context)
+  activateEzModeRcCommands(context)
   activateOpenEzModeMenu(context)
   activateExecuteEzCommand(context)
   activateOpenEzModeTutorial(context)
