@@ -88,7 +88,7 @@ map ez n <vscode editor.action.insertLineAfter>
 map ez N <vscode editor.action.insertLineBefore>
 map ez m <vscode ezmode.scroll>
 map ez M <vscode ezmode.scroll {"direction": "up"}>
-map ez , <vscode workbench.action.openSettings>
+map ez , <native>
 map ez lt <vscode ezmode.openEzModeMenu>
 set lastfindchar .
 set lastfindprev false
