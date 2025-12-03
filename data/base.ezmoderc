@@ -12,7 +12,8 @@ map ez 3 <vscode workbench.action.terminal.toggleTerminal><vscode workbench.acti
 map ez # <vscode workbench.action.terminal.toggleTerminal>
 map ez 4 <vscode workbench.action.closePanel><vscode workbench.action.closeSidebar>
 map ez $ <vscode workbench.action.closePanel>
-map ez 5 <vscode editor.action.goToImplementation>
+map ez 5 <vscode editor.action.quickFix>
+map ez % <vscode editor.action.goToImplementation>
 map ez 7 <mode special>
 map ez 8 <vscode editor.action.insertCursorBelow>
 map ez * <vscode editor.action.insertCursorAbove>
@@ -89,13 +90,20 @@ map ez m <vscode ezmode.scroll>
 map ez M <vscode ezmode.scroll {"direction": "up"}>
 map ez , <vscode workbench.action.openSettings>
 map ez lt <vscode ezmode.openEzModeMenu>
-map ez . <vscode editor.action.quickFix>
 map ez gt <vscode editor.action.triggerParameterHints>
 map ez / <vscode editor.action.commentLine>
 map ez ? <vscode editor.action.blockComment>
 
 map ez space <mode find>
 map find default <find ${key}><mode ez>
+map find space <mode findprev>
+map findprev default <find ${key} {"prev": true}><mode ez>
+map findprev space <mode find>
+map select space <mode findselect>
+map findselect default <find ${key} {"select": true}><mode ez>
+map findselect space <mode findprevselect>
+map findprevselect default <find ${key} {"prev": true, "select": true}><mode ez>
+map findprevselect space <mode findselect>
 
 
 map select default <ofmode ez>

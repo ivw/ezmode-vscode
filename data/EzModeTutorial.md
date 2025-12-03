@@ -39,6 +39,7 @@ Use `i`, `j`, `k`, `l` to move, just like the arrow keys.
 `m` / `M`: Scroll half a page down/up
 
 You can jump right to any character by pressing Space, then typing that character.
+To jump left, press Space twice.
 
 
 ### Selecting text

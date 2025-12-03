@@ -152,10 +152,23 @@ export function parseAction(buf: LexerBuffer): EzAction {
       if (arg === null) {
         throw new Error("Expected argument for find action")
       }
-      return createFindAction(arg)
+      let findPrev: boolean = false
+      let shouldSelect: boolean = false
+      const argsString = buf.remainingContent()
+      if (argsString) {
+        const argsJson = JSON.parse(argsString)
+        if (typeof argsJson.prev === "boolean") {
+          findPrev = argsJson.prev
+        }
+        if (typeof argsJson.select === "boolean") {
+          shouldSelect = argsJson.select
+        }
+      }
+      return createFindAction(arg, findPrev, shouldSelect)
     }
     case "pair": {
       function parseShouldFindClosingDelim() {
+        // TODO use JSON?
         const direction = buf.nextToken()
         if (direction === "open") {
           return false
