@@ -98,14 +98,16 @@ map ez / <vscode editor.action.commentLine>
 map ez ? <vscode editor.action.blockComment>
 
 map ez space <mode find>
-map find default <find ${key}><mode ez><set lastfindchar ${key}><set lastfindprev false>
-map find space <mode findprev>
-map findprev default <find ${key} {"prev": true}><mode ez><set lastfindchar ${key}><set lastfindprev true>
-map findprev space <mode find>
 map select space <mode findselect>
+
+map find default <find ${key}><mode ez><set lastfindchar ${key}><set lastfindprev false>
+map findprev default <find ${key} {"prev": true}><mode ez><set lastfindchar ${key}><set lastfindprev true>
 map findselect default <find ${key} {"select": true}><mode ez><set lastfindchar ${key}><set lastfindprev false>
-map findselect space <mode findprevselect>
 map findprevselect default <find ${key} {"prev": true, "select": true}><mode ez><set lastfindchar ${key}><set lastfindprev true>
+
+map find space <mode findprev>
+map findprev space <mode find>
+map findselect space <mode findprevselect>
 map findprevselect space <mode findselect>
 
 
