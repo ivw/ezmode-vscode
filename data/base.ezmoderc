@@ -119,7 +119,7 @@ map select e <vscode ezmode.unselect><mode ez>
 map select r <ofmode ez><mode ez>
 map select R <ofmode ez><mode ez>
 map select u <vscode cursorWordLeftSelect>
-map select U <ofmode ez><mode ez>
+map select U <vscode ezmode.jumpToAnchor>
 map select i <vscode cursorUpSelect>
 map select I <vscode cursorMove {"to": "prevBlankLine", "select": true}>
 map select o <vscode cursorWordRightSelect>

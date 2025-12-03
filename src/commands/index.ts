@@ -5,8 +5,7 @@ import { activateSelectWord } from "./SelectWord"
 import { activateSelectToDelim } from "./SelectToDelim"
 import { activateRemoveDelim } from "./RemoveDelim"
 import { activateToggleCase } from "./ToggleCase"
-import { activateFlipSelection } from "./FlipSelection"
-import { activateUnselect } from "./Unselect"
+import { activateSelectBasics } from "./SelectBasics"
 import { activateOpenEzModeRc } from "./OpenEzModeRc"
 import { activateReloadEzModeRc } from "./ReloadEzModeRc"
 import { registerCommand } from "../utils/Commands"
@@ -29,8 +28,7 @@ export function activateCommands(context: vscode.ExtensionContext) {
   activateSelectToDelim(context)
   activateRemoveDelim(context)
   activateToggleCase(context)
-  activateFlipSelection(context)
-  activateUnselect(context)
+  activateSelectBasics(context)
   activateOpenEzModeRc(context)
   activateReloadEzModeRc(context)
   activateOpenEzModeMenu(context)

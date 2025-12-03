@@ -56,6 +56,10 @@
         "title": "Flip Selection"
       },
       {
+        "command": "ezmode.jumpToAnchor",
+        "title": "Jump To Selection Anchor"
+      },
+      {
         "command": "ezmode.editEzModeRc",
         "enablement": "!isWeb",
         "title": "Edit .ezmoderc"
