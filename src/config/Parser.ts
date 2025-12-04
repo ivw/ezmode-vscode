@@ -19,6 +19,13 @@ import {
 } from "./EzAction"
 import { LexerBuffer } from "../utils/LexerBuffer"
 
+const keyBindingKeyMap: Record<string, string> = {
+  lt: "<",
+  gt: ">",
+  space: " ",
+  enter: "\n",
+}
+
 export function parseEzModeRc(content: string): Array<EzAction> {
   const actions: Array<EzAction> = []
   content.split("\n").forEach((line, lineIndex) => {
@@ -46,8 +53,12 @@ export function parseLine(line: string): EzAction | null {
     return null
   }
 
-  const buf = new LexerBuffer(line)
-  const action = parseAction(buf)
+  return parseAction(line)
+}
+
+export function parseAction(str: string): EzAction {
+  const buf = new LexerBuffer(str)
+  const action = parseActionBuf(buf)
   const extraneousToken = buf.nextToken()
   if (extraneousToken !== null) {
     throw new Error(`Unexpected token: ${extraneousToken}`)
@@ -55,14 +66,7 @@ export function parseLine(line: string): EzAction | null {
   return action
 }
 
-const keyBindingKeyMap: Record<string, string> = {
-  lt: "<",
-  gt: ">",
-  space: " ",
-  enter: "\n",
-}
-
-export function parseAction(buf: LexerBuffer): EzAction {
+export function parseActionBuf(buf: LexerBuffer): EzAction {
   const actionType = buf.nextToken()
   switch (actionType) {
     case "mode": {
@@ -218,13 +222,7 @@ export function parseActionChain(actionChainString: string): EzAction {
       if (nestedActionString === null) {
         throw new Error("Expected closing '>'")
       }
-      const nestedActionBuf = new LexerBuffer(nestedActionString)
-      const nestedAction = parseAction(nestedActionBuf)
-      const extraneousToken = nestedActionBuf.nextToken()
-      if (extraneousToken !== null) {
-        throw new Error(`Unexpected token: ${extraneousToken}`)
-      }
-      actions.push(nestedAction)
+      actions.push(parseAction(nestedActionString))
     } else {
       actions.push(createKeyReferenceAction(char))
     }
