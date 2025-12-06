@@ -57,3 +57,9 @@ const varRegex = /\$\{([A-Za-z_]\w*)\}/g
 export function resolveVars(str: string, ctx: VarContext): string {
   return str.replace(varRegex, (_, varName: string) => resolveVar(varName, ctx) ?? "")
 }
+
+export function hasVars(str: string): boolean {
+  const result = varRegex.test(str)
+  varRegex.lastIndex = 0 // Reset regex state
+  return result
+}
