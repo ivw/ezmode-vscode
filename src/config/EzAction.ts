@@ -190,33 +190,32 @@ export function createJumpToQuoteAction(delims: Array<QuoteDelim>): EzAction {
   }
 }
 
-export function createFindAction(
-  target: VarString,
-  findPrev: boolean = false,
-  shouldSelect: boolean = false,
-): EzAction {
+export function createFindAction(target: VarString, args: VarString): EzAction {
   return {
     perform: async (key) => {
       const editor = vscode.window.activeTextEditor
       if (!editor) return
 
       const text = editor.document.getText()
-      const targetChar = await resolveVarString(target, varContext(key))
+      const varCtx = varContext(key)
+      const targetChar = await resolveVarString(target, varCtx)
       if (targetChar.length !== 1) {
         return
       }
+      const argsString = await resolveVarString(args, varCtx)
+      const argsJson = argsString === "" ? null : JSON.parse(argsString)
 
       editor.selections = editor.selections.map((sel) => {
-        if (findPrev) {
+        if (argsJson?.prev) {
           for (let i = editor.document.offsetAt(sel.active) - 2; i >= 0; i--) {
             if (text[i] === targetChar) {
-              return moveSelection(sel, editor.document.positionAt(i), shouldSelect)
+              return moveSelection(sel, editor.document.positionAt(i), argsJson?.select)
             }
           }
         } else {
           for (let i = editor.document.offsetAt(sel.active) + 1; i < text.length; i++) {
             if (text[i] === targetChar) {
-              return moveSelection(sel, editor.document.positionAt(i), shouldSelect)
+              return moveSelection(sel, editor.document.positionAt(i), argsJson?.select)
             }
           }
         }
