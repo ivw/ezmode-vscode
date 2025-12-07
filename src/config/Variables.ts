@@ -22,14 +22,14 @@ export function varContext(
 /**
  * A string that may resolve variables based on context.
  */
-export type VarString = string | ((ctx: VarContext) => string)
+export type VarString = string | ((ctx: VarContext) => string | Thenable<string>)
 
 /**
  * The string to represent an undefined variable
  */
 export const NULL_VAR = ""
 
-export function resolveVarString(varString: VarString, ctx: VarContext): string {
+export function resolveVarString(varString: VarString, ctx: VarContext): string | Thenable<string> {
   if (typeof varString === "string") {
     return varString
   } else {
@@ -49,6 +49,7 @@ const builtInVarStrings: Record<string, VarString> = {
   projectname: () => vscode.workspace.name ?? NULL_VAR,
   mode: getMode,
   key: (ctx) => ctx.key ?? NULL_VAR,
+  clipboard: () => vscode.env.clipboard.readText(),
   space: " ",
   tab: "\t",
   nl: "\n",
@@ -82,6 +83,6 @@ export function parseVarString(src: string): VarString {
     if (typeof acc === "string" && typeof curr === "string") {
       return acc + curr
     }
-    return (ctx) => resolveVarString(acc, ctx) + resolveVarString(curr, ctx)
+    return async (ctx) => (await resolveVarString(acc, ctx)) + (await resolveVarString(curr, ctx))
   }, "")
 }

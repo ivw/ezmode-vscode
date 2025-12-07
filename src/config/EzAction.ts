@@ -43,14 +43,26 @@ export const nativeEzAction: EzAction = {
 
 export function createWriteAction(message: VarString): EzAction {
   return {
-    perform: (key) => {
+    perform: async (key) => {
       const editor = vscode.window.activeTextEditor
       if (!editor) return
+
+      const textWithoutSelIndex = await resolveVarString(message, varContext(key))
 
       return editor
         .edit((edit) => {
           editor.selections = editor.selections.map((sel, selectionIndex) => {
-            const text = resolveVarString(message, varContext(key, sel, selectionIndex))
+            // `message` may contain a variable that requires `selectionIndex`.
+            // In that case, we resolve the var string again with `selectionIndex` info.
+            let text = textWithoutSelIndex
+            if (text === "") {
+              const result = resolveVarString(message, varContext(key, sel, selectionIndex))
+              // Ignore async results for selectionIndex based vars.
+              if (typeof result === "string") {
+                text = result
+              }
+            }
+
             if (sel.isEmpty) {
               edit.insert(sel.active, text)
               return sel
@@ -70,8 +82,8 @@ export function createWriteAction(message: VarString): EzAction {
 
 export function createPopupAction(message: VarString): EzAction {
   return {
-    perform: (key) => {
-      vscode.window.showInformationMessage(resolveVarString(message, varContext(key)))
+    perform: async (key) => {
+      vscode.window.showInformationMessage(await resolveVarString(message, varContext(key)))
     },
     description: `Display notification: ${message}`,
   }
@@ -89,8 +101,8 @@ export function createMapKeyBindingAction(mode: string, keyBinding: KeyBinding):
 
 export function createSetVarAction(varName: string, value: VarString): EzAction {
   return {
-    perform: (key) => {
-      getEnv().vars.set(varName, resolveVarString(value, varContext(key)))
+    perform: async (key) => {
+      getEnv().vars.set(varName, await resolveVarString(value, varContext(key)))
     },
     description: `Set variable '${varName}' to '${value}'`,
   }
@@ -184,12 +196,12 @@ export function createFindAction(
   shouldSelect: boolean = false,
 ): EzAction {
   return {
-    perform: (key) => {
+    perform: async (key) => {
       const editor = vscode.window.activeTextEditor
       if (!editor) return
 
       const text = editor.document.getText()
-      const targetChar = resolveVarString(target, varContext(key))
+      const targetChar = await resolveVarString(target, varContext(key))
       if (targetChar.length !== 1) {
         return
       }
