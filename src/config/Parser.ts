@@ -18,6 +18,7 @@ import {
   type EzAction,
 } from "./EzAction"
 import { LexerBuffer } from "../utils/LexerBuffer"
+import { parseVarString } from "./Variables"
 
 const keyBindingKeyMap: Record<string, string> = {
   lt: "<",
@@ -96,14 +97,14 @@ export function parseActionBuf(buf: LexerBuffer): EzAction {
       if (text === null) {
         throw new Error("Expected text to write")
       }
-      return createWriteAction(text)
+      return createWriteAction(parseVarString(text))
     }
     case "popup": {
       const message = buf.remainingContent()
       if (message === null) {
         throw new Error("Expected popup message")
       }
-      return createPopupAction(message)
+      return createPopupAction(parseVarString(message))
     }
     case "native": {
       return nativeEzAction
@@ -117,7 +118,7 @@ export function parseActionBuf(buf: LexerBuffer): EzAction {
       if (value === null) {
         throw new Error("Expected value for set action")
       }
-      return createSetVarAction(varName, value)
+      return createSetVarAction(varName, parseVarString(value))
     }
     case "map": {
       const modeName = buf.nextToken()
@@ -168,7 +169,7 @@ export function parseActionBuf(buf: LexerBuffer): EzAction {
           shouldSelect = argsJson.select
         }
       }
-      return createFindAction(arg, findPrev, shouldSelect)
+      return createFindAction(parseVarString(arg), findPrev, shouldSelect)
     }
     case "pair": {
       function parseShouldFindClosingDelim() {

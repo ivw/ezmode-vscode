@@ -4,7 +4,7 @@ import { getMode, switchMode } from "../mode/ModeState"
 import type { Delim } from "../utils/delim/Delim"
 import { moveSelection, moveSelectionBasedOnMode, revealCursor, unselect } from "../utils/Selection"
 import type { QuoteDelim } from "../utils/delim/QuoteDelim"
-import { resolveVars, varContext } from "./Variables"
+import { resolveVarString, varContext, type VarString } from "./Variables"
 import { getEnv } from "./EnvState"
 
 export type EzAction = {
@@ -41,7 +41,7 @@ export const nativeEzAction: EzAction = {
   description: "Native",
 }
 
-export function createWriteAction(message: string): EzAction {
+export function createWriteAction(message: VarString): EzAction {
   return {
     perform: (key) => {
       const editor = vscode.window.activeTextEditor
@@ -50,7 +50,7 @@ export function createWriteAction(message: string): EzAction {
       return editor
         .edit((edit) => {
           editor.selections = editor.selections.map((sel, selectionIndex) => {
-            const text = resolveVars(message, varContext(key, sel, selectionIndex))
+            const text = resolveVarString(message, varContext(key, sel, selectionIndex))
             if (sel.isEmpty) {
               edit.insert(sel.active, text)
               return sel
@@ -68,10 +68,10 @@ export function createWriteAction(message: string): EzAction {
   }
 }
 
-export function createPopupAction(message: string): EzAction {
+export function createPopupAction(message: VarString): EzAction {
   return {
     perform: (key) => {
-      vscode.window.showInformationMessage(resolveVars(message, varContext(key)))
+      vscode.window.showInformationMessage(resolveVarString(message, varContext(key)))
     },
     description: `Display notification: ${message}`,
   }
@@ -87,10 +87,10 @@ export function createMapKeyBindingAction(mode: string, keyBinding: KeyBinding):
   }
 }
 
-export function createSetVarAction(varName: string, value: string): EzAction {
+export function createSetVarAction(varName: string, value: VarString): EzAction {
   return {
     perform: (key) => {
-      getEnv().vars.set(varName, resolveVars(value, varContext(key)))
+      getEnv().vars.set(varName, resolveVarString(value, varContext(key)))
     },
     description: `Set variable '${varName}' to '${value}'`,
   }
@@ -179,7 +179,7 @@ export function createJumpToQuoteAction(delims: Array<QuoteDelim>): EzAction {
 }
 
 export function createFindAction(
-  target: string,
+  target: VarString,
   findPrev: boolean = false,
   shouldSelect: boolean = false,
 ): EzAction {
@@ -189,7 +189,7 @@ export function createFindAction(
       if (!editor) return
 
       const text = editor.document.getText()
-      const targetChar = resolveVars(target, varContext(key))
+      const targetChar = resolveVarString(target, varContext(key))
       if (targetChar.length !== 1) {
         return
       }

@@ -2,6 +2,9 @@ import * as vscode from "vscode"
 import { getMode } from "../mode/ModeState"
 import { getEnv } from "./EnvState"
 
+/**
+ * Context that may be needed to resolve a variable
+ */
 export type VarContext = {
   key: string | null
   selection: vscode.Selection | null
@@ -16,37 +19,44 @@ export function varContext(
   return { key, selection, selectionIndex }
 }
 
-export function resolveVar(varName: string, ctx: VarContext): string | null {
-  switch (varName) {
-    case "caretindex":
-      return ctx.selectionIndex === null ? null : String(ctx.selectionIndex)
-    case "line":
-      return ctx.selection ? String(ctx.selection.active.line + 1) : null
-    case "column":
-      return ctx.selection ? String(ctx.selection.active.character + 1) : null
-    case "selection":
-      return ctx.selection && vscode.window.activeTextEditor
-        ? vscode.window.activeTextEditor.document.getText(ctx.selection)
-        : null
-    case "filename":
-      return vscode.window.activeTextEditor?.document?.fileName ?? null
-    case "projectname":
-      return vscode.workspace.name ?? null
-    case "mode":
-      return getMode()
-    case "key":
-      return ctx.key
-    case "space":
-      return " "
-    case "tab":
-      return "\t"
-    case "nl":
-      return "\n"
-    case "doubleslash":
-      return "//"
-    default:
-      return getEnv().vars.get(varName) ?? null
+/**
+ * A string that may resolve variables based on context.
+ */
+export type VarString = string | ((ctx: VarContext) => string)
+
+/**
+ * The string to represent an undefined variable
+ */
+export const NULL_VAR = ""
+
+export function resolveVarString(varString: VarString, ctx: VarContext): string {
+  if (typeof varString === "string") {
+    return varString
+  } else {
+    return varString(ctx)
   }
+}
+
+const builtInVarStrings: Record<string, VarString> = {
+  caretindex: (ctx) => (ctx.selectionIndex === null ? NULL_VAR : String(ctx.selectionIndex)),
+  line: (ctx) => (ctx.selection ? String(ctx.selection.active.line + 1) : NULL_VAR),
+  column: (ctx) => (ctx.selection ? String(ctx.selection.active.character + 1) : NULL_VAR),
+  selection: (ctx) =>
+    ctx.selection && vscode.window.activeTextEditor
+      ? vscode.window.activeTextEditor.document.getText(ctx.selection)
+      : NULL_VAR,
+  filename: () => vscode.window.activeTextEditor?.document?.fileName ?? NULL_VAR,
+  projectname: () => vscode.workspace.name ?? NULL_VAR,
+  mode: getMode,
+  key: (ctx) => ctx.key ?? NULL_VAR,
+  space: " ",
+  tab: "\t",
+  nl: "\n",
+  doubleslash: "//",
+}
+
+function envVarString(varName: string): VarString {
+  return () => getEnv().vars.get(varName) ?? NULL_VAR
 }
 
 /**
@@ -54,12 +64,24 @@ export function resolveVar(varName: string, ctx: VarContext): string | null {
  */
 const varRegex = /\$\{([A-Za-z_]\w*)\}/g
 
-export function resolveVars(str: string, ctx: VarContext): string {
-  return str.replace(varRegex, (_, varName: string) => resolveVar(varName, ctx) ?? "")
-}
+/**
+ * Parses a string that may contain ${} variables and turns it into a VarString
+ */
+export function parseVarString(src: string): VarString {
+  return src.split(varRegex).reduce<VarString>((acc, currString, index) => {
+    if (currString === "") return acc
 
-export function hasVars(str: string): boolean {
-  const result = varRegex.test(str)
-  varRegex.lastIndex = 0 // Reset regex state
-  return result
+    const isCurrStringVarName = index % 2 === 1
+    const curr: VarString = isCurrStringVarName
+      ? currString in builtInVarStrings
+        ? builtInVarStrings[currString]
+        : envVarString(currString)
+      : currString
+
+    if (acc === "") return curr
+    if (typeof acc === "string" && typeof curr === "string") {
+      return acc + curr
+    }
+    return (ctx) => resolveVarString(acc, ctx) + resolveVarString(curr, ctx)
+  }, "")
 }
