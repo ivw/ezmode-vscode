@@ -2,183 +2,183 @@ map type default <native>
 map typeonce default <native><mode ez>
 
 
-map ez ` <vscode ezmode.cheatsheet.focus><vscode workbench.action.focusActiveEditorGroup>
-map ez ~ <vscode ezmode.toggleCase>
-map ez 1 <vscode workbench.view.explorer><vscode workbench.action.focusActiveEditorGroup>
-map ez ! <vscode workbench.view.explorer>
-map ez 2 <vscode workbench.view.scm><vscode workbench.action.focusActiveEditorGroup>
-map ez @ <vscode workbench.view.scm>
-map ez 3 <vscode workbench.action.terminal.toggleTerminal><vscode workbench.action.focusActiveEditorGroup>
-map ez # <vscode workbench.action.terminal.toggleTerminal>
-map ez 4 <vscode workbench.action.closePanel><vscode workbench.action.closeSidebar>
-map ez $ <vscode workbench.action.closePanel>
-map ez 5 <vscode editor.action.quickFix>
-map ez % <vscode editor.action.goToImplementation>
-map ez 7 <mode special>
-map ez 8 <vscode editor.action.insertCursorBelow>
-map ez * <vscode editor.action.insertCursorAbove>
-map ez 9 <vscode editor.action.moveSelectionToPreviousFindMatch>
-map ez ( <pair open ()>
-map ez 0 <vscode editor.action.addSelectionToNextFindMatch>
-map ez ) <pair close ()>
-map ez - <vscode ezmode.removeDelim {"selectContents": false}>
-map ez _ <vscode ezmode.removeDelim {"selectContents": true}>
-map ez = <vscode workbench.action.focusNextGroup>
-map ez + <vscode workbench.action.closeEditorsInGroup>
+map ez ` <vscode ezmode.cheatsheet.focus><vscode workbench.action.focusActiveEditorGroup> // View cheat sheet
+map ez ~ <vscode ezmode.toggleCase> // Toggle case
+map ez 1 <vscode workbench.view.explorer><vscode workbench.action.focusActiveEditorGroup> // View sidebar: explorer
+map ez ! <vscode workbench.view.explorer> // Focus sidebar: explorer
+map ez 2 <vscode workbench.view.scm><vscode workbench.action.focusActiveEditorGroup> // View sidebar: source control
+map ez @ <vscode workbench.view.scm> // Focus sidebar: source control
+map ez 3 <vscode workbench.action.terminal.toggleTerminal><vscode workbench.action.focusActiveEditorGroup> // View terminal
+map ez # <vscode workbench.action.terminal.toggleTerminal> // Focus terminal
+map ez 4 <vscode workbench.action.closePanel><vscode workbench.action.closeSidebar> // Close sidebar and panel
+map ez $ <vscode workbench.action.closePanel> // Close panel
+map ez 5 <vscode editor.action.quickFix> // Quick fix…
+map ez % <vscode editor.action.goToImplementation> // Go to implementation / definition
+map ez 7 <mode special> // Switch to special mode
+map ez 8 <vscode editor.action.insertCursorBelow> // Insert cursor below
+map ez * <vscode editor.action.insertCursorAbove> // Insert cursor above
+map ez 9 <vscode editor.action.moveSelectionToPreviousFindMatch> // Move selection to previous find match
+map ez ( <pair open ()> // Go to (
+map ez 0 <vscode editor.action.addSelectionToNextFindMatch> // Add selection to next find match
+map ez ) <pair close ()> // Go to )
+map ez - <vscode ezmode.removeDelim {"selectContents": false}> // Remove delimiter
+map ez _ <vscode ezmode.removeDelim {"selectContents": true}> // Remove delimiter and select contents
+map ez = <vscode workbench.action.focusNextGroup> // Focus next split
+map ez + <vscode workbench.action.closeEditorsInGroup> // Close split
 
-map ez q <vscode ezmode.selectToDelim>
-map ez Q <vscode ezmode.selectToDelim {"around": true}>
-map ez w <vscode workbench.action.closeActiveEditor>
-map ez W <vscode workbench.action.closeOtherEditors>
-map ez e <mode select>
-map ez E <vscode ezmode.selectLine><mode select>
-map ez r <vscode editor.action.deleteLines>
-map ez R <vscode editor.action.deleteLines><vscode cursorUp>
-map ez t <mode type>
-map ez T <mode typeonce>
-map ez y <vscode redo>
-map ez u <vscode cursorWordLeft>
-map ez U <vscode deleteWordLeft>
-map ez i <vscode cursorUp>
-map ez I <vscode cursorMove {"to": "prevBlankLine"}>
-map ez o <vscode cursorWordRight>
-map ez O <vscode deleteWordRight>
-map ez p <vscode workbench.action.quickOpen>
-map ez P <vscode workbench.action.showCommands>
-map ez [ <vscode workbench.action.previousEditorInGroup>
-map ez { <pair open {}> // TODO xml
-map ez ] <vscode workbench.action.nextEditorInGroup>
-map ez } <pair close {}> // TODO xml
-map ez \ <vscode workbench.action.splitEditor>
-map ez | <vscode workbench.action.moveEditorToNextGroup>
+map ez q <vscode ezmode.selectToDelim> // Select enclosed
+map ez Q <vscode ezmode.selectToDelim {"around": true}> // Select enclosure
+map ez w <vscode workbench.action.closeActiveEditor> // Close tab
+map ez W <vscode workbench.action.closeOtherEditors> // Close other tabs
+map ez e <mode select> // Switch to select mode
+map ez E <vscode ezmode.selectLine><mode select> // Select line
+map ez r <vscode editor.action.deleteLines> // Remove line
+map ez R <vscode editor.action.deleteLines><vscode cursorUp> // Remove line upward
+map ez t <mode type> // Switch to type mode
+map ez T <mode typeonce> // Type one character
+map ez y <vscode redo> // Redo
+map ez u <vscode cursorWordLeft> // Move left by word
+map ez U <vscode deleteWordLeft> // Delete left by word
+map ez i <vscode cursorUp> // Move up
+map ez I <vscode cursorMove {"to": "prevBlankLine"}> // Move to previous blank line
+map ez o <vscode cursorWordRight> // Move right by word
+map ez O <vscode deleteWordRight> // Delete right by word
+map ez p <vscode workbench.action.quickOpen> // Quick open file…
+map ez P <vscode workbench.action.showCommands> // Show command palette
+map ez [ <vscode workbench.action.previousEditorInGroup> // Open tab to the left
+map ez { <pair open {}> // Go to {
+map ez ] <vscode workbench.action.nextEditorInGroup> // Open tab to the right
+map ez } <pair close {}> // Go to }
+map ez \ <vscode workbench.action.splitEditor> // Split editor
+map ez | <vscode workbench.action.moveEditorToNextGroup> // Split editor without duplicate
 
-map ez a <vscode ezmode.selectWord>
-map ez A <vscode editor.action.selectAll>
-map ez s <vscode workbench.action.files.save>
-map ez S <vscode editor.action.formatDocument>
-map ez d <vscode deleteRight>
-map ez D <vscode deleteLeft>
-map ez f <vscode actions.find>
-map ez F <vscode workbench.action.findInFiles>
-map ez g <mode git>
-map ez G <vscode workbench.action.tasks.runTask>
-map ez h <vscode cursorHome>
-map ez H <vscode cursorTop>
-map ez j <vscode cursorLeft>
-map ez J <vscode workbench.action.navigateBack>
-map ez k <vscode cursorDown>
-map ez K <vscode cursorMove {"to": "nextBlankLine"}>
-map ez l <vscode cursorRight>
-map ez L <vscode workbench.action.navigateForward>
-map ez ; <vscode cursorEnd>
-map ez : <vscode cursorBottom>
-map ez ' <quote ' " `>
-map ez " <quote " `>
-map ez enter <native>
+map ez a <vscode ezmode.selectWord> // Select word
+map ez A <vscode editor.action.selectAll> // Select all
+map ez s <vscode workbench.action.files.save> // Save
+map ez S <vscode editor.action.formatDocument> // Format
+map ez d <vscode deleteRight> // Delete right
+map ez D <vscode deleteLeft> // Delete left
+map ez f <vscode actions.find> // Find…
+map ez F <vscode workbench.action.findInFiles> // Find in files…
+map ez g <mode git> // Switch to git mode
+map ez G <vscode workbench.action.tasks.runTask> // Run task
+map ez h <vscode cursorHome> // Move to line start
+map ez H <vscode cursorTop> // Move to file start
+map ez j <vscode cursorLeft> // Move left
+map ez J <vscode workbench.action.navigateBack> // Navigate back
+map ez k <vscode cursorDown> // Move down
+map ez K <vscode cursorMove {"to": "nextBlankLine"}> // Move to next blank line
+map ez l <vscode cursorRight> // Move right
+map ez L <vscode workbench.action.navigateForward> // Navigate forward
+map ez ; <vscode cursorEnd> // Move to line end
+map ez : <vscode cursorBottom> // Move to file end
+map ez ' <quote ' " `> // Go to quote
+map ez " <quote " `> // Go to double quote
+map ez enter <native> // Enter
 
-map ez z <vscode undo>
-map ez Z <vscode workbench.action.reopenClosedEditor>
-map ez x <vscode editor.action.clipboardCutAction>
-map ez c <vscode editor.action.clipboardCopyAction><vscode cancelSelection>
-map ez v <vscode editor.action.clipboardPasteAction>
-map ez V <vscode editor.action.duplicateSelection>
-map ez b <vscode editor.action.joinLines>
-map ez B <vscode cursorUp><vscode editor.action.joinLines>
-map ez n <vscode editor.action.insertLineAfter>
-map ez N <vscode editor.action.insertLineBefore>
-map ez m <vscode ezmode.scroll>
-map ez M <vscode ezmode.scroll {"direction": "up"}>
-map ez , <native>
-map ez lt <vscode ezmode.openEzModeMenu>
+map ez z <vscode undo> // Undo
+map ez Z <vscode workbench.action.reopenClosedEditor> // Reopen closed tab
+map ez x <vscode editor.action.clipboardCutAction> // Cut
+map ez c <vscode editor.action.clipboardCopyAction><vscode cancelSelection> // Copy
+map ez v <vscode editor.action.clipboardPasteAction> // Paste
+map ez V <vscode editor.action.duplicateSelection> // Duplicate line or selection
+map ez b <vscode editor.action.joinLines> // Join lines
+map ez B <vscode cursorUp><vscode editor.action.joinLines> // Join lines up
+map ez n <vscode editor.action.insertLineAfter> // Insert line below
+map ez N <vscode editor.action.insertLineBefore> // Insert line above
+map ez m <vscode ezmode.scroll> // Scroll half a page down
+map ez M <vscode ezmode.scroll {"direction": "up"}> // Scroll half a page up
+map ez , <native> // Insert comma
+map ez lt <vscode ezmode.openEzModeMenu> // Open ezmode menu
 set lastfindchar .
 set lastfindprev false
-map ez . <vscode ezmode.findChar {"target": "${lastfindchar}", "prev": ${lastfindprev}}>
-map ez gt <vscode editor.action.triggerParameterHints>
-map ez / <vscode editor.action.commentLine>
-map ez ? <vscode editor.action.blockComment>
+map ez . <vscode ezmode.findChar {"target": "${lastfindchar}", "prev": ${lastfindprev}}> // Repeat last jump
+map ez gt <vscode editor.action.triggerParameterHints> // Show parameter hints
+map ez / <vscode editor.action.commentLine> // Toggle line comment
+map ez ? <vscode editor.action.blockComment> // Toggle block comment
 
-map ez space <mode find>
-map select space <mode findselect>
+map ez space <mode find> // Jump to character…
+map select space <mode findselect> // Jump to character and select…
 
-map find default <vscode ezmode.findChar {"target": "${key}"}><mode ez><set lastfindchar ${key}><set lastfindprev false>
-map findprev default <vscode ezmode.findChar {"target": "${key}", "prev": true}><mode ez><set lastfindchar ${key}><set lastfindprev true>
-map findselect default <vscode ezmode.findChar {"target": "${key}", "select": true}><mode ez><set lastfindchar ${key}><set lastfindprev false>
-map findprevselect default <vscode ezmode.findChar {"target": "${key}", "prev": true, "select": true}><mode ez><set lastfindchar ${key}><set lastfindprev true>
+map find default <vscode ezmode.findChar {"target": "${key}"}><mode ez><set lastfindchar ${key}><set lastfindprev false> // Jump right to typed character
+map findprev default <vscode ezmode.findChar {"target": "${key}", "prev": true}><mode ez><set lastfindchar ${key}><set lastfindprev true> // Jump left to typed character
+map findselect default <vscode ezmode.findChar {"target": "${key}", "select": true}><mode ez><set lastfindchar ${key}><set lastfindprev false> // Jump right to typed character and select
+map findprevselect default <vscode ezmode.findChar {"target": "${key}", "prev": true, "select": true}><mode ez><set lastfindchar ${key}><set lastfindprev true> // Jump left to typed character and select
 
-map find space <mode findprev>
-map findprev space <mode find>
-map findselect space <mode findprevselect>
-map findprevselect space <mode findselect>
-
-
-map select default <ofmode ez>
-
-map select ~ <ofmode ez><mode ez>
-
-map select e <vscode ezmode.unselect><mode ez>
-map select r <ofmode ez><mode ez>
-map select R <ofmode ez><mode ez>
-map select u <vscode cursorWordLeftSelect>
-map select U <vscode ezmode.jumpToAnchor>
-map select i <vscode cursorUpSelect>
-map select I <vscode cursorMove {"to": "prevBlankLine", "select": true}>
-map select o <vscode cursorWordRightSelect>
-map select O <vscode ezmode.flipSelection>
-
-map select d <ofmode ez><mode ez>
-map select D <ofmode ez><mode ez>
-map select h <vscode cursorHomeSelect>
-map select H <vscode cursorTopSelect>
-map select j <vscode cursorLeftSelect>
-map select k <vscode cursorDownSelect>
-map select K <vscode cursorMove {"to": "nextBlankLine", "select": true}>
-map select l <vscode cursorRightSelect>
-map select ; <vscode cursorEndSelect>
-map select : <vscode cursorBottomSelect>
-
-map select x <ofmode ez><mode ez>
-map select c <ofmode ez><mode ez>
-map select v <ofmode ez><mode ez>
-map select m <vscode cursorPageDownSelect>
-map select M <vscode cursorPageUpSelect>
-map select lt <pair open angle>
-map select . <vscode ezmode.findChar {"target": "${lastfindchar}", "prev": ${lastfindprev}, "select": true}>
-map select gt <pair close angle>
+map find space <mode findprev> // Reverse jump direction to left
+map findprev space <mode find> // Reverse jump direction to right
+map findselect space <mode findprevselect> // Reverse jump direction to left
+map findprevselect space <mode findselect> // Reverse jump direction to right
 
 
-map git default <ofmode ez>
+map select default <ofmode ez> // Same action as ez mode
 
-map git w <vscode workbench.action.closeActiveEditor><mode ez>
-map git r <vscode workbench.view.scm><vscode workbench.action.focusActiveEditorGroup><vscode ezmode.gitReview>
-map git u <vscode git.sync><mode ez>
-map git i <vscode ezmode.nextChange {"reversed": true}>
-map git p <vscode git.push><mode ez>
-map git P <vscode git.pullFrom><mode ez>
+map select ~ <ofmode ez><mode ez> // Toggle case
 
-map git a <vscode gitlens.toggleFileBlame><mode ez>
-map git s <vscode workbench.scm.history.focus><mode ez>
-map git f <vscode git.fetchAll><mode ez>
-map git g <mode ez>
-map git h <vscode gitlens.showFileHistoryView><mode ez>
-map git j <vscode ezmode.nextChangedFile {"reversed": true}>
-map git k <vscode ezmode.nextChange>
-map git l <vscode ezmode.nextChangedFile>
+map select e <vscode ezmode.unselect><mode ez> // Unselect and return to ez mode
+map select r <ofmode ez><mode ez> // Remove line
+map select R <ofmode ez><mode ez> // Remove line upward
+map select u <vscode cursorWordLeftSelect> // Select left by word
+map select U <vscode ezmode.jumpToAnchor> // Jump to selection anchor
+map select i <vscode cursorUpSelect> // Select up
+map select I <vscode cursorMove {"to": "prevBlankLine", "select": true}> // Select to previous blank line
+map select o <vscode cursorWordRightSelect> // Select right by word
+map select O <vscode ezmode.flipSelection> // Flip selection anchor
 
-map git c <mode type><vscode git.commit><mode ez>
-map git b <vscode git.checkout><mode ez>
-map git m <vscode git.merge><mode ez>
+map select d <ofmode ez><mode ez> // Delete selection
+map select D <ofmode ez> // Delete selection but stay in select mode
+map select h <vscode cursorHomeSelect> // Select to line start
+map select H <vscode cursorTopSelect> // Select to file start
+map select j <vscode cursorLeftSelect> // Select left
+map select k <vscode cursorDownSelect> // Select down
+map select K <vscode cursorMove {"to": "nextBlankLine", "select": true}> // Select to next blank line
+map select l <vscode cursorRightSelect> // Select right
+map select ; <vscode cursorEndSelect> // Select to line end
+map select : <vscode cursorBottomSelect> // Select to file end
+
+map select x <ofmode ez><mode ez> // Cut selection
+map select c <ofmode ez><mode ez> // Copy selection
+map select v <ofmode ez><mode ez> // Paste over selection
+map select m <vscode cursorPageDownSelect> // Select half a page down
+map select M <vscode cursorPageUpSelect> // Select half a page up
+map select lt <pair open angle> // Select to <
+map select . <vscode ezmode.findChar {"target": "${lastfindchar}", "prev": ${lastfindprev}, "select": true}> // Repeat last jump
+map select gt <pair close angle> // Select to >
 
 
-map special default <ofmode ez>
+map git default <ofmode ez> // Same action as ez mode
 
-map special 7 <mode ez>
-map special + <vscode ezmode.numberOperation {"op": "+"}>
-map special - <vscode ezmode.numberOperation {"op": "-"}>
-map special * <vscode ezmode.numberOperation {"op": "*"}>
-map special / <vscode ezmode.numberOperation {"op": "/"}>
-map special i <write ${caretindex}><mode ez>
-map special f <write ${filename}><mode ez>
-map special l <write ${line}><mode ez>
-map special c <write ${column}><mode ez>
-map special r <vscode editor.action.rename><mode ez>
-map special R <vscode workbench.view.explorer><vscode workbench.action.focusActiveEditorGroup><vscode renameFile><mode ez>
+map git w <vscode workbench.action.closeActiveEditor><mode ez> // Close tab and return to ez mode
+map git r <vscode workbench.view.scm><vscode workbench.action.focusActiveEditorGroup><vscode ezmode.gitReview> // Review diffs of local changes
+map git u <vscode git.sync><mode ez> // Update/sync changes
+map git i <vscode ezmode.nextChange {"reversed": true}> // Go to previous change
+map git p <vscode git.push><mode ez> // Push
+map git P <vscode git.pullFrom><mode ez> // Pull from…
+
+map git a <vscode gitlens.toggleFileBlame><mode ez> // Toggle blame annotations
+map git s <vscode workbench.scm.history.focus><mode ez> // Show git log
+map git f <vscode git.fetchAll><mode ez> // Fetch
+map git g <mode ez> // Return to ez mode
+map git h <vscode gitlens.showFileHistoryView><mode ez> // Show git history of file
+map git j <vscode ezmode.nextChangedFile {"reversed": true}> // Go to previous changed file
+map git k <vscode ezmode.nextChange> // Go to next change
+map git l <vscode ezmode.nextChangedFile> // Go to next changed file
+
+map git c <mode type><vscode git.commit><mode ez> // Commit
+map git b <vscode git.checkout><mode ez> // Checkout branch…
+map git m <vscode git.merge><mode ez> // Merge branch…
+
+
+map special default <ofmode ez> // Same action as ez mode
+
+map special 7 <mode ez> // Return to ez mode
+map special + <vscode ezmode.numberOperation {"op": "+"}> // Increment number
+map special - <vscode ezmode.numberOperation {"op": "-"}> // Decrement number
+map special * <vscode ezmode.numberOperation {"op": "*"}> // Double number
+map special / <vscode ezmode.numberOperation {"op": "/"}> // Halve number
+map special i <write ${caretindex}><mode ez> // Insert caret index/sequence
+map special f <write ${filename}><mode ez> // Insert file name
+map special l <write ${line}><mode ez> // Insert line number
+map special c <write ${column}><mode ez> // Insert column number
+map special r <vscode editor.action.rename><mode ez> // Rename symbol
+map special R <vscode workbench.view.explorer><vscode workbench.action.focusActiveEditorGroup><vscode renameFile><mode ez> // Rename file

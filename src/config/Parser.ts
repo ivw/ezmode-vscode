@@ -45,7 +45,9 @@ export function parseEzModeRc(content: string): Array<EzAction> {
 
 export function parseLine(line: string): EzAction | null {
   const commentIndex = line.indexOf("//")
+  let comment: string | null = null
   if (commentIndex !== -1) {
+    comment = line.substring(commentIndex + 2).trim()
     line = line.substring(0, commentIndex)
   }
   line = line.trim()
@@ -53,12 +55,12 @@ export function parseLine(line: string): EzAction | null {
     return null
   }
 
-  return parseAction(line)
+  return parseAction(line, comment)
 }
 
-export function parseAction(str: string): EzAction {
+export function parseAction(str: string, lineDescription: string | null): EzAction {
   const buf = new LexerBuffer(str)
-  const action = parseActionBuf(buf)
+  const action = parseActionBuf(buf, lineDescription)
   const extraneousToken = buf.nextToken()
   if (extraneousToken !== null) {
     throw new Error(`Unexpected token: ${extraneousToken}`)
@@ -66,7 +68,7 @@ export function parseAction(str: string): EzAction {
   return action
 }
 
-export function parseActionBuf(buf: LexerBuffer): EzAction {
+export function parseActionBuf(buf: LexerBuffer, lineDescription: string | null): EzAction {
   const actionType = buf.nextToken()
   switch (actionType) {
     case "mode": {
@@ -128,7 +130,8 @@ export function parseActionBuf(buf: LexerBuffer): EzAction {
         throw new Error("Expected action for `map`")
       }
       const action = parseActionChain(actionChainString)
-      return createMapKeyBindingAction(modeName, { key, action })
+      const description = lineDescription || actionChainString
+      return createMapKeyBindingAction(modeName, { key, action, description })
     }
     case "ofmode": {
       const mode = buf.remainingContent()
@@ -196,7 +199,7 @@ export function parseActionChain(actionChainString: string): EzAction {
       if (nestedActionString === null) {
         throw new Error("Expected closing '>'")
       }
-      actions.push(parseAction(nestedActionString))
+      actions.push(parseAction(nestedActionString, null))
     } else {
       actions.push(createKeyReferenceAction(char))
     }

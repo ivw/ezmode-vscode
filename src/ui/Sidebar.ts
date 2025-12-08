@@ -9,7 +9,7 @@ export function activateSidebar(context: vscode.ExtensionContext) {
     onDidChangeTreeData: changeEmitter.event,
     getTreeItem: (element: KeyBinding) => {
       const key = element.key === " " ? "space" : element.key
-      return new vscode.TreeItem(`${key}: ${element.action.description}`)
+      return new vscode.TreeItem(`${key}: ${element.description}`)
     },
     getChildren: (element?: KeyBinding) => {
       if (element) {

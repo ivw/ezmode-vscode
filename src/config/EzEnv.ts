@@ -15,6 +15,7 @@ export type ModeEnv = {
 export type KeyBinding = {
   key: string
   action: EzAction
+  description: string
 }
 
 export const DEFAULT_KEY = "default"

@@ -2,14 +2,14 @@ import * as vscode from "vscode"
 import { getOrAddModeEnv, getActionForKey, type KeyBinding } from "./EzEnv"
 import { getMode, switchMode } from "../mode/ModeState"
 import type { Delim } from "../utils/delim/Delim"
-import { moveSelection, moveSelectionBasedOnMode, revealCursor, unselect } from "../utils/Selection"
+import { moveSelectionBasedOnMode, revealCursor, unselect } from "../utils/Selection"
 import type { QuoteDelim } from "../utils/delim/QuoteDelim"
 import { resolveVarString, varContext, type VarString } from "./Variables"
 import { getEnv } from "./EnvState"
 
+// TODO unwrap
 export type EzAction = {
   perform: (key: string | null) => Thenable<unknown> | void
-  description: string
 }
 
 export function createSwitchModeAction(mode: string): EzAction {
@@ -17,7 +17,6 @@ export function createSwitchModeAction(mode: string): EzAction {
     perform: () => {
       switchMode(mode)
     },
-    description: `Switch mode to: ${mode}`,
   }
 }
 
@@ -50,7 +49,6 @@ export function createVsCodeEzAction(commandId: string, argsVarString: VarString
         ? vscode.commands.executeCommand(commandId)
         : vscode.commands.executeCommand(commandId, args)
     },
-    description: `Command: ${commandId}`, // TODO args
   }
 }
 
@@ -58,7 +56,6 @@ export const nativeEzAction: EzAction = {
   perform: (key) => {
     return vscode.commands.executeCommand("default:type", { text: key })
   },
-  description: "Native",
 }
 
 export function createWriteAction(message: VarString): EzAction {
@@ -96,7 +93,6 @@ export function createWriteAction(message: VarString): EzAction {
           revealCursor(editor)
         })
     },
-    description: `Write: ${message}`,
   }
 }
 
@@ -105,7 +101,6 @@ export function createPopupAction(message: VarString): EzAction {
     perform: async (key) => {
       vscode.window.showInformationMessage(await resolveVarString(message, varContext(key)))
     },
-    description: `Display notification: ${message}`,
   }
 }
 
@@ -115,7 +110,6 @@ export function createMapKeyBindingAction(mode: string, keyBinding: KeyBinding):
       const modeEnv = getOrAddModeEnv(getEnv(), mode)
       modeEnv.keyBindings.set(keyBinding.key, keyBinding)
     },
-    description: `Map '${keyBinding.key}' in mode '${mode}' to: ${keyBinding.action.description}`,
   }
 }
 
@@ -124,7 +118,6 @@ export function createSetVarAction(varName: string, value: VarString): EzAction 
     perform: async (key) => {
       getEnv().vars.set(varName, await resolveVarString(value, varContext(key)))
     },
-    description: `Set variable '${varName}' to '${value}'`,
   }
 }
 
@@ -134,7 +127,6 @@ export function createKeyReferenceAction(key: string): EzAction {
       const mode = getMode()
       return getActionForKey(key, mode, getEnv())?.perform(key)
     },
-    description: key,
   }
 }
 
@@ -145,7 +137,6 @@ export function createOfModeAction(mode: string): EzAction {
 
       return getActionForKey(key, mode)?.perform(key)
     },
-    description: `Action in mode: ${mode}`,
   }
 }
 
@@ -156,7 +147,6 @@ export function createCompositeEzAction(actions: EzAction[]): EzAction {
         await action.perform(e)
       }
     },
-    description: actions.map((a) => a.description).join(", "),
   }
 }
 
@@ -185,7 +175,6 @@ export function createJumpToBracketAction(
       })
       revealCursor(editor)
     },
-    description: `Move caret to ${delims.map((delim) => delim.toNiceString(findClosingDelim)).join(" or ")}`,
   }
 }
 
@@ -206,6 +195,5 @@ export function createJumpToQuoteAction(delims: Array<QuoteDelim>): EzAction {
       })
       revealCursor(editor)
     },
-    description: `Move caret to ${delims.map((delim) => delim.char).join(" or ")}`,
   }
 }
