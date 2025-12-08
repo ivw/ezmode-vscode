@@ -21,16 +21,36 @@ export function createSwitchModeAction(mode: string): EzAction {
   }
 }
 
-export function createVsCodeEzAction(commandId: string, args: unknown): EzAction {
+export function createVsCodeEzAction(commandId: string, argsVarString: VarString | null): EzAction {
+  const cachedArgsJson = typeof argsVarString === "string" ? parseJson(argsVarString) : null
+
+  function parseJson(argsString: string): string | null {
+    if (argsString === "") return null
+    try {
+      return JSON.parse(argsString)
+    } catch {
+      return argsString
+    }
+  }
+
+  async function parseArgs(key: string | null): Promise<unknown | null> {
+    if (argsVarString === null) return null
+    if (typeof argsVarString === "string") return cachedArgsJson
+    const argsString = await resolveVarString(argsVarString, varContext(key))
+    return parseJson(argsString)
+  }
+
   return {
-    perform: () => {
+    perform: async (key) => {
+      const args = await parseArgs(key)
+
       // Note: Calling executeCommand with nullish args can cause problems,
       //   for example with `workbench.action.findInFiles`.
       return args == null
         ? vscode.commands.executeCommand(commandId)
         : vscode.commands.executeCommand(commandId, args)
     },
-    description: `Command: ${commandId}${args != null ? `, args: ${JSON.stringify(args ?? undefined)}` : ""}`,
+    description: `Command: ${commandId}`, // TODO args
   }
 }
 
@@ -187,42 +207,5 @@ export function createJumpToQuoteAction(delims: Array<QuoteDelim>): EzAction {
       revealCursor(editor)
     },
     description: `Move caret to ${delims.map((delim) => delim.char).join(" or ")}`,
-  }
-}
-
-export function createFindAction(target: VarString, args: VarString): EzAction {
-  return {
-    perform: async (key) => {
-      const editor = vscode.window.activeTextEditor
-      if (!editor) return
-
-      const text = editor.document.getText()
-      const varCtx = varContext(key)
-      const targetChar = await resolveVarString(target, varCtx)
-      if (targetChar.length !== 1) {
-        return
-      }
-      const argsString = await resolveVarString(args, varCtx)
-      const argsJson = argsString === "" ? null : JSON.parse(argsString)
-
-      editor.selections = editor.selections.map((sel) => {
-        if (argsJson?.prev) {
-          for (let i = editor.document.offsetAt(sel.active) - 2; i >= 0; i--) {
-            if (text[i] === targetChar) {
-              return moveSelection(sel, editor.document.positionAt(i), argsJson?.select)
-            }
-          }
-        } else {
-          for (let i = editor.document.offsetAt(sel.active) + 1; i < text.length; i++) {
-            if (text[i] === targetChar) {
-              return moveSelection(sel, editor.document.positionAt(i), argsJson?.select)
-            }
-          }
-        }
-        return sel
-      })
-      revealCursor(editor)
-    },
-    description: `Move caret to ${target}`,
   }
 }

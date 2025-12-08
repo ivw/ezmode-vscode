@@ -3,7 +3,6 @@ import { pairDelim, pairDelims } from "../utils/delim/PairDelim"
 import { quoteDelim } from "../utils/delim/QuoteDelim"
 import {
   createCompositeEzAction,
-  createFindAction,
   createJumpToBracketAction,
   createJumpToQuoteAction,
   createKeyReferenceAction,
@@ -82,15 +81,8 @@ export function parseActionBuf(buf: LexerBuffer): EzAction {
       if (commandId === null) {
         throw new Error("Expected command ID")
       }
-      let args = buf.remainingContent()
-      if (args !== null) {
-        try {
-          args = JSON.parse(args)
-        } catch {
-          // Leave as string if not valid JSON
-        }
-      }
-      return createVsCodeEzAction(commandId, args)
+      const args = buf.remainingContent()
+      return createVsCodeEzAction(commandId, args === null ? null : parseVarString(args))
     }
     case "write": {
       const text = buf.remainingContent()
@@ -151,17 +143,6 @@ export function parseActionBuf(buf: LexerBuffer): EzAction {
         throw new Error("Expected character for quote action")
       }
       return createJumpToQuoteAction(args.split(" ").map(quoteDelim))
-    }
-    case "find": {
-      const arg = buf.nextToken()
-      if (arg === null) {
-        throw new Error("Expected argument for find action")
-      }
-      const argsString = buf.remainingContent()
-      return createFindAction(
-        parseVarString(arg),
-        argsString === null ? "" : parseVarString(argsString),
-      )
     }
     case "pair": {
       function parseShouldFindClosingDelim() {

@@ -92,7 +92,7 @@ map ez , <native>
 map ez lt <vscode ezmode.openEzModeMenu>
 set lastfindchar .
 set lastfindprev false
-map ez . <find ${lastfindchar} {"prev": ${lastfindprev}}>
+map ez . <vscode ezmode.findChar {"target": "${lastfindchar}", "prev": ${lastfindprev}}>
 map ez gt <vscode editor.action.triggerParameterHints>
 map ez / <vscode editor.action.commentLine>
 map ez ? <vscode editor.action.blockComment>
@@ -100,10 +100,10 @@ map ez ? <vscode editor.action.blockComment>
 map ez space <mode find>
 map select space <mode findselect>
 
-map find default <find ${key}><mode ez><set lastfindchar ${key}><set lastfindprev false>
-map findprev default <find ${key} {"prev": true}><mode ez><set lastfindchar ${key}><set lastfindprev true>
-map findselect default <find ${key} {"select": true}><mode ez><set lastfindchar ${key}><set lastfindprev false>
-map findprevselect default <find ${key} {"prev": true, "select": true}><mode ez><set lastfindchar ${key}><set lastfindprev true>
+map find default <vscode ezmode.findChar {"target": "${key}"}><mode ez><set lastfindchar ${key}><set lastfindprev false>
+map findprev default <vscode ezmode.findChar {"target": "${key}", "prev": true}><mode ez><set lastfindchar ${key}><set lastfindprev true>
+map findselect default <vscode ezmode.findChar {"target": "${key}", "select": true}><mode ez><set lastfindchar ${key}><set lastfindprev false>
+map findprevselect default <vscode ezmode.findChar {"target": "${key}", "prev": true, "select": true}><mode ez><set lastfindchar ${key}><set lastfindprev true>
 
 map find space <mode findprev>
 map findprev space <mode find>
@@ -142,7 +142,7 @@ map select v <ofmode ez><mode ez>
 map select m <vscode cursorPageDownSelect>
 map select M <vscode cursorPageUpSelect>
 map select lt <pair open angle>
-map select . <find ${lastfindchar} {"prev": ${lastfindprev}, "select": true}>
+map select . <vscode ezmode.findChar {"target": "${lastfindchar}", "prev": ${lastfindprev}, "select": true}>
 map select gt <pair close angle>
 
 

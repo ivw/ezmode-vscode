@@ -100,6 +100,10 @@
       {
         "command": "ezmode.scroll",
         "title": "Scroll half a page (down by default)"
+      },
+      {
+        "command": "ezmode.findChar",
+        "title": "Find/jump to character"
       }
     ],
     "keybindings": [
