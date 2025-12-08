@@ -7,16 +7,11 @@ import type { QuoteDelim } from "../utils/delim/QuoteDelim"
 import { resolveVarString, varContext, type VarString } from "./Variables"
 import { getEnv } from "./EnvState"
 
-// TODO unwrap
-export type EzAction = {
-  perform: (key: string | null) => Thenable<unknown> | void
-}
+export type EzAction = (key: string | null) => Thenable<unknown> | void
 
 export function createSwitchModeAction(mode: string): EzAction {
-  return {
-    perform: () => {
-      switchMode(mode)
-    },
+  return () => {
+    switchMode(mode)
   }
 }
 
@@ -39,114 +34,96 @@ export function createVsCodeEzAction(commandId: string, argsVarString: VarString
     return parseJson(argsString)
   }
 
-  return {
-    perform: async (key) => {
-      const args = await parseArgs(key)
+  return async (key) => {
+    const args = await parseArgs(key)
 
-      // Note: Calling executeCommand with nullish args can cause problems,
-      //   for example with `workbench.action.findInFiles`.
-      return args == null
-        ? vscode.commands.executeCommand(commandId)
-        : vscode.commands.executeCommand(commandId, args)
-    },
+    // Note: Calling executeCommand with nullish args can cause problems,
+    //   for example with `workbench.action.findInFiles`.
+    return args == null
+      ? vscode.commands.executeCommand(commandId)
+      : vscode.commands.executeCommand(commandId, args)
   }
 }
 
-export const nativeEzAction: EzAction = {
-  perform: (key) => {
-    return vscode.commands.executeCommand("default:type", { text: key })
-  },
+export const nativeEzAction: EzAction = (key) => {
+  return vscode.commands.executeCommand("default:type", { text: key })
 }
 
 export function createWriteAction(message: VarString): EzAction {
-  return {
-    perform: async (key) => {
-      const editor = vscode.window.activeTextEditor
-      if (!editor) return
+  return async (key) => {
+    const editor = vscode.window.activeTextEditor
+    if (!editor) return
 
-      const textWithoutSelIndex = await resolveVarString(message, varContext(key))
+    const textWithoutSelIndex = await resolveVarString(message, varContext(key))
 
-      return editor
-        .edit((edit) => {
-          editor.selections = editor.selections.map((sel, selectionIndex) => {
-            // `message` may contain a variable that requires `selectionIndex`.
-            // In that case, we resolve the var string again with `selectionIndex` info.
-            let text = textWithoutSelIndex
-            if (text === "") {
-              const result = resolveVarString(message, varContext(key, sel, selectionIndex))
-              // Ignore async results for selectionIndex based vars.
-              if (typeof result === "string") {
-                text = result
-              }
+    return editor
+      .edit((edit) => {
+        editor.selections = editor.selections.map((sel, selectionIndex) => {
+          // `message` may contain a variable that requires `selectionIndex`.
+          // In that case, we resolve the var string again with `selectionIndex` info.
+          let text = textWithoutSelIndex
+          if (text === "") {
+            const result = resolveVarString(message, varContext(key, sel, selectionIndex))
+            // Ignore async results for selectionIndex based vars.
+            if (typeof result === "string") {
+              text = result
             }
+          }
 
-            if (sel.isEmpty) {
-              edit.insert(sel.active, text)
-              return sel
-            } else {
-              edit.replace(sel, text)
-              return unselect(sel)
-            }
-          })
+          if (sel.isEmpty) {
+            edit.insert(sel.active, text)
+            return sel
+          } else {
+            edit.replace(sel, text)
+            return unselect(sel)
+          }
         })
-        .then(() => {
-          revealCursor(editor)
-        })
-    },
+      })
+      .then(() => {
+        revealCursor(editor)
+      })
   }
 }
 
 export function createPopupAction(message: VarString): EzAction {
-  return {
-    perform: async (key) => {
-      vscode.window.showInformationMessage(await resolveVarString(message, varContext(key)))
-    },
+  return async (key) => {
+    vscode.window.showInformationMessage(await resolveVarString(message, varContext(key)))
   }
 }
 
 export function createMapKeyBindingAction(mode: string, keyBinding: KeyBinding): EzAction {
-  return {
-    perform: () => {
-      const modeEnv = getOrAddModeEnv(getEnv(), mode)
-      modeEnv.keyBindings.set(keyBinding.key, keyBinding)
-    },
+  return () => {
+    const modeEnv = getOrAddModeEnv(getEnv(), mode)
+    modeEnv.keyBindings.set(keyBinding.key, keyBinding)
   }
 }
 
 export function createSetVarAction(varName: string, value: VarString): EzAction {
-  return {
-    perform: async (key) => {
-      getEnv().vars.set(varName, await resolveVarString(value, varContext(key)))
-    },
+  return async (key) => {
+    getEnv().vars.set(varName, await resolveVarString(value, varContext(key)))
   }
 }
 
 export function createKeyReferenceAction(key: string): EzAction {
-  return {
-    perform: () => {
-      const mode = getMode()
-      return getActionForKey(key, mode, getEnv())?.perform(key)
-    },
+  return () => {
+    const mode = getMode()
+    return getActionForKey(key, mode, getEnv())?.(key)
   }
 }
 
 export function createOfModeAction(mode: string): EzAction {
-  return {
-    perform: (key) => {
-      if (key === null) return
+  return (key) => {
+    if (key === null) return
 
-      return getActionForKey(key, mode)?.perform(key)
-    },
+    return getActionForKey(key, mode)?.(key)
   }
 }
 
 export function createCompositeEzAction(actions: EzAction[]): EzAction {
-  return {
-    perform: async (e) => {
-      for (const action of actions) {
-        await action.perform(e)
-      }
-    },
+  return async (e) => {
+    for (const action of actions) {
+      await action(e)
+    }
   }
 }
 
@@ -154,46 +131,42 @@ export function createJumpToBracketAction(
   findClosingDelim: boolean,
   delims: Array<Delim>,
 ): EzAction {
-  return {
-    perform: () => {
-      const editor = vscode.window.activeTextEditor
-      if (!editor) return
+  return () => {
+    const editor = vscode.window.activeTextEditor
+    if (!editor) return
 
-      editor.selections = editor.selections.map((sel) => {
-        for (const delim of delims) {
-          const delimOffset = delim.findDelim(
-            findClosingDelim,
-            editor,
-            editor.document.offsetAt(sel.active),
-            true,
-          )
-          if (delimOffset !== null) {
-            return moveSelectionBasedOnMode(sel, editor.document.positionAt(delimOffset))
-          }
+    editor.selections = editor.selections.map((sel) => {
+      for (const delim of delims) {
+        const delimOffset = delim.findDelim(
+          findClosingDelim,
+          editor,
+          editor.document.offsetAt(sel.active),
+          true,
+        )
+        if (delimOffset !== null) {
+          return moveSelectionBasedOnMode(sel, editor.document.positionAt(delimOffset))
         }
-        return sel
-      })
-      revealCursor(editor)
-    },
+      }
+      return sel
+    })
+    revealCursor(editor)
   }
 }
 
 export function createJumpToQuoteAction(delims: Array<QuoteDelim>): EzAction {
-  return {
-    perform: () => {
-      const editor = vscode.window.activeTextEditor
-      if (!editor) return
+  return () => {
+    const editor = vscode.window.activeTextEditor
+    if (!editor) return
 
-      editor.selections = editor.selections.map((sel) => {
-        for (const delim of delims) {
-          const delimOffset = delim.findAuto(editor, editor.document.offsetAt(sel.active))
-          if (delimOffset !== null) {
-            return moveSelectionBasedOnMode(sel, editor.document.positionAt(delimOffset))
-          }
+    editor.selections = editor.selections.map((sel) => {
+      for (const delim of delims) {
+        const delimOffset = delim.findAuto(editor, editor.document.offsetAt(sel.active))
+        if (delimOffset !== null) {
+          return moveSelectionBasedOnMode(sel, editor.document.positionAt(delimOffset))
         }
-        return sel
-      })
-      revealCursor(editor)
-    },
+      }
+      return sel
+    })
+    revealCursor(editor)
   }
 }

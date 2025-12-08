@@ -6,6 +6,6 @@ export function activateTypeActionHandler(context: vscode.ExtensionContext) {
   registerCommand(context, "type", (args) => {
     const key = args.text as string
 
-    getActionForKey(key)?.perform(key)
+    getActionForKey(key)?.(key)
   })
 }

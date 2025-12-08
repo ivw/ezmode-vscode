@@ -9,7 +9,7 @@ export function activateEnvModeSwitchHooks(context: vscode.ExtensionContext) {
       const oldModeEnv = getModeEnv(getEnv(), getMode())
       const exitAction = oldModeEnv?.keyBindings.get(EXIT_MODE_KEY)
       if (exitAction) {
-        exitAction.action.perform(null)
+        exitAction.action(null)
       }
     }),
   )
@@ -18,7 +18,7 @@ export function activateEnvModeSwitchHooks(context: vscode.ExtensionContext) {
       const newModeEnv = getModeEnv(getEnv(), getMode())
       const enterAction = newModeEnv?.keyBindings.get(ENTER_MODE_KEY)
       if (enterAction) {
-        enterAction.action.perform(null)
+        enterAction.action(null)
       }
     }),
   )
