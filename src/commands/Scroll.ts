@@ -12,13 +12,16 @@ export function activateScroll(context: vscode.ExtensionContext) {
 
     const up = args?.direction === "up"
     const revealCenter = args?.revealCenter ?? true
+    const shouldSelect = args?.select ?? false
 
     editor.selections = editor.selections.map((sel) => {
       const newLine = up
         ? Math.max(sel.active.line - linesToMove, 0)
         : Math.min(sel.active.line + linesToMove, editor.document.lineCount - 1)
       const newPos = sel.active.with(newLine)
-      return new vscode.Selection(newPos, newPos)
+      return shouldSelect
+        ? new vscode.Selection(sel.anchor, newPos)
+        : new vscode.Selection(newPos, newPos)
     })
     editor.revealRange(
       emptyRange(editor.selection.active),
