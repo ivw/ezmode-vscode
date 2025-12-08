@@ -182,3 +182,5 @@ map special l <write ${line}><mode ez> // Insert line number
 map special c <write ${column}><mode ez> // Insert column number
 map special r <vscode editor.action.rename><mode ez> // Rename symbol
 map special R <vscode workbench.view.explorer><vscode workbench.action.focusActiveEditorGroup><vscode renameFile><mode ez> // Rename file
+map special e <vscode ezmode.executeCommand {"command": "${selection}"}> // Execute selected command
+map special E <vscode ezmode.executeCommand {"command": "${clipboard}"}> // Execute copied command
