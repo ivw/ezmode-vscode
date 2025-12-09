@@ -16,8 +16,6 @@ export type Delim = {
     sel: vscode.Selection,
     purpose: DelimRangePurpose,
   ) => DelimRanges | null
-
-  toNiceString: (isClosingDelim: boolean) => string
 }
 
 export type DelimRanges = {

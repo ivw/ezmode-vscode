@@ -104,6 +104,14 @@
       {
         "command": "ezmode.findChar",
         "title": "Find/jump to character"
+      },
+      {
+        "command": "ezmode.jumpToBracket",
+        "title": "Jump to bracket"
+      },
+      {
+        "command": "ezmode.jumpToQuote",
+        "title": "Jump to quote"
       }
     ],
     "keybindings": [

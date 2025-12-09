@@ -17,6 +17,8 @@ import { activateGitReview } from "./GitReview"
 import { activateNumberOperation } from "./NumberOperation"
 import { activateScroll } from "./Scroll"
 import { activateFindChar } from "./FindChar"
+import { activateJumpToBracket } from "./JumpToBracket"
+import { activateJumpToQuote } from "./JumpToQuote"
 
 export function activateCommands(context: vscode.ExtensionContext) {
   registerCommand(context, "ezmode.enterEzMode", () => {
@@ -39,4 +41,6 @@ export function activateCommands(context: vscode.ExtensionContext) {
   activateNumberOperation(context)
   activateScroll(context)
   activateFindChar(context)
+  activateJumpToBracket(context)
+  activateJumpToQuote(context)
 }

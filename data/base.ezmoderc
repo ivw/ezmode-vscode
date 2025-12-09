@@ -18,9 +18,9 @@ map ez 7 <mode special> // Switch to special mode
 map ez 8 <vscode editor.action.insertCursorBelow> // Insert cursor below
 map ez * <vscode editor.action.insertCursorAbove> // Insert cursor above
 map ez 9 <vscode editor.action.moveSelectionToPreviousFindMatch> // Move selection to previous find match
-map ez ( <pair open ()> // Go to (
+map ez ( <vscode ezmode.jumpToBracket {"delims": ["()"], "goToOpen": true}> // Go to (
 map ez 0 <vscode editor.action.addSelectionToNextFindMatch> // Add selection to next find match
-map ez ) <pair close ()> // Go to )
+map ez ) <vscode ezmode.jumpToBracket {"delims": ["()"], "goToOpen": false}> // Go to )
 map ez - <vscode ezmode.removeDelim {"selectContents": false}> // Remove delimiter
 map ez _ <vscode ezmode.removeDelim {"selectContents": true}> // Remove delimiter and select contents
 map ez = <vscode workbench.action.focusNextGroup> // Focus next split
@@ -46,9 +46,9 @@ map ez O <vscode deleteWordRight> // Delete right by word
 map ez p <vscode workbench.action.quickOpen> // Quick open file…
 map ez P <vscode workbench.action.showCommands> // Show command palette
 map ez [ <vscode workbench.action.previousEditorInGroup> // Open tab to the left
-map ez { <pair open {}> // Go to {
+map ez { <vscode ezmode.jumpToBracket {"delims": ["{}"], "goToOpen": true}> // Go to {
 map ez ] <vscode workbench.action.nextEditorInGroup> // Open tab to the right
-map ez } <pair close {}> // Go to }
+map ez } <vscode ezmode.jumpToBracket {"delims": ["{}"], "goToOpen": false}> // Go to }
 map ez \ <vscode workbench.action.splitEditor> // Split editor
 map ez | <vscode workbench.action.moveEditorToNextGroup> // Split editor without duplicate
 
@@ -72,8 +72,8 @@ map ez l <vscode cursorRight> // Move right
 map ez L <vscode workbench.action.navigateForward> // Navigate forward
 map ez ; <vscode cursorEnd> // Move to line end
 map ez : <vscode cursorBottom> // Move to file end
-map ez ' <quote ' " `> // Go to quote
-map ez " <quote " `> // Go to double quote
+map ez ' <vscode ezmode.jumpToQuote {"quotes": ["'", "\"", "`"]}> // Go to quote
+map ez " <vscode ezmode.jumpToQuote {"quotes": ["\"", "`"]}> // Go to double quote
 map ez enter <native> // Enter
 
 map ez z <vscode undo> // Undo
@@ -141,9 +141,9 @@ map select c <ofmode ez><mode ez> // Copy selection
 map select v <ofmode ez><mode ez> // Paste over selection
 map select m <vscode ezmode.scroll {"select": true}> // Select half a page down
 map select M <vscode ezmode.scroll {"direction": "up", "select": true}> // Select half a page up
-map select lt <pair open angle> // Select to <
+map select lt <vscode ezmode.jumpToBracket {"delims": ["<>"], "goToOpen": true}> // Select to <
 map select . <vscode ezmode.findChar {"target": "${lastfindchar}", "prev": ${lastfindprev}, "select": true}> // Repeat last jump
-map select gt <pair close angle> // Select to >
+map select gt <vscode ezmode.jumpToBracket {"delims": ["<>"], "goToOpen": false}> // Select to >
 
 
 map git default <ofmode ez> // Same action as ez mode

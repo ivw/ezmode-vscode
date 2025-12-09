@@ -1,10 +1,5 @@
-import type { Delim } from "../utils/delim/Delim"
-import { pairDelim, pairDelims } from "../utils/delim/PairDelim"
-import { quoteDelim } from "../utils/delim/QuoteDelim"
 import {
   createCompositeEzAction,
-  createJumpToBracketAction,
-  createJumpToQuoteAction,
   createKeyReferenceAction,
   createMapKeyBindingAction,
   createOfModeAction,
@@ -140,48 +135,6 @@ export function parseActionBuf(buf: LexerBuffer, lineDescription: string | null)
       }
       return createOfModeAction(mode)
     }
-    case "quote": {
-      const args = buf.remainingContent()
-      if (args === null) {
-        throw new Error("Expected character for quote action")
-      }
-      return createJumpToQuoteAction(args.split(" ").map(quoteDelim))
-    }
-    case "pair": {
-      function parseShouldFindClosingDelim() {
-        // TODO use JSON?
-        const direction = buf.nextToken()
-        if (direction === "open") {
-          return false
-        }
-        if (direction === "close") {
-          return true
-        }
-        throw new Error("First argument of `pair` must be open or close")
-      }
-      function parseDelims(): Array<Delim> {
-        const args = buf.remainingContent()
-        if (args === null) {
-          throw new Error("Expected arguments for pair action")
-        }
-        return args.split(" ").map((delimString) => {
-          if (delimString === "angle") {
-            return pairDelims.angle
-          }
-          if (delimString.length !== 2) {
-            throw new Error("Second argument of `pair` must be 2 characters")
-          }
-          const openChar = delimString.charAt(0)
-          const closeChar = delimString.charAt(1)
-          if (openChar === closeChar) {
-            throw new Error("Second argument of `pair` must be 2 different characters")
-          }
-          return pairDelim(openChar, closeChar)
-        })
-      }
-      return createJumpToBracketAction(parseShouldFindClosingDelim(), parseDelims())
-    }
-
     default: {
       throw new Error(`Unknown action type: ${actionType}`)
     }

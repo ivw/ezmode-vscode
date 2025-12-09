@@ -86,7 +86,6 @@ export function quoteDelim(char: string): QuoteDelim {
       )
     },
     findDelimRanges,
-    toNiceString: () => char,
   }
 }
 

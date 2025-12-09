@@ -1,9 +1,7 @@
 import * as vscode from "vscode"
 import { getOrAddModeEnv, getActionForKey, type KeyBinding } from "./EzEnv"
 import { getMode, switchMode } from "../mode/ModeState"
-import type { Delim } from "../utils/delim/Delim"
-import { moveSelectionBasedOnMode, revealCursor, unselect } from "../utils/Selection"
-import type { QuoteDelim } from "../utils/delim/QuoteDelim"
+import { revealCursor, unselect } from "../utils/Selection"
 import { resolveVarString, varContext, type VarString } from "./Variables"
 import { getEnv } from "./EnvState"
 
@@ -124,49 +122,5 @@ export function createCompositeEzAction(actions: EzAction[]): EzAction {
     for (const action of actions) {
       await action(e)
     }
-  }
-}
-
-export function createJumpToBracketAction(
-  findClosingDelim: boolean,
-  delims: Array<Delim>,
-): EzAction {
-  return () => {
-    const editor = vscode.window.activeTextEditor
-    if (!editor) return
-
-    editor.selections = editor.selections.map((sel) => {
-      for (const delim of delims) {
-        const delimOffset = delim.findDelim(
-          findClosingDelim,
-          editor,
-          editor.document.offsetAt(sel.active),
-          true,
-        )
-        if (delimOffset !== null) {
-          return moveSelectionBasedOnMode(sel, editor.document.positionAt(delimOffset))
-        }
-      }
-      return sel
-    })
-    revealCursor(editor)
-  }
-}
-
-export function createJumpToQuoteAction(delims: Array<QuoteDelim>): EzAction {
-  return () => {
-    const editor = vscode.window.activeTextEditor
-    if (!editor) return
-
-    editor.selections = editor.selections.map((sel) => {
-      for (const delim of delims) {
-        const delimOffset = delim.findAuto(editor, editor.document.offsetAt(sel.active))
-        if (delimOffset !== null) {
-          return moveSelectionBasedOnMode(sel, editor.document.positionAt(delimOffset))
-        }
-      }
-      return sel
-    })
-    revealCursor(editor)
   }
 }

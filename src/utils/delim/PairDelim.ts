@@ -81,7 +81,6 @@ export function pairDelim(openChar: string, closeChar: string): Delim {
   return {
     findDelim,
     findDelimRanges,
-    toNiceString: (isClosingDelim) => (isClosingDelim ? closeChar : openChar),
   }
 }
 
