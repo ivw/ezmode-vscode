@@ -7,6 +7,8 @@ import { getEnv } from "./EnvState"
 
 export type EzAction = (key: string | null) => Thenable<unknown> | void
 
+export const noopEzAction: EzAction = () => {}
+
 export function createSwitchModeAction(mode: string): EzAction {
   return () => {
     switchMode(mode)

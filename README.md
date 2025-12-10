@@ -80,6 +80,7 @@ or you can use base actions enclosed in angle brackets:
 - `<native>`: Insert the `key` into the editor
 - `<ofmode somemode>`: Let another mode handle the same `key`
 - `<set varname value>`: Set a custom variable to a value
+- `<nothing>`: Do nothing
 
 ### Variables
 

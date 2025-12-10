@@ -9,6 +9,7 @@ import {
   createVsCodeEzAction,
   createWriteAction,
   nativeEzAction,
+  noopEzAction,
   type EzAction,
 } from "./EzAction"
 import { LexerBuffer } from "../utils/LexerBuffer"
@@ -134,6 +135,9 @@ export function parseActionBuf(buf: LexerBuffer, lineDescription: string | null)
         throw new Error("Expected mode for ofmode action")
       }
       return createOfModeAction(mode)
+    }
+    case "nothing": {
+      return noopEzAction
     }
     default: {
       throw new Error(`Unknown action type: ${actionType}`)
