@@ -1,6 +1,12 @@
 import * as vscode from "vscode"
-import { getOrAddModeEnv, getActionForKey, type KeyBinding, type EzAction } from "./EzEnv"
-import { getMode, switchMode } from "../mode/ModeState"
+import {
+  getOrAddModeEnv,
+  performActionForKey,
+  type KeyBinding,
+  type EzAction,
+  addBindingToModeEnv,
+} from "./EzEnv"
+import { switchMode } from "../mode/ModeState"
 import { revealCursor, unselect } from "../utils/Selection"
 import { resolveVarString, varContext, type VarString } from "./Variables"
 import { getEnv } from "./EnvState"
@@ -92,7 +98,7 @@ export function createPopupAction(message: VarString): EzAction {
 export function createMapKeyBindingAction(mode: string, keyBinding: KeyBinding): EzAction {
   return () => {
     const modeEnv = getOrAddModeEnv(getEnv(), mode)
-    modeEnv.keyBindings.set(keyBinding.key, keyBinding)
+    addBindingToModeEnv(modeEnv, keyBinding)
   }
 }
 
@@ -104,8 +110,7 @@ export function createSetVarAction(varName: string, value: VarString): EzAction 
 
 export function createKeyReferenceAction(key: string): EzAction {
   return () => {
-    const mode = getMode()
-    return getActionForKey(key, mode, getEnv())?.(key)
+    return performActionForKey(key)
   }
 }
 
@@ -113,7 +118,7 @@ export function createOfModeAction(mode: string): EzAction {
   return (key) => {
     if (key === null) return
 
-    return getActionForKey(key, mode)?.(key)
+    return performActionForKey(key, mode)
   }
 }
 

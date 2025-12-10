@@ -42,13 +42,16 @@ export function addBindingToModeEnv(modeEnv: ModeEnv, keyBinding: KeyBinding) {
   modeEnv.keyBindings.set(keyBinding.key, keyBinding)
 }
 
-export function getActionForKey(
+export function performActionForKey(
   key: string,
   mode: string = getMode(),
   env: EzEnv = getEnv(),
-): EzAction | null {
+): Thenable<unknown> | void {
   const modeEnv = getModeEnv(env, mode)
-  if (!modeEnv) return null
+  if (!modeEnv) return
 
-  return getKeyBindingOrDefault(modeEnv, key)?.action ?? null
+  const keyBinding = getKeyBindingOrDefault(modeEnv, key)
+  if (!keyBinding) return
+
+  return keyBinding.action(key)
 }
