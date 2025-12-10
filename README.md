@@ -30,8 +30,8 @@ Common actions like copy/paste/undo/save are on the keys everyone already knows.
 
 ## Getting Started
 
-TODO
-4. Open the [tutorial](data/EzModeTutorial.md) in VS Code by clicking the mode indicator in the bottom-right corner.
+1. Install the extension
+2. Open the [tutorial](data/EzModeTutorial.md) in VS Code by clicking the mode indicator in the bottom-right corner.
 
 ## Customization
 
@@ -41,7 +41,7 @@ which you can override with your own `.ezmoderc` file.
 Key mappings use this format:
 
 ```
-map {mode} {keychar} {actions}
+map {mode} {key} {actions}
 ```
 
 ### `mode`
@@ -49,13 +49,13 @@ map {mode} {keychar} {actions}
 The mode in which the key mapping is active. Built-in modes include `ez`, `type`, `select`, and `git`, but you can
 define your own as well.
 
-### `keychar`
+### `key`
 
-The character that has to be "typed" to trigger the action. Naturally, uppercase means you have to hold shift.
+The character that has to be "typed" to trigger the action. Naturally, uppercase means holding shift.
 
 Ctrl/Alt shortcuts are not characters and are not handled by EzMode.
 
-Special values:
+Special key values:
 
 - `default`: The default key mapping, which will be triggered by any key that does not have a mapping for the given
   mode.
@@ -70,15 +70,15 @@ Special values:
 
 A string of one or more actions with no separators.
 
-You can map an action to the parent keymap by typing its `keychar`,
-or you can use a base action:
+You can map an action to the parent keymap by typing its `key`,
+or you can use base actions enclosed in angle brackets:
 
 - `<vscode SomeCommandId>`: Invoke a VSCode command.
 - `<mode somemode>`: Switch to a different mode
 - `<write Hello world!>`: Insert a string into the editor
 - `<popup Hello world!>`: Show a notification
-- `<native>`: Insert the `keychar` into the editor
-- `<ofmode somemode>`: Let another mode handle the `keychar`
+- `<native>`: Insert the `key` into the editor
+- `<ofmode somemode>`: Let another mode handle the same `key`
 - `<set varname value>`: Set a custom variable to a value
 
 ### Variables
@@ -110,13 +110,12 @@ the [.ezmoderc template](data/template.ezmoderc)
 
 ## Comparison with other modal editors
 
-EzMode doesn't add as many commands as Vim, for example, but EzMode can use any action that's already available in the IDE.
+Compared to Vim or Kakoune, EzMode focuses on adding customizable modes without altering the editor's fundamental behavior. It doesn't change how copy/paste works, and it doesn't use a block cursor, only changing the cursor color to indicate mode.
 
-- No block cursor
-- No changes to copy/paste behavior
-- `ijkl` instead of `hjkl`
+EzMode avoids Ctrl and Alt entirely for ergonomics and simplicity. This makes it easier to learn and configure while preserving your existing editor shortcuts.
 
-EzMode uses *object-verb* style like Kakoune, rather than Vim's *verb-object* style. A few common examples:
+EzMode also uses the more intuitive `ijkl` layout for arrow-key movement instead of `hjkl`.
+It also uses *object-verb* style like Kakoune, rather than Vim's *verb-object* style. A few common examples:
 
 |                           | EzMode | Vim    | Kakoune     |
 |---------------------------|--------|--------|-------------|
