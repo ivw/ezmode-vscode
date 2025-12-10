@@ -1,7 +1,10 @@
 import * as vscode from "vscode"
 import { afterModeChange, beforeModeChange, getMode } from "./ModeState"
-import { getModeEnv, EXIT_MODE_KEY, ENTER_MODE_KEY } from "../config/EzEnv"
+import { getModeEnv } from "../config/EzEnv"
 import { getEnv } from "../config/EnvState"
+
+export const ENTER_MODE_KEY = "entermode"
+export const EXIT_MODE_KEY = "exitmode"
 
 export function activateEnvModeSwitchHooks(context: vscode.ExtensionContext) {
   context.subscriptions.push(

@@ -1,4 +1,3 @@
-import { type EzAction } from "./EzAction"
 import { getMode } from "../mode/ModeState"
 import { getEnv } from "./EnvState"
 
@@ -18,9 +17,9 @@ export type KeyBinding = {
   description: string
 }
 
+export type EzAction = (key: string | null) => Thenable<unknown> | void
+
 export const DEFAULT_KEY = "default"
-export const ENTER_MODE_KEY = "entermode"
-export const EXIT_MODE_KEY = "exitmode"
 
 export function getModeEnv(env: EzEnv, mode: string): ModeEnv | null {
   return env.modes.find((m) => m.name === mode) ?? null

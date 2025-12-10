@@ -1,11 +1,9 @@
 import * as vscode from "vscode"
-import { getOrAddModeEnv, getActionForKey, type KeyBinding } from "./EzEnv"
+import { getOrAddModeEnv, getActionForKey, type KeyBinding, type EzAction } from "./EzEnv"
 import { getMode, switchMode } from "../mode/ModeState"
 import { revealCursor, unselect } from "../utils/Selection"
 import { resolveVarString, varContext, type VarString } from "./Variables"
 import { getEnv } from "./EnvState"
-
-export type EzAction = (key: string | null) => Thenable<unknown> | void
 
 export const noopEzAction: EzAction = () => {}
 

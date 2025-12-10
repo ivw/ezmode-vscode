@@ -10,10 +10,10 @@ import {
   createWriteAction,
   nativeEzAction,
   noopEzAction,
-  type EzAction,
-} from "./EzAction"
+} from "./EzActions"
 import { LexerBuffer } from "../utils/LexerBuffer"
 import { parseVarString } from "./Variables"
+import type { EzAction } from "./EzEnv"
 
 const keyBindingKeyMap: Record<string, string> = {
   lt: "<",

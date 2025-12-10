@@ -1,6 +1,5 @@
 import * as vscode from "vscode"
-import type { EzEnv } from "./EzEnv"
-import type { EzAction } from "./EzAction"
+import type { EzAction, EzEnv } from "./EzEnv"
 import { getConfig } from "./EzModeRcFiles"
 
 function createEmptyEnv(): EzEnv {
