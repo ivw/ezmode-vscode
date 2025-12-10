@@ -42,6 +42,11 @@ export function addBindingToModeEnv(modeEnv: ModeEnv, keyBinding: KeyBinding) {
   modeEnv.keyBindings.set(keyBinding.key, keyBinding)
 }
 
+export function addBinding(mode: string, keyBinding: KeyBinding) {
+  const modeEnv = getOrAddModeEnv(getEnv(), mode)
+  addBindingToModeEnv(modeEnv, keyBinding)
+}
+
 export function performActionForKey(
   key: string,
   mode: string = getMode(),
