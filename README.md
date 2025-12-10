@@ -3,15 +3,16 @@ Edit faster than ever, with or without a mouse.
 
 ![Advanced demo](demo_advanced.gif)
 
+One reason modal editing is so fast is that it reduces hand movement, such as reaching for arrow keys after typing. EzMode takes this further: when your right hand is on the mouse, you can still perform all essential editing actions without moving your left hand. This allows some really fast editing:
+
 ![Basic demo](demo_basic.gif)
 
----
+### Features
 
 - Built for modern IDEs
 - Tiny core, powerful actions
 - Fully customizable modes and keybindings
 - No Ctrl or Alt needed
-- Cursor color indicates mode
 - Git mode and diff navigation
 - Built-in tutorial and cheat sheet
 
@@ -59,7 +60,7 @@ Special key values:
 
 - `default`: The default key mapping, which will be triggered by any key that does not have a mapping for the given
   mode.
-- `space`: The spacebar.
+- `space`: The spacebar
 - `enter`: The enter key
 - `lt`: The `<` key
 - `gt`: The `>` key
