@@ -57,9 +57,14 @@ Ctrl/Alt shortcuts are not characters and are not handled by EzMode.
 
 Special values:
 
-- `<space>`: The space character.
-- `<default>`: The default key mapping, which will be triggered by any key that does not have a mapping for the given
+- `default`: The default key mapping, which will be triggered by any key that does not have a mapping for the given
   mode.
+- `space`: The spacebar.
+- `enter`: The enter key
+- `lt`: The `<` key
+- `gt`: The `>` key
+- `entermode`: Triggered when entering the mode
+- `exitmode`: Triggered when exiting the mode
 
 ### `actions`
 
@@ -70,11 +75,11 @@ or you can use a base action:
 
 - `<vscode SomeCommandId>`: Invoke a VSCode command.
 - `<mode somemode>`: Switch to a different mode
-- `<ofmode somemode>`: Let another mode handle the `keychar`
-- `<native>`: Insert the `keychar` into the editor
 - `<write Hello world!>`: Insert a string into the editor
-- `<pair open/close {}>`: Jump to the opening/closing delimiter defined in the third argument, which must be two characters,
-  or `angle` for `<>`, or `xml` for XML/HTML tags. You can list multiple delimiters by separating them with spaces.
+- `<popup Hello world!>`: Show a notification
+- `<native>`: Insert the `keychar` into the editor
+- `<ofmode somemode>`: Let another mode handle the `keychar`
+- `<set varname value>`: Set a custom variable to a value
 
 ### Variables
 
@@ -82,7 +87,7 @@ In actions that take a text argument, you can use variables enclosed in `${}`,
 for example: `<write Hello, ${filename}!>`.
 
 - Custom variables: set in your config using `set varname value`
-- Built-in variables: `mode`, `key`, `caretindex`, `line`, `column`, `selection`, `filename`, `projectname`
+- Built-in variables: `mode`, `key`, `caretindex`, `line`, `column`, `selection`, `clipboard`, `filename`, `projectname`
 - Escape sequences: `space`, `tab`, `nl` (newline), `doubleslash` (for `//`)
 
 ### Examples
@@ -96,7 +101,7 @@ map ez C Ac
 Create a mode that types every character twice:
 
 ```
-map doubletype <default> <native><native>
+map doubletype default <native><native>
 map ez X <mode doubletype>
 ```
 
