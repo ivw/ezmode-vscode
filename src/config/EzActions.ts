@@ -3,7 +3,7 @@ import { performActionForKey, type KeyBinding, type EzAction, addBinding } from 
 import { switchMode } from "../mode/ModeState"
 import { revealCursor, unselect } from "../utils/Selection"
 import { resolveVarString, varContext, type VarString } from "./Variables"
-import { getEnv } from "./EnvState"
+import { fireEnvChange, getEnv } from "./EnvState"
 
 export const noopEzAction: EzAction = () => {}
 
@@ -98,6 +98,7 @@ export function createMapKeyBindingAction(mode: string, keyBinding: KeyBinding):
 export function createSetVarAction(varName: string, value: VarString): EzAction {
   return async (key) => {
     getEnv().vars.set(varName, await resolveVarString(value, varContext(key)))
+    fireEnvChange()
   }
 }
 

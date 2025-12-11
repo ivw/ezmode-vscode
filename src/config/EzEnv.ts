@@ -1,5 +1,5 @@
 import { getMode } from "../mode/ModeState"
-import { getEnv } from "./EnvState"
+import { fireEnvChange, getEnv } from "./EnvState"
 
 export type EzEnv = {
   modes: Array<ModeEnv>
@@ -40,6 +40,7 @@ export function getKeyBindingOrDefault(modeEnv: ModeEnv, key: string): KeyBindin
 
 export function addBindingToModeEnv(modeEnv: ModeEnv, keyBinding: KeyBinding) {
   modeEnv.keyBindings.set(keyBinding.key, keyBinding)
+  fireEnvChange()
 }
 
 export function addBinding(mode: string, keyBinding: KeyBinding) {

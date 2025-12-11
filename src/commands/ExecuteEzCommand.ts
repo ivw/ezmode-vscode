@@ -1,6 +1,5 @@
 import * as vscode from "vscode"
 import { registerCommand } from "../utils/Commands"
-import { performSingleAction } from "../config/EnvState"
 import { parseLine } from "../config/Parser"
 
 export function activateExecuteEzCommand(context: vscode.ExtensionContext) {
@@ -15,7 +14,7 @@ export function activateExecuteEzCommand(context: vscode.ExtensionContext) {
       try {
         const action = parseLine(commandStr)
         if (action) {
-          performSingleAction(action)
+          action(null)
         }
       } catch (e) {
         vscode.window.showErrorMessage(String(e))
