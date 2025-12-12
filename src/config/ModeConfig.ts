@@ -1,6 +1,7 @@
 import * as vscode from "vscode"
-import { getMode } from "../mode/ModeState"
 import { isLoadingConfig } from "./LoadConfig"
+import { getMode } from "../mode/ModeState"
+import { registerCommand } from "../utils/Commands"
 
 export const DEFAULT_KEY = "default"
 
@@ -31,13 +32,6 @@ export function getModeConfig(mode: string): ModeConfig | null {
   return modeConfigs.find((m) => m.name === mode) ?? null
 }
 
-export function getKeyBindingOrDefault(
-  modeConfig: ModeConfig,
-  key: string,
-): KeyBinding | undefined {
-  return modeConfig.keyBindings.get(key) ?? modeConfig.keyBindings.get(DEFAULT_KEY)
-}
-
 export function addBindingToModeConfig(modeConfig: ModeConfig, keyBinding: KeyBinding) {
   modeConfig.keyBindings.set(keyBinding.key, keyBinding)
   fireModeConfigsChange()
@@ -52,15 +46,23 @@ export function addBinding(mode: string, keyBinding: KeyBinding) {
   addBindingToModeConfig(modeConfig, keyBinding)
 }
 
-export function performActionForKey(
+export function handleKeyBasedOnMode(
   key: string,
   mode: string = getMode(),
 ): Thenable<unknown> | void {
   const modeConfig = getModeConfig(mode)
   if (!modeConfig) return
 
-  const keyBinding = getKeyBindingOrDefault(modeConfig, key)
+  const keyBinding = modeConfig.keyBindings.get(key) ?? modeConfig.keyBindings.get(DEFAULT_KEY)
   if (!keyBinding) return
 
   return keyBinding.action(key)
+}
+
+export function activateModalTypeHandler(context: vscode.ExtensionContext) {
+  // Override the default typing handler
+  registerCommand(context, "type", (args) => {
+    const key = args.text as string
+    handleKeyBasedOnMode(key)
+  })
 }

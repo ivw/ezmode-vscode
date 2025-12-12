@@ -1,5 +1,5 @@
 import * as vscode from "vscode"
-import { performActionForKey, type KeyBinding, type EzAction, addBinding } from "./ModeConfig"
+import { handleKeyBasedOnMode, type KeyBinding, type EzAction, addBinding } from "./ModeConfig"
 import { switchMode } from "../mode/ModeState"
 import { revealCursor, unselect } from "../utils/Selection"
 import { fireVarsChange, resolveVarString, varContext, vars, type VarString } from "./Variables"
@@ -103,7 +103,7 @@ export function createSetVarAction(varName: string, value: VarString): EzAction 
 
 export function createKeyReferenceAction(key: string): EzAction {
   return () => {
-    return performActionForKey(key)
+    return handleKeyBasedOnMode(key)
   }
 }
 
@@ -111,7 +111,7 @@ export function createOfModeAction(mode: string): EzAction {
   return (key) => {
     if (key === null) return
 
-    return performActionForKey(key, mode)
+    return handleKeyBasedOnMode(key, mode)
   }
 }
 
