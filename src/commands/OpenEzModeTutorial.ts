@@ -5,12 +5,8 @@ import { readFileToString } from "../utils/Files"
 export function activateOpenEzModeTutorial(context: vscode.ExtensionContext) {
   registerCommand(context, "ezmode.openEzModeTutorial", async () => {
     const content = await loadTutorialText(context)
-    const uri = vscode.Uri.parse("untitled:EzModeTutorial.md")
-    const document = await vscode.workspace.openTextDocument(uri)
-    const editor = await vscode.window.showTextDocument(document)
-    editor.edit((edit) => {
-      edit.insert(new vscode.Position(0, 0), content)
-    })
+    const document = await vscode.workspace.openTextDocument({ language: "markdown", content })
+    return vscode.window.showTextDocument(document)
   })
 }
 
