@@ -1,6 +1,16 @@
 import * as vscode from "vscode"
 import { getMode } from "../mode/ModeState"
-import { getEnv } from "./EnvState"
+import { isLoadingConfig } from "./LoadConfig"
+
+export const vars: Map<string, string> = new Map()
+
+const varsChangeEmitter = new vscode.EventEmitter<Map<string, string>>()
+export const onVarsChange = varsChangeEmitter.event
+
+export function fireVarsChange() {
+  if (isLoadingConfig) return
+  varsChangeEmitter.fire(vars)
+}
 
 /**
  * Context that may be needed to resolve a variable
@@ -56,8 +66,8 @@ const builtInVarStrings: Record<string, VarString> = {
   doubleslash: "//",
 }
 
-function envVarString(varName: string): VarString {
-  return () => getEnv().vars.get(varName) ?? NULL_VAR
+function configVarString(varName: string): VarString {
+  return () => vars.get(varName) ?? NULL_VAR
 }
 
 /**
@@ -76,7 +86,7 @@ export function parseVarString(src: string): VarString {
     const curr: VarString = isCurrStringVarName
       ? currString in builtInVarStrings
         ? builtInVarStrings[currString]
-        : envVarString(currString)
+        : configVarString(currString)
       : currString
 
     if (acc === "") return curr

@@ -1,9 +1,8 @@
 import * as vscode from "vscode"
-import { performActionForKey, type KeyBinding, type EzAction, addBinding } from "./EzEnv"
+import { performActionForKey, type KeyBinding, type EzAction, addBinding } from "./ModeConfig"
 import { switchMode } from "../mode/ModeState"
 import { revealCursor, unselect } from "../utils/Selection"
-import { resolveVarString, varContext, type VarString } from "./Variables"
-import { fireEnvChange, getEnv } from "./EnvState"
+import { fireVarsChange, resolveVarString, varContext, vars, type VarString } from "./Variables"
 
 export const noopEzAction: EzAction = () => {}
 
@@ -97,8 +96,8 @@ export function createMapKeyBindingAction(mode: string, keyBinding: KeyBinding):
 
 export function createSetVarAction(varName: string, value: VarString): EzAction {
   return async (key) => {
-    getEnv().vars.set(varName, await resolveVarString(value, varContext(key)))
-    fireEnvChange()
+    vars.set(varName, await resolveVarString(value, varContext(key)))
+    fireVarsChange()
   }
 }
 

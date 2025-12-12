@@ -1,6 +1,6 @@
 import * as vscode from "vscode"
 import { afterModeChange, getMode } from "../mode/ModeState"
-import { getEnv, onEnvChange } from "../config/EnvState"
+import { onVarsChange, vars } from "../config/Variables"
 
 export function activateCursorColor(context: vscode.ExtensionContext) {
   updateCursorColor()
@@ -16,18 +16,18 @@ export function activateCursorColor(context: vscode.ExtensionContext) {
   )
 
   context.subscriptions.push(
-    onEnvChange(() => {
+    onVarsChange(() => {
       updateCursorColor()
     }),
   )
 }
 
 function getPrimaryCursorColor(): string {
-  return getEnv().vars.get("primarycolor") ?? "#FF6200"
+  return vars.get("primarycolor") ?? "#FF6200"
 }
 
 function getSecondaryCursorColor(): string {
-  return getEnv().vars.get("secondarycolor") ?? "#589DF6"
+  return vars.get("secondarycolor") ?? "#589DF6"
 }
 
 function updateCursorColor(mode: string = getMode()) {

@@ -1,7 +1,7 @@
 import * as vscode from "vscode"
 import { parseEzModeRc } from "./Parser"
 import { fileExists, getDataUri, getHomeUri, readFileToString } from "../utils/Files"
-import type { EzAction } from "./EzEnv"
+import type { EzAction } from "./ModeConfig"
 
 export const userRcUri = getHomeUri(".ezmoderc")
 export const userVsCodeRcUri = getHomeUri(".vscode.ezmoderc")

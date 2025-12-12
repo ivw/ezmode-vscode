@@ -13,7 +13,7 @@ import {
 } from "./EzActions"
 import { LexerBuffer } from "../utils/LexerBuffer"
 import { parseVarString } from "./Variables"
-import type { EzAction } from "./EzEnv"
+import type { EzAction } from "./ModeConfig"
 
 const keyBindingKeyMap: Record<string, string> = {
   lt: "<",

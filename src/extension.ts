@@ -5,8 +5,8 @@ import { activateTypeActionHandler } from "./TypeActionHandler"
 import { activateCommands } from "./commands"
 import { activateCursorColor } from "./ui/CursorColor"
 import { activateSelectModeListeners } from "./mode/SelectMode"
-import { activateEnvModeSwitchHooks } from "./mode/EnvModeSwitchHooks"
-import { loadConfig } from "./config/EnvState"
+import { activateConfigModeSwitchHooks } from "./mode/ConfigModeSwitchHooks"
+import { loadConfig } from "./config/LoadConfig"
 
 export function activate(context: vscode.ExtensionContext) {
   loadConfig(context)
@@ -14,7 +14,7 @@ export function activate(context: vscode.ExtensionContext) {
   activateTypeActionHandler(context)
   activateCursorColor(context)
   activateSelectModeListeners(context)
-  activateEnvModeSwitchHooks(context)
+  activateConfigModeSwitchHooks(context)
   activateModeStatusBarItem(context)
   activateSidebar(context)
 }

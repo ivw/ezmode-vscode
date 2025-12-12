@@ -1,5 +1,5 @@
 import * as vscode from "vscode"
-import { performActionForKey } from "./config/EzEnv"
+import { performActionForKey } from "./config/ModeConfig"
 import { registerCommand } from "./utils/Commands"
 
 export function activateTypeActionHandler(context: vscode.ExtensionContext) {
