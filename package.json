@@ -138,7 +138,8 @@
       "ezmode": [
         {
           "id": "ezmode.cheatsheet",
-          "name": "Cheat Sheet"
+          "name": "Cheat Sheet",
+          "icon": "media/ezmode.svg"
         }
       ]
     },

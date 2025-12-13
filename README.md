@@ -62,8 +62,7 @@ Special key values:
   mode.
 - `space`: The spacebar
 - `enter`: The enter key
-- `lt`: The `<` key
-- `gt`: The `>` key
+- `lt` / `gt`: The `<` or `>` key
 - `entermode`: Triggered when entering the mode
 - `exitmode`: Triggered when exiting the mode
 
