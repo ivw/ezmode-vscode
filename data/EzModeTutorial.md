@@ -14,7 +14,7 @@ To return to typing, press `t`. In type mode, everything behaves as usual.
 Most of the basic editing actions are on the left-hand side of the keyboard,
 so you can use them with your right hand on the mouse.
 
-Try the exercises below:
+Make sure you are in EzMode by pressing Escape, and try the exercises below:
 
 - Select the word FOO using `a` and copy it with `c`
 - Select the word BAR using `a` and paste over it with `v`
@@ -39,7 +39,7 @@ Use `i`, `j`, `k`, `l` to move, just like the arrow keys.
 `m` / `M`: Scroll half a page down/up
 
 You can jump right to any character by pressing Space, then typing that character.
-To jump left, press Space twice.
+To jump left, press Space twice. Repeat the last jump with the . key.
 
 
 ### Selecting text
