@@ -127,6 +127,7 @@ map select : <vscode cursorBottomSelect> // Select to file end
 
 map select x <ofmode ez><mode ez> // Cut selection
 map select c <ofmode ez><mode ez> // Copy selection
+map select C <vscode editor.action.clipboardCopyAction> // Copy and keep selection
 map select v <ofmode ez><mode ez> // Paste over selection
 map select m <vscode ezmode.scroll {"select": true}> // Select half a page down
 map select M <vscode ezmode.scroll {"direction": "up", "select": true}> // Select half a page up
