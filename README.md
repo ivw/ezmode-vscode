@@ -112,7 +112,7 @@ the [.ezmoderc template](data/template.ezmoderc)
 
 ## Comparison with other modal editors
 
-Compared to Vim or Kakoune, EzMode focuses on adding customizable modes without altering the editor's fundamental behavior. It doesn't change how copy/paste works, and it doesn't use a block cursor, only changing the cursor color to indicate mode.
+Compared to Vim or Kakoune, EzMode focuses on adding customizable modes without changing the editor's fundamental behavior. It doesn't change how copy/paste works, and it doesn't use a block cursor, only changing the cursor color to indicate mode.
 
 EzMode avoids Ctrl and Alt entirely for ergonomics and simplicity. This makes it easier to learn and configure while preserving your existing editor shortcuts.
 
