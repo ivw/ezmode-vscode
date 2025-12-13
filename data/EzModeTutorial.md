@@ -47,6 +47,8 @@ To jump left, press Space twice. Repeat the last jump with the . key.
 Press `e` to enter select mode, then use movement keys (see above) to extend the selection.
 Select mode is automatically activated whenever something is selected in EzMode.
 
+You can also select the whole line with `E`, or select words with `a`.
+
 Press `t` to type over the selection, `c` to copy, `d` to delete, or `e` to unselect.
 
 ```
