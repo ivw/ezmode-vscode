@@ -102,8 +102,21 @@ export function createSetVarAction(varName: string, value: VarString): EzAction 
 }
 
 export function createKeyReferenceAction(key: string): EzAction {
+  let isRunning = false
   return () => {
-    return handleKeyBasedOnMode(key)
+    if (isRunning) {
+      console.log(`Ignoring recursive key reference to "${key}"`)
+      isRunning = false
+      return
+    }
+    isRunning = true
+    let result: Thenable<unknown> | void
+    try {
+      result = handleKeyBasedOnMode(key)
+    } finally {
+      isRunning = false
+    }
+    return result
   }
 }
 
