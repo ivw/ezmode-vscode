@@ -1,5 +1,5 @@
-map type default <native>
-map typeonce default <native><mode ez>
+map type default <native> // Type
+map typeonce default <native><mode ez> // Type one character then return to ez mode
 
 
 map ez ` <vscode ezmode.cheatsheet.focus><vscode workbench.action.focusActiveEditorGroup> // View cheat sheet
@@ -98,17 +98,6 @@ map ez / <vscode editor.action.commentLine> // Toggle line comment
 map ez ? <vscode editor.action.blockComment> // Toggle block comment
 
 map ez space <mode find> // Jump to character…
-map select space <mode findselect> // Jump to character and select…
-
-map find default <vscode ezmode.findChar {"target": "${key}"}><mode ez><set lastfindchar ${key}><set lastfindprev false> // Jump right to typed character
-map findprev default <vscode ezmode.findChar {"target": "${key}", "prev": true}><mode ez><set lastfindchar ${key}><set lastfindprev true> // Jump left to typed character
-map findselect default <vscode ezmode.findChar {"target": "${key}", "select": true}><mode ez><set lastfindchar ${key}><set lastfindprev false> // Jump right to typed character and select
-map findprevselect default <vscode ezmode.findChar {"target": "${key}", "prev": true, "select": true}><mode ez><set lastfindchar ${key}><set lastfindprev true> // Jump left to typed character and select
-
-map find space <mode findprev> // Reverse jump direction to left
-map findprev space <mode find> // Reverse jump direction to right
-map findselect space <mode findprevselect> // Reverse jump direction to left
-map findprevselect space <mode findselect> // Reverse jump direction to right
 
 
 map select default <ofmode ez> // Same action as ez mode
@@ -144,6 +133,8 @@ map select M <vscode ezmode.scroll {"direction": "up", "select": true}> // Selec
 map select lt <vscode ezmode.jumpToBracket {"delims": ["<>"], "goToOpen": true}> // Select to <
 map select . <vscode ezmode.findChar {"target": "${lastfindchar}", "prev": ${lastfindprev}, "select": true}> // Repeat last jump
 map select gt <vscode ezmode.jumpToBracket {"delims": ["<>"], "goToOpen": false}> // Select to >
+
+map select space <mode findselect> // Jump to character and select…
 
 
 map git default <ofmode ez> // Same action as ez mode
@@ -184,3 +175,14 @@ map special r <vscode editor.action.rename><mode ez> // Rename symbol
 map special R <vscode workbench.view.explorer><vscode workbench.action.focusActiveEditorGroup><vscode renameFile><mode ez> // Rename file
 map special e <vscode ezmode.executeCommand {"command": "${selection}"}> // Execute selected command
 map special E <vscode ezmode.executeCommand {"command": "${clipboard}"}> // Execute copied command
+
+
+map find default <vscode ezmode.findChar {"target": "${key}"}><mode ez><set lastfindchar ${key}><set lastfindprev false> // Jump right to typed character
+map findprev default <vscode ezmode.findChar {"target": "${key}", "prev": true}><mode ez><set lastfindchar ${key}><set lastfindprev true> // Jump left to typed character
+map findselect default <vscode ezmode.findChar {"target": "${key}", "select": true}><mode ez><set lastfindchar ${key}><set lastfindprev false> // Jump right to typed character and select
+map findprevselect default <vscode ezmode.findChar {"target": "${key}", "prev": true, "select": true}><mode ez><set lastfindchar ${key}><set lastfindprev true> // Jump left to typed character and select
+
+map find space <mode findprev> // Reverse jump direction to left
+map findprev space <mode find> // Reverse jump direction to right
+map findselect space <mode findprevselect> // Reverse jump direction to left
+map findprevselect space <mode findselect> // Reverse jump direction to right
