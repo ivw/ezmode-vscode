@@ -60,6 +60,10 @@
         "title": "Jump To Selection Anchor"
       },
       {
+        "command": "ezmode.deleteSelectedText",
+        "title": "Delete selected text, if there is any"
+      },
+      {
         "command": "ezmode.editEzModeRc",
         "enablement": "!isWeb",
         "title": "Edit .ezmoderc"

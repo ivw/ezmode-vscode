@@ -19,4 +19,13 @@ export function activateSelectBasics(context: vscode.ExtensionContext) {
     editor.selections = editor.selections.map((sel) => new vscode.Selection(sel.anchor, sel.anchor))
     revealCursor(editor)
   })
+
+  registerTextEditorCommand(context, "ezmode.deleteSelectedText", (editor, edit) => {
+    editor.selections.forEach((sel) => {
+      if (!sel.isEmpty) {
+        edit.delete(sel)
+      }
+    })
+    revealCursor(editor)
+  })
 }

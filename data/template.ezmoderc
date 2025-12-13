@@ -11,8 +11,8 @@ mode ez
 // Example: Do not unselect after copying:
 // map select c <vscode editor.action.clipboardCopyAction>
 
-// Example: Delete selection before going to type mode:
-// map ez t <vscode ezmode.unselect><mode type>
+// Example: Delete selected text when switching to type mode:
+// map ez t <mode type><vscode ezmode.deleteSelectedText>
 
 // Example: Use the space bar to type spaces in ez mode:
 // map ez space <native>
