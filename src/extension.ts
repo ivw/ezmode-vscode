@@ -19,4 +19,8 @@ export function activate(context: vscode.ExtensionContext) {
   activateSidebar(context)
 }
 
-export function deactivate() {}
+export function deactivate() {
+  // await resetCursorColor()
+  // The above line unfortunately doesn't work due to this issue:
+  // https://github.com/microsoft/vscode/issues/144118
+}
