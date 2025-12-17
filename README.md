@@ -31,7 +31,7 @@ Common actions like copy/paste/undo/save are on the keys everyone already knows.
 
 ## Getting Started
 
-1. Install the extension
+1. Install the [extension](https://marketplace.visualstudio.com/items?itemName=EzMode.ezmode) from the marketplace
 2. Open the [tutorial](data/EzModeTutorial.md) in VS Code by clicking the mode indicator in the bottom-right corner.
 
 ## Customization
