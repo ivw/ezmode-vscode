@@ -6,4 +6,14 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+## 0.0.3
+
+- Allow this extension in untrusted workspaces.
+
+## 0.0.2
+
+- Fix icons and labels
+
+## 0.0.1
+
 - Initial release

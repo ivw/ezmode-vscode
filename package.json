@@ -26,6 +26,11 @@
     "syntaxes",
     "ezmoderc-language-configuration.json"
   ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    }
+  },
   "contributes": {
     "commands": [
       {
