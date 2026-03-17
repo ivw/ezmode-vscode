@@ -3,7 +3,7 @@ import { registerTextEditorCommand } from "../utils/Commands"
 import { moveSelection, revealCursor } from "../utils/Selection"
 
 export function activateFindChar(context: vscode.ExtensionContext) {
-  registerTextEditorCommand(context, "ezmode.findChar", async (editor, _, args) => {
+  registerTextEditorCommand(context, "ezmode.findChar", (editor, _, args) => {
     const text = editor.document.getText()
     const targetChar = args?.target
     if (typeof targetChar !== "string" || targetChar.length !== 1) {
