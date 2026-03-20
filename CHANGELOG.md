@@ -6,6 +6,10 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+## 0.0.4
+
+- Fix a bug where certain key combinations cause replacing of characters, outside of type mode.
+
 ## 0.0.3
 
 - Allow this extension in untrusted workspaces.
