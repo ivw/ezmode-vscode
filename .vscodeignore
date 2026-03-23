@@ -1,0 +1,9 @@
+src
+typings
+.vscode
+.gitignore
+tsconfig.json
+.vscode-test.mjs
+eslint.config.mjs
+.prettierignore
+*.gif
