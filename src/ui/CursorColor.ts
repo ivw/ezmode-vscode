@@ -39,7 +39,12 @@ function updateCursorColor(mode: string = getMode()) {
     changeCursorColor(getSecondaryCursorColor())
   }
 }
+
+let lastColorConfigured: string | undefined | null = null
 export function changeCursorColor(color: string | undefined) {
+  if (lastColorConfigured === color) return
+  lastColorConfigured = color
+
   const configuration = vscode.workspace.getConfiguration("workbench")
 
   // Set the color in the global user settings.
