@@ -6,6 +6,10 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [Unreleased]
 
+## 0.0.6
+
+- Prevent updating vscode config multiple times for the same cursor color
+
 ## 0.0.5
 
 - Remove unneeded files from package again
